@@ -9,8 +9,13 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-/bin/
-.project
-.classpath
+2dam.ORM/.classpath
+2dam.ORM/.idea/libraries/Maven__com_google_protobuf_protobuf_java_3_6_1.xml
+2dam.ORM/.idea/compiler.xml
+2dam.ORM/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_18.xml
+2dam.ORM/.idea/misc.xml
+2dam.ORM/.idea/modules.xml
+2dam.ORM/.idea/vcs.xml
+2dam.ORM/2dam.ORM.iml
 2dam.ORM/.classpath
 2dam.ORM/.classpath

@@ -59,7 +59,7 @@ public class Registro extends JPanel {
 		textFieldPassword.setBounds(199, 138, 154, 19);
 		add(textFieldPassword);
 		
-		JPasswordField textFieldRepetirPassword = new JPasswordField();
+		final JPasswordField textFieldRepetirPassword = new JPasswordField();
 		textFieldRepetirPassword.setHorizontalAlignment(SwingConstants.CENTER);
 		textFieldRepetirPassword.setEchoChar('*');
 		textFieldRepetirPassword.setBounds(199, 165, 154, 19);
@@ -95,23 +95,61 @@ public class Registro extends JPanel {
 		add(btnAtras);
 		
 		//Evento de botones
-		//Boton Registrar
+		//Boton Registrar con control de errores
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if(textFieldNombre.getText().isEmpty()) {
-					textFieldNombre.setBackground(Color.RED);
-				}
-				
+				int error = 0; 
 				String usuario = textFieldNombre.getText();
 				String password = String.valueOf(textFieldPassword.getPassword());
+				String passwordRepetido = String.valueOf(textFieldRepetirPassword.getPassword());
 				String email = textFieldEmail.getText();
-				if(checkboxTienda.isSelected()) {
-					
+				String emailRepetido = textFieldRepetirEmail.getText();
+				
+				if(usuario.isEmpty()) {
+					textFieldNombre.setBackground(Color.RED);
+					error = 1;
 				}
-				//Registro ventana = new Registro();
-				//getContentPane().add(ventana);
-				//Usuario nuevoUsuario = new Usuario(usuario, password, email, null, null, null);
+				
+				if(password.isEmpty()) {
+					textFieldPassword.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(passwordRepetido.isEmpty()) {
+					textFieldRepetirPassword.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(email.isEmpty()) {
+					textFieldEmail.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(emailRepetido.isEmpty()) {
+					textFieldRepetirEmail.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(error!=1) {
+					if(password.equals(passwordRepetido)) {
+						if(email.equals(emailRepetido)) {
+							if(checkboxTienda.isSelected()) {
+								JOptionPane.showMessageDialog(null, "Tienda creada");
+								//Usuario nuevoUsuario = new Usuario(usuario, password, email, null, null, null);
+							}else {
+								JOptionPane.showMessageDialog(null, "Usuario creado");
+								//Usuario nuevoUsuario = new Usuario(usuario, password, email, null, null, null);
+							}
+						}else {
+							JOptionPane.showMessageDialog(null, "Ambos email no coinciden");
+						}
+					}else {
+						JOptionPane.showMessageDialog(null, "Ambas contraseñas no coinciden");
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");
+				}
 			}
 		});
 		

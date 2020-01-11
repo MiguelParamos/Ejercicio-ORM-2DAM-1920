@@ -1,6 +1,6 @@
 package interfaces;
 /**
- * @author Ivan Diaz y Jose Maria
+ * @author Ivan Diaz y Jose Maria Osuna
  */
 
 import javax.swing.*;

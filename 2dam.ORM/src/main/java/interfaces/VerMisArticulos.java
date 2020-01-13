@@ -15,6 +15,7 @@ public class VerMisArticulos extends JPanel{
 		setSize(new Dimension(500, 500));
 		setLayout(null);
 		
+		//LISTA DE ARTICULOS
 		JList listaArticulos = new JList();
 		listaArticulos.setBounds(135, 54, 233, 282);
 		listaArticulos.setModel(new AbstractListModel() {
@@ -28,6 +29,7 @@ public class VerMisArticulos extends JPanel{
 		});
 		add(listaArticulos);
 		
+		//BOTÓN VER ARTICULOS
 		JButton btnVerArticulos = new JButton("Ver art\u00EDculos");
 		btnVerArticulos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -37,14 +39,15 @@ public class VerMisArticulos extends JPanel{
 		btnVerArticulos.setBounds(201, 347, 108, 23);
 		add(btnVerArticulos);
 		
-		JButton btnNewButton = new JButton("Atr\u00E1s");
-		btnNewButton.addActionListener(new ActionListener() {
+		//BOTÓN ATRÁS
+		JButton btnAtras = new JButton("Atr\u00E1s");
+		btnAtras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
-		btnNewButton.setBounds(49, 425, 89, 23);
-		add(btnNewButton);
+		btnAtras.setBounds(49, 425, 89, 23);
+		add(btnAtras);
 		
 	}
 }

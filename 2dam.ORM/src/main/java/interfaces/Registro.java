@@ -12,6 +12,8 @@ import main.Usuario;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
 	private JPasswordField textFieldRepetirPassword;
@@ -90,6 +92,11 @@ public class Registro extends JPanel {
 		
 		//Boton para ir a la pagina principal.
 		JButton btnAtras = new JButton("Atras");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
 		btnAtras.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAtras.setBounds(173, 342, 166, 28);
 		add(btnAtras);

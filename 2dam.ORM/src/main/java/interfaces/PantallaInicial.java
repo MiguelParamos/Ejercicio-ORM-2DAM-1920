@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,9 @@ public class PantallaInicial extends JFrame {
 				}
 			}
 		});
+	}
+	public JFrame getFrame() {
+		return this;
 	}
 	
 	public JTextField getTfUsuario() {
@@ -67,8 +71,25 @@ public class PantallaInicial extends JFrame {
 		btnInicio = new JButton("Iniciar Sesion");
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String user = getTfUsuario().toString();
-				String pass = getPfPass().toString();
+				String user = getTfUsuario().getText();
+				String pass = getPfPass().getText();
+				if(user.equals("")||(pass.equals(""))) {
+					JOptionPane.showMessageDialog(getFrame(),
+						    "Rellene todos los campos" ,
+						    "Error!",
+						    JOptionPane.WARNING_MESSAGE);
+				}
+				else if((user=="WilergioVargarado")&&(pass=="CheekyBreeky")){
+					JOptionPane.showMessageDialog(getFrame(),
+						    "¡Hola!" ,
+						    "¡Bienvenido!",
+						    JOptionPane.PLAIN_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(getFrame(),
+						    "Usuario o contraseña incorrectos" ,
+						    "Error!",
+						    JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		btnInicio.setBounds(161, 153, 118, 21);
@@ -87,8 +108,8 @@ public class PantallaInicial extends JFrame {
 		lblNewLabel_1.setBounds(90, 120, 61, 13);
 		contentPane.add(lblNewLabel_1);
 		
-		pfContraseña = new JPasswordField();
-		pfContraseña.setBounds(161, 124, 118, 19);
-		contentPane.add(pfContraseña);
+		pfPass = new JPasswordField();
+		pfPass.setBounds(161, 124, 118, 19);
+		contentPane.add(pfPass);
 	}
 }

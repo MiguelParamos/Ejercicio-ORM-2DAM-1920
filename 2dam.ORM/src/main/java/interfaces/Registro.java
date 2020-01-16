@@ -1,6 +1,7 @@
 package interfaces;
 /**
- * @author Ivan Diaz y Jose Maria Osuna
+ * @author Ivan Diaz
+ * @author Jose Maria Osuna
  */
 
 import javax.swing.*;
@@ -16,8 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
 	private VentanaPrincipal ventana;
-	private JPasswordField textFieldRepetirPassword;
-	private JTextField textFieldRepetirEmail;
+	
 	public Registro(VentanaPrincipal v) {
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);

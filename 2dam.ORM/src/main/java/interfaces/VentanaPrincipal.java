@@ -20,4 +20,12 @@ public class VentanaPrincipal extends JFrame {
 		   this.pantallaInicial.setVisible(true);
 		   
 	   }
+	  
+	  public void irAMenu() {
+		  
+	  }
+	  
+	  public void irARegistro() {
+		  
+	  }
 }

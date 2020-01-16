@@ -3,33 +3,102 @@ package interfaces;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import main.Usuario;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class MasSaldo extends JPanel{
-	private JTextField AddSaldoText;
-	public MasSaldo() {
-		setBackground(new Color(65, 105, 225));		
-		setLayout(null);	
-		JLabel LabelSueldo = new JLabel("A\u00F1adir Saldo :");
-		LabelSueldo.setForeground(new Color(255, 165, 0));
-		LabelSueldo.setHorizontalAlignment(SwingConstants.CENTER);
-		LabelSueldo.setBounds(78, 84, 78, 14);
-		add(LabelSueldo);		
-		JButton AtrasBoton = new JButton("Atras");
-		AtrasBoton.setBackground(new Color(139, 0, 0));
-		AtrasBoton.setForeground(new Color(178, 34, 34));
-		AtrasBoton.setBounds(10, 326, 89, 23);
-		add(AtrasBoton);		
-		JButton AddSaldo = new JButton("A\u00F1adir");
-		AddSaldo.setForeground(new Color(50, 205, 50));
-		AddSaldo.setBackground(new Color(0, 128, 0));
-		AddSaldo.setBounds(166, 133, 89, 23);
-		add(AddSaldo);		
-		AddSaldoText = new JTextField();
-		AddSaldoText.setBounds(166, 81, 96, 20);		
-		add(AddSaldoText);		
-		AddSaldoText.setColumns(10);
+public class MasSaldo extends JPanel
+{
+	private JTextField addSaldoText;
+	private JLabel lblSaldoAnadido;
+	private Usuario usuario;
+
+
+
+	/**
+	 * 
+	 * @author Jose Luis Gallardo
+	 * @author Balint Salamon Mark
+	 */
+	public MasSaldo(VentanaPrincipal v, Usuario usuario)
+	{
+		this.usuario = usuario;
+		setBackground(new Color(65, 105, 225));
+		setLayout(null);
+		JLabel labelSueldo = new JLabel("A\u00F1adir Saldo :");
+		labelSueldo.setForeground(new Color(255, 165, 0));
+		labelSueldo.setHorizontalAlignment(SwingConstants.CENTER);
+		labelSueldo.setBounds(65, 83, 89, 17);
+		add(labelSueldo);
+		JButton atrasBoton = new JButton("Atras");
+		atrasBoton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				// TODO hacer que el boton atras funcione :3
+			}
+		});
+		atrasBoton.setBackground(new Color(139, 0, 0));
+		atrasBoton.setForeground(new Color(178, 34, 34));
+		atrasBoton.setBounds(12, 264, 89, 23);
+		add(atrasBoton);
+		JButton addSaldo = new JButton("A\u00F1adir");
+		int newBal = (int) (usuario.getSaldo() + Integer.parseInt(labelSueldo.getText()));
+		addSaldo.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent arg0)
+			{
+				int newBal = (int) (Integer.parseInt(getAddSaldoText().getText()) + getUsuario().getSaldo());
+				getUsuario().setSaldo(newBal);
+				getLblSaldoAnadido().setText("lblSaldoAnadido");
+			}
+		});
+		addSaldo.setForeground(new Color(50, 205, 50));
+		addSaldo.setBackground(new Color(0, 128, 0));
+		addSaldo.setBounds(166, 133, 89, 23);
+		add(addSaldo);
+		addSaldoText = new JTextField();
+		addSaldoText.setBounds(166, 81, 96, 20);
+		add(addSaldoText);
+		addSaldoText.setColumns(10);
+
+		lblSaldoAnadido = new JLabel("");
+		lblSaldoAnadido.setHorizontalAlignment(SwingConstants.LEFT);
+		lblSaldoAnadido.setForeground(new Color(255, 165, 0));
+		lblSaldoAnadido.setBounds(113, 267, 314, 20);
+		add(lblSaldoAnadido);
+	}
+
+
+
+	public JLabel getLblSaldoAnadido()
+	{
+		return lblSaldoAnadido;
+	}
+
+
+
+	public JTextField getAddSaldoText()
+	{
+		return addSaldoText;
+	}
+
+
+
+	public Usuario getUsuario()
+	{
+		return usuario;
+	}
+
+
+
+	public void setUsuario(Usuario usuario)
+	{
+		this.usuario = usuario;
 	}
 }

@@ -16,9 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
+	private VentanaPrincipal ventana;
 	private JPasswordField textFieldRepetirPassword;
 	private JTextField textFieldRepetirEmail;
-	public Registro() {
+	public Registro(VentanaPrincipal v) {
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
 		setLayout(null);
@@ -164,7 +165,7 @@ public class Registro extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
+                //ventana.irPantallaInicio();
 			}
 		});
 		

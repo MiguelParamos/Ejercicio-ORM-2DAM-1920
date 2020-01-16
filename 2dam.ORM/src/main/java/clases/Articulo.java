@@ -20,6 +20,7 @@ public class Articulo {
 	}
 	
 	
+	
 	//GETTERS AND SETTERS
 	public String getArtName() {
 		return artName;

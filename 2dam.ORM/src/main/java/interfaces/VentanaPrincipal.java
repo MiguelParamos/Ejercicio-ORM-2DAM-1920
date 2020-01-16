@@ -4,22 +4,31 @@ import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
     private Registro pantallaRegistro;
-    private Menu pantallaMenu;
+    private PantallaInicial pantallaInicial;
 	public VentanaPrincipal() {
-		pantallaMenu= new Menu(this,null);
+		pantallaInicial= new PantallaInicial();
 		this.setSize(500,500);
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
+		irAPantallaInicial();
 	}
 	 
 	//Esta función nos sirve para movernos a la pantalla inicial
-	  public void irPantallaMenu(){
+	  public void irAPantallaInicial(){
 		   if(this.pantallaRegistro!=null) {
 			   this.pantallaRegistro.setVisible(false);
 		   }
 		   this.setTitle("pantallaMenu");
-		   this.setContentPane(this.pantallaMenu);
-		   this.pantallaMenu.setVisible(true);
+		   this.setContentPane(this.pantallaInicial);
+		   this.pantallaInicial.setVisible(true);
 		   
 	   }
+	  
+	  public void irAMenu() {
+		  
+	  }
+	  
+	  public void irARegistro() {
+		  
+	  }
 }

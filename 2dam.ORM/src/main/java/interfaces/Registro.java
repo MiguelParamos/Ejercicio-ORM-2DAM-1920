@@ -164,7 +164,7 @@ public class Registro extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-                ventana.irPantallaInicial();
+                ventana.irAPantallaInicial();
 			}
 		});
 		

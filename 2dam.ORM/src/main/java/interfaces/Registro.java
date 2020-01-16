@@ -19,7 +19,7 @@ public class Registro extends JPanel {
 	private VentanaPrincipal ventana;
 	
 	public Registro(VentanaPrincipal v) {
-		setBackground(Color.decode("#5b9dc3"));
+		setBackground(new Color(91, 157, 195));
 		setSize(500,500);
 		setLayout(null);
 		

@@ -16,52 +16,66 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class NuevoArticulo extends JPanel{
-	private JTextField textField;
+	private JTextField textFieldNombre;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField textFieldPrecio;
+	private JTextField textFieldDescripcion;
 	private JLabel lblValido;
 	
 	public NuevoArticulo() {
 		setLayout(null);
+		setBackground(new Color(91, 157, 195));
 		
-		JLabel lblNewLabel = new JLabel("Nombre");
-		lblNewLabel.setBounds(99, 70, 46, 14);
-		add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Precio");
-		lblNewLabel_1.setBounds(99, 124, 46, 14);
-		add(lblNewLabel_1);
+		JLabel lblNewLabelNombre = new JLabel("Nombre");
+		lblNewLabelNombre.setBounds(99, 70, 46, 14);
+		add(lblNewLabelNombre);
 		
-		JLabel lblNewLabel_2 = new JLabel("Descripcion");
-		lblNewLabel_2.setBounds(99, 174, 69, 14);
-		add(lblNewLabel_2);
+		JLabel lblNewLabelPrecio = new JLabel("Precio");
+		lblNewLabelPrecio.setBounds(99, 124, 46, 14);
+		add(lblNewLabelPrecio);
 		
-		textField = new JTextField();
-		textField.setBounds(245, 67, 86, 20);
-		add(textField);
-		textField.setColumns(10);
+		JLabel lblNewLabelDescripcion = new JLabel("Descripcion");
+		lblNewLabelDescripcion.setBounds(99, 174, 69, 14);
+		add(lblNewLabelDescripcion);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(245, 121, 86, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(245, 67, 86, 20);
+		add(textFieldNombre);
+		textFieldNombre.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(214, 163, 139, 60);
-		add(textField_2);
-		textField_2.setColumns(10);
+		textFieldPrecio = new JTextField();
+		textFieldPrecio.setBounds(245, 121, 86, 20);
+		add(textFieldPrecio);
+		textFieldPrecio.setColumns(10);
 		
+		textFieldDescripcion = new JTextField();
+		textFieldDescripcion.setBounds(214, 163, 139, 60);
+		add(textFieldDescripcion);
+		textFieldDescripcion.setColumns(10);
+		
+		
+		/**
+		 * Modificado por Ivan Diaz Vera
+		 * y José Maria Osuna Liñán
+		 */
 		JButton btnIntroducir = new JButton("Introducir Articulo");
 		btnIntroducir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(textField.getText().length()>0&&textField_1.getText().length()>0&&textField_2.getText().length()>0) {
-					Articulo articulo=new Articulo(textField.getText(), Float.parseFloat(textField_1.getText()), textField_2.getText());
-				}else {
+				
+				String nombre=textFieldNombre.getText();
+				String precio=textFieldPrecio.getText();
+				String descripcion=textFieldDescripcion.getText();
+				
+				if(nombre.isEmpty()||precio.isEmpty()||descripcion.isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Hay algun campo incompleto");
+				}else {
+				    Articulo articulo=new Articulo(nombre, Float.parseFloat(precio), descripcion);
+				    
 				}
 			}
-		});
+		});		
 		btnIntroducir.setBounds(242, 234, 127, 23);
 		add(btnIntroducir);
 		
@@ -74,7 +88,7 @@ public class NuevoArticulo extends JPanel{
 		lblNewLabel_3.setBounds(140, 11, 201, 37);
 		add(lblNewLabel_3);
 		
-		 lblValido = new JLabel("");
+		lblValido = new JLabel("");
 		lblValido.setForeground(Color.RED);
 		lblValido.setBounds(341, 124, 99, 14);
 		add(lblValido);

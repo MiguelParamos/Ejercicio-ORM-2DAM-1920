@@ -1,9 +1,16 @@
 package clases;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 /***
  * @author Silver (Alejandro)
  * @author Pablo Castellanos
  */
 import java.util.ArrayList;
+
+import com.mysql.cj.protocol.Resultset;
+import com.mysql.cj.xdevapi.Statement;
 
 public class Usuario {
 	private String nombre;
@@ -85,6 +92,31 @@ public class Usuario {
 		this.articulosComprados = articulosComprados;
 	}
 	
+	/***
+	 * Esta función se encarga de recoger los datos de usuario de la base de datos.
+	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
+	 * @return -> Los datos del usuario de la base de datos.
+	 */
+	public String funcionDAOString(String datos) {
+		
+		Connection conexion = null;
+		try {
+			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
+			
+			PreparedStatement consultaStatement = conexion.prepareStatement("SELECT '"+datos+"' FROM Usuario");
+			
+			Resultset rSet = (Resultset) consultaStatement.executeQuery();
+			
+			datos=rSet.toString();
+			
+			conexion.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return datos;
+		
+	}
 	
 	
 }

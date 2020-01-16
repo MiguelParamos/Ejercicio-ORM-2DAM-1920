@@ -14,7 +14,7 @@ public class VentanaPrincipal extends JFrame {
 		   if(this.pantallaInicio==null) {
 			   this.pantallaInicio=new Inicio(this,null);
 		   }
-		   this.setTitle("pantallaLogin");
+		   this.setTitle("pantallaInicio");
 		   this.pantallaRegistro.setVisible(false);
 		   this.setContentPane(this.pantallaInicio);
 		   this.pantallaInicio.setVisible(true);

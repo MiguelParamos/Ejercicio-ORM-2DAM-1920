@@ -4,14 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import main.Usuario;
+import clases.Usuario;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 public class MasSaldo extends JPanel
 {
 	private JTextField addSaldoText;

@@ -2,21 +2,33 @@ package interfaces;
 
 import javax.swing.JPanel;
 
+import clases.Usuario;
 import componentes.BotonMenu;
 
-public class Menu extends JPanel{
+/**
+ * El panel Menu de la aplicacion. Hereda de JPanel.
+ * @author Sara Pedrosa
+ * @author Alvaro de Francisco
+ */
+public class Menu extends JPanel {
 
-	private VentanaPrincipal v;
-
-	public Menu(VentanaPrincipal v, Usuario usuaruo) {
+	private VentanaPrincipal v; // El JFrame personalizado que alberga el panel
+	private Usuario u; // El Usuario que utiliza la aplicacion
+	
+	/**
+	 * Constructor de Menu
+	 * @param v El JFrame personalizado que alberga el panel
+	 * @param usuario El Usuario que utiliza la aplicacion
+	 */
+	public Menu(VentanaPrincipal ventana, Usuario usuario) {
 
 		super();
-		this.v = v;
+		this.v = ventana;
+		this.u = usuario;
 
 		setLayout(null);
 
-
-		if (usuaruo.isEsTienda()) {
+		if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");
@@ -36,7 +48,7 @@ public class Menu extends JPanel{
 			add(annadirArticulo);
 			add(verUsuarios);
 
-		} else {
+		} else { // Comprueba si el Usuario NO es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verMisArticulos = new BotonMenu("Ver mis Articulos");

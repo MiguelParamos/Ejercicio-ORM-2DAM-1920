@@ -19,19 +19,14 @@ public class Stock {
 		super();
 		this.HashMap = HashMap;
 	}
-
-	/**
-	 * @return the HashMap
-	 */
-	public HashMap<Articulo, Short> getHashMap() {
-		return HashMap;
-	}
-
-	/**
-	 * @param HashMap the HashMap to set
-	 */
-	public void setHashMap(HashMap<Articulo, Short> HashMap) {
-		this.HashMap = HashMap;
+	
+	public void AñadirStock(Articulo articulo,short cantidad) {
+		try {
+			this.HashMap.replace(articulo,(short) (this.HashMap.get(articulo) + cantidad));
+		}catch(Exception e) {//Excepcion personalizada
+			
+		}
+		
 	}
 	
 	

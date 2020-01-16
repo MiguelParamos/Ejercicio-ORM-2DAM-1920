@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * 
  * @author Andrés
- *
+ * @author Malkien
  */
 public class Stock {
 

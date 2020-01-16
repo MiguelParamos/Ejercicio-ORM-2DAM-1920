@@ -13,7 +13,7 @@ public class BotonMenu extends JButton {
 		super(txt);
 		
 		this.setForeground(new Color(0, 0, 0));
-		this.setFont(new Font("Malgun Gothic", Font.PLAIN, 22));
+		this.setFont(new Font("Malgun Gothic", Font.PLAIN, 14));
 		this.setBackground(SystemColor.activeCaption);
 		
 	}

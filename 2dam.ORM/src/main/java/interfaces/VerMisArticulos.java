@@ -6,6 +6,7 @@ import clases.Articulo;
 import clases.Usuario;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
@@ -31,7 +32,7 @@ public class VerMisArticulos extends JPanel{
 		this.user=us;
 		setSize(new Dimension(500, 500));
 		setLayout(null);
-		
+		setBackground(new Color(38, 49, 179));
 		//LISTA DE ARTICULOS
 		//Foreach para rellenar los articulos que dependan del usuario.
 		DefaultListModel dLM=new DefaultListModel<String>();
@@ -41,6 +42,7 @@ public class VerMisArticulos extends JPanel{
 		JList listaArticulos = new JList(dLM);
 		listaArticulos.setBounds(135, 54, 233, 282);
 		add(listaArticulos);
+		listaArticulos.setBackground(new Color(105, 112, 205));
 		
 		//BOTÓN ATRÁS
 		JButton btnAtras = new JButton("Atr\u00E1s");
@@ -50,6 +52,7 @@ public class VerMisArticulos extends JPanel{
 			}
 		});
 		btnAtras.setBounds(49, 425, 89, 23);
+		btnAtras.setBackground(new Color(13, 21, 116));
 		add(btnAtras);
 		
 	}

@@ -14,11 +14,10 @@ import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PantallaInicial extends JFrame {
+public class PantallaInicial extends JPanel {
 
-	private JPanel contentPane;
 	private JTextField tfUsuario;
-	private JLabel lblNewLabel_1;
+	private JLabel lblPass;
 	private JPasswordField pfPass;
 	private JButton btnInicio;
 
@@ -37,7 +36,9 @@ public class PantallaInicial extends JFrame {
 			}
 		});
 	}
-	public JFrame getFrame() {
+	
+	
+	public JPanel getFrame() {
 		return this;
 	}
 	
@@ -56,17 +57,20 @@ public class PantallaInicial extends JFrame {
 	public void setPfPass(JPasswordField pfPass) {
 		this.pfPass = pfPass;
 	}
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public PantallaInicial() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+
+		setSize(500,500);
+		setLayout(null);
+		
+		tfUsuario = new JTextField();
+		tfUsuario.setBounds(190, 215, 96, 19);
+		this.add(tfUsuario);
+		tfUsuario.setColumns(10);
 		
 		btnInicio = new JButton("Iniciar Sesion");
 		btnInicio.addActionListener(new ActionListener() {
@@ -92,24 +96,19 @@ public class PantallaInicial extends JFrame {
 				}
 			}
 		});
-		btnInicio.setBounds(161, 153, 118, 21);
-		contentPane.add(btnInicio);
+		btnInicio.setBounds(173, 301, 131, 21);
+		this.add(btnInicio);
 		
-		tfUsuario = new JTextField();
-		tfUsuario.setBounds(161, 88, 118, 19);
-		contentPane.add(tfUsuario);
-		tfUsuario.setColumns(10);
+		JLabel lblUser = new JLabel("Usuario");
+		lblUser.setBounds(103, 216, 77, 16);
+		this.add(lblUser);
 		
-		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setBounds(90, 91, 61, 13);
-		contentPane.add(lblNewLabel);
-		
-		lblNewLabel_1 = new JLabel("Contrase\u00F1a");
-		lblNewLabel_1.setBounds(90, 120, 61, 13);
-		contentPane.add(lblNewLabel_1);
+		lblPass = new JLabel("Contrase\u00F1a");
+		lblPass.setBounds(103, 260, 77, 13);
+		this.add(lblPass);
 		
 		pfPass = new JPasswordField();
-		pfPass.setBounds(161, 124, 118, 19);
-		contentPane.add(pfPass);
+		pfPass.setBounds(190, 257, 96, 19);
+		this.add(pfPass);
 	}
 }

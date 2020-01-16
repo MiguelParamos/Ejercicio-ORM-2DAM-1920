@@ -5,7 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import main.Usuario;
+import clases.Usuario;
 
 public class MasStock extends JPanel {
 	private JTextField campoNumericoMasStock;

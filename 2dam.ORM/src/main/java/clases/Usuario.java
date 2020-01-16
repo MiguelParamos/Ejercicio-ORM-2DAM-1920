@@ -1,6 +1,7 @@
-package main;
+package clases;
 /***
- * @author Silver (Alejandro) y Pablo Castellanos
+ * @author Silver (Alejandro)
+ * @author Pablo Castellanos
  */
 import java.util.ArrayList;
 

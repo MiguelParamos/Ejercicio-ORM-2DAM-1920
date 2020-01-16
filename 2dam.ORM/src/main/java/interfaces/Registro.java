@@ -5,11 +5,10 @@ package interfaces;
 
 import javax.swing.*;
 
+import clases.Usuario;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import main.Usuario;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;

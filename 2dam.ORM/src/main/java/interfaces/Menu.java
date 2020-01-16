@@ -2,8 +2,8 @@ package interfaces;
 
 import javax.swing.JPanel;
 
+import clases.Usuario;
 import componentes.BotonMenu;
-import main.Usuario;
 
 public class Menu extends JPanel{
 	

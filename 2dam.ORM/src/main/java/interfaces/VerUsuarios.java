@@ -1,7 +1,6 @@
 package interfaces;
 
 import javax.swing.JPanel;
-import main.Usuario;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -15,6 +14,9 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.border.MatteBorder;
+
+import clases.Usuario;
+
 import java.awt.Color;
 
 /**

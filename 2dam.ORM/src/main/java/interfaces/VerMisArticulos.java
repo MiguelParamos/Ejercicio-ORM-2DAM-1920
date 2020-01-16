@@ -2,8 +2,8 @@ package interfaces;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 
-import main.Articulo;
-import main.Usuario;
+import clases.Articulo;
+import clases.Usuario;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 public class VerMisArticulos extends JPanel{
 	private VentanaPrincipal ventanaPrincipal;
 	private Usuario user;
-	@SuppressWarnings("unchecked")
 	/**
 	 * El constructor principal de la clase.
 	 * @param vp la clase VentanaPrincipal del programa.

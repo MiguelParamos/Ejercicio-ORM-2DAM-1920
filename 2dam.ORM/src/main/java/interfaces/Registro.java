@@ -1,15 +1,15 @@
 package interfaces;
 /**
- * @author Ivan Diaz y Jose Maria Osuna
+ * @author Ivan Diaz
+ * @author Jose Maria Osuna
  */
 
 import javax.swing.*;
 
+import clases.Usuario;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import main.Usuario;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -17,8 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
 	private VentanaPrincipal ventana;
-	private JPasswordField textFieldRepetirPassword;
-	private JTextField textFieldRepetirEmail;
+	
 	public Registro(VentanaPrincipal v) {
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
@@ -165,7 +164,7 @@ public class Registro extends JPanel {
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-                //ventana.irPantallaInicio();
+                ventana.irPantallaInicial();
 			}
 		});
 		

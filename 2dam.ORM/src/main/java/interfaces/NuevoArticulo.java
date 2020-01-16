@@ -1,6 +1,11 @@
 package interfaces;
+/**
+ * @author Ivan Diaz
+ * @author Jose Maria Osuna
+ */
 
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -8,102 +13,165 @@ import javax.swing.JTextField;
 import clases.Articulo;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat;
+
+import javax.swing.SwingConstants;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.NumberFormatter;
+import javax.swing.text.PlainDocument;
 
 public class NuevoArticulo extends JPanel{
 	private JTextField textFieldNombre;
 	private JTextField textField_1;
 	private JTextField textFieldPrecio;
-	private JTextField textFieldDescripcion;
-	private JLabel lblValido;
+	private JTextArea textFieldDescripcion;
 	
 	public NuevoArticulo() {
+		setBackground(Color.decode("#5b9dc3"));
+		setSize(500,500);
 		setLayout(null);
-		setBackground(new Color(91, 157, 195));
 		
+		//JLabel utilizados como etiquetas.
+		JLabel lblCabecera = new JLabel("Nuevo Articulo");
+		lblCabecera.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCabecera.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblCabecera.setBounds(102, 41, 270, 37);
+		add(lblCabecera);
 		
-		JLabel lblNewLabelNombre = new JLabel("Nombre");
-		lblNewLabelNombre.setBounds(99, 70, 46, 14);
-		add(lblNewLabelNombre);
+		JLabel lblNombre = new JLabel("Nombre:");
+		lblNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNombre.setBounds(125, 108, 81, 14);
+		add(lblNombre);
 		
-		JLabel lblNewLabelPrecio = new JLabel("Precio");
-		lblNewLabelPrecio.setBounds(99, 124, 46, 14);
-		add(lblNewLabelPrecio);
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblPrecio.setBounds(139, 145, 58, 14);
+		add(lblPrecio);
 		
-		JLabel lblNewLabelDescripcion = new JLabel("Descripcion");
-		lblNewLabelDescripcion.setBounds(99, 174, 69, 14);
-		add(lblNewLabelDescripcion);
+		JLabel lblDescripcion = new JLabel("Descripcion:");
+		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblDescripcion.setBounds(102, 186, 91, 14);
+		add(lblDescripcion);
 		
+		//TextField para rellenar los campos de Nombre, precio y descripcion del articulo.
+		//Precio y descripcion usan DocumentFilter 
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(245, 67, 86, 20);
+		textFieldNombre.setBounds(194, 106, 178, 20);
 		add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
 		textFieldPrecio = new JTextField();
-		textFieldPrecio.setBounds(245, 121, 86, 20);
+		DocumentFilter filter = new UppercaseDocumentFilter();
+		((AbstractDocument) textFieldPrecio.getDocument()).setDocumentFilter(filter);
+		textFieldPrecio.setBounds(194, 144, 178, 20);
 		add(textFieldPrecio);
 		textFieldPrecio.setColumns(10);
-		
-		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(214, 163, 139, 60);
+
+		textFieldDescripcion = new JTextArea();
+		textFieldDescripcion.setDocument(new JTextFieldLimit());
+		textFieldDescripcion.setLineWrap(true);
+		textFieldDescripcion.setBounds(194, 186, 178, 90);
 		add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
+		//Boton para introducir nuevo articulo.
+		JButton btnIntroducir = new JButton("Introducir");
+		btnIntroducir.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnIntroducir.setBounds(179, 320, 166, 37);
+		add(btnIntroducir);
+		
+		//Boton para salir.
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAtras.setBounds(179, 367, 166, 37);
+		add(btnAtras);
 		
 		/**
-		 * Modificado por Ivan Diaz Vera
-		 * y José Maria Osuna Liñán
+		 * Evento Boton Introducir
+		 * Se comprueba que los campos de texto no estan vacios, de lo contrario la variable error pasa a 1 y cambiara el color del campo a rojo, 
+		 * si esto ocurre el programa no seguira con el ingreso del nuevo articulo.
 		 */
-		JButton btnIntroducir = new JButton("Introducir Articulo");
 		btnIntroducir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
-				String nombre=textFieldNombre.getText();
-				String precio=textFieldPrecio.getText();
-				String descripcion=textFieldDescripcion.getText();
-				
-				if(nombre.isEmpty()||precio.isEmpty()||descripcion.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Hay algun campo incompleto");
-				}else {
-				    Articulo articulo=new Articulo(nombre, Float.parseFloat(precio), descripcion);
-				    
+				int error = 0; 
+				if(textFieldNombre.getText().isEmpty()) {
+					textFieldNombre.setBackground(Color.RED);
+					error = 1;
 				}
-			}
-		});		
-		btnIntroducir.setBounds(242, 234, 127, 23);
-		add(btnIntroducir);
-		
-		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(91, 234, 89, 23);
-		add(btnSalir);
-		
-		JLabel lblNewLabel_3 = new JLabel("INSERTAR ARTICULO");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_3.setBounds(140, 11, 201, 37);
-		add(lblNewLabel_3);
-		
-		lblValido = new JLabel("");
-		lblValido.setForeground(Color.RED);
-		lblValido.setBounds(341, 124, 99, 14);
-		add(lblValido);
-		textField_1 = new JTextField();
-		textField_1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				try {
-					float precio=Integer.parseInt(textField_1.getText());
-					lblValido.setText("");
-				}catch(NumberFormatException nfe) {
-				lblValido.setText("Numero invalido");	
+				
+				if(textFieldPrecio.getText().isEmpty()) {
+					textFieldPrecio.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(textFieldDescripcion.getText().isEmpty()) {
+					textFieldDescripcion.setBackground(Color.RED);
+					error = 1;
+				}
+				
+				if(error!=1) {
+					//Crea el nuevo articulo.
+					Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText());
+					
+					//Limpia los campos de texto para facilitar la ayuda a un nuevo articulo y devuelve el color original del campo.
+					textFieldNombre.setText("");
+					textFieldNombre.setBackground(Color.WHITE);
+					try {
+						textFieldPrecio.getDocument().remove(0, textFieldPrecio.getText().length());
+					} catch (BadLocationException e) {
+						e.printStackTrace();
+					}
+					textFieldPrecio.setBackground(Color.WHITE);
+					textFieldDescripcion.setText("");
+					textFieldDescripcion.setBackground(Color.WHITE);
+					JOptionPane.showMessageDialog(null, "¡Articulo introducido!");
+				}else{
+					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");
 				}
 			}
 		});
 		
+		/**
+		 * Evento Boton Atras
+		 */
+		btnAtras.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+	}
+	
+	/**
+	 * Limitamos el numero maximo de caracteres por linea y en total del JTextField, lo usamos para el campo descripcion.
+	 * El numero *120* indica el maximo permitido.
+	 */
+	public class JTextFieldLimit extends PlainDocument {
+		public void insertString(int offset, String  str, AttributeSet attr) throws BadLocationException {
+			if (str == null) return;
+	    	if ((getLength() + str.length()) <= 120){
+	    		super.insertString(offset, str, attr);
+	    	}
+	    }
+    }
+	
+	/**
+	 * Limita el uso de cualquier caracter que no sea numerico en el campo precio.
+	 */
+	public class UppercaseDocumentFilter extends DocumentFilter {
+		public void replace(DocumentFilter.FilterBypass fb, int offset, int length,String text, javax.swing.text.AttributeSet attr) throws BadLocationException {
+			fb.insertString(offset, text.replaceAll("[^0-9.]", ""), attr);   
+		}
 	}
 }

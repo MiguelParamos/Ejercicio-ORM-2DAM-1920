@@ -84,7 +84,7 @@ public class Registro extends JPanel {
 		checkboxTienda.setFont(new Font("Dialog", Font.BOLD, 12));
 		add(checkboxTienda);
 		
-		//Boton de registrar nuevo usuario.
+		//Boton para registrar un nuevo usuario.
 		JButton btnRegistrar = new JButton("Registro");
 		btnRegistrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnRegistrar.setBounds(173, 303, 166, 28);
@@ -101,8 +101,12 @@ public class Registro extends JPanel {
 		btnAtras.setBounds(173, 342, 166, 28);
 		add(btnAtras);
 		
-		//Evento de botones
-		//Boton Registrar con control de errores
+		/**
+		 * Evento Boton Registrar
+		 * Se comprueba que los campos de texto no estan vacios, de lo contrario la variable error pasa a 1 y cambiara el color del campo a rojo, 
+		 * si esto ocurre el programa no seguira con el registro. Si todos los campos son rellenados correctamente se comprueba
+		 * que Email/RepetirEmail y Password/RepetirPassword coinciden para terminar con el proceso de registro.
+		 */
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

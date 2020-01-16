@@ -2,12 +2,18 @@ package interfaces;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import clases.Articulo;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class NuevoArticulo extends JPanel{
 	private JTextField textField;
@@ -35,6 +41,7 @@ public class NuevoArticulo extends JPanel{
 		add(textField);
 		textField.setColumns(10);
 		
+		textField_1 = new JTextField();
 		textField_1.setBounds(245, 121, 86, 20);
 		add(textField_1);
 		textField_1.setColumns(10);
@@ -45,6 +52,16 @@ public class NuevoArticulo extends JPanel{
 		textField_2.setColumns(10);
 		
 		JButton btnIntroducir = new JButton("Introducir Articulo");
+		btnIntroducir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(textField.getText().length()>0&&textField_1.getText().length()>0&&textField_2.getText().length()>0) {
+					Articulo articulo=new Articulo(textField.getText(), Float.parseFloat(textField_1.getText()), textField_2.getText());
+				}else {
+					JOptionPane.showMessageDialog(null, "Hay algun campo incompleto");
+				}
+			}
+		});
 		btnIntroducir.setBounds(242, 234, 127, 23);
 		add(btnIntroducir);
 		

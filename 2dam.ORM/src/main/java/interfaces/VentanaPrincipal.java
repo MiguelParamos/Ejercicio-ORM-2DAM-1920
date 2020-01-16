@@ -12,7 +12,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	  /*public void irPantallaInicio(){
 		   if(this.pantallaInicio==null) {
-			   this.pantallaInicio=new Menu(this,null);
+			   this.pantallaInicio=new Inicio(this,null);
 		   }
 		   this.setTitle("pantallaLogin");
 		   this.pantallaRegistro.setVisible(false);

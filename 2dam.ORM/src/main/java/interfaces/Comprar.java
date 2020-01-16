@@ -5,7 +5,7 @@ package interfaces;
  */
 import javax.swing.JPanel;
 
-import main.Usuario;
+import clases.Usuario;
 
 import javax.swing.JList;
 import javax.swing.JLabel;

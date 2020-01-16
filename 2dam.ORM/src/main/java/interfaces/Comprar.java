@@ -1,5 +1,8 @@
 package interfaces;
-
+/**
+ * @author Javier del Pozo
+ * @author Alberto Riera
+ */
 import javax.swing.JPanel;
 
 import main.Usuario;

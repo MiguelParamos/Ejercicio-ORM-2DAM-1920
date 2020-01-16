@@ -32,12 +32,14 @@ import javax.swing.text.NumberFormatter;
 import javax.swing.text.PlainDocument;
 
 public class NuevoArticulo extends JPanel{
+	private VentanaPrincipal ventana;
 	private JTextField textFieldNombre;
 	private JTextField textField_1;
 	private JTextField textFieldPrecio;
 	private JTextArea textFieldDescripcion;
 	
-	public NuevoArticulo() {
+	public NuevoArticulo(VentanaPrincipal v) {
+		
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
 		setLayout(null);
@@ -140,6 +142,7 @@ public class NuevoArticulo extends JPanel{
 				}else{
 					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");
 				}
+				ventana.irAMenu();
 			}
 		});
 		
@@ -149,6 +152,7 @@ public class NuevoArticulo extends JPanel{
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ventana.irAMenu();
 			}
 		});
 	}

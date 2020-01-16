@@ -9,15 +9,16 @@ public class VentanaPrincipal extends JFrame {
 		this.setSize(500,500);
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
+		irPantallaInicial();
 	}
 	  public void irPantallaInicial(){
 		   if(this.pantallaInicial==null) {
 			   this.pantallaInicial=new PantallaInicial();
 		   }
 		   this.setTitle("pantallaInicial");
-		   this.pantallaRegistro.setVisible(false);
+		   //this.pantallaRegistro.setVisible(false);
 		   this.setContentPane(this.pantallaInicial);
-		   this.pantallaInicial.setVisible(true);
+		   //this.pantallaInicial.setVisible(true);
 		   
 	   }
 }

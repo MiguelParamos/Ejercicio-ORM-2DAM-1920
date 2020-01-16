@@ -86,16 +86,5 @@ public class Usuario {
 	}
 	
 	
-	/*public String funcionDAOString (String datos) {
-	
-		
-		
-		
-		
-		
-		return datos;
-		
-	}*/
-	
 	
 }

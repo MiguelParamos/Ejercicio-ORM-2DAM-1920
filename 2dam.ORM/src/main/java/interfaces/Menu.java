@@ -9,21 +9,22 @@ import componentes.BotonMenu;
  * El panel Menu de la aplicacion. Hereda de JPanel.
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
- *
  */
 public class Menu extends JPanel {
 
 	private VentanaPrincipal v; // El JFrame personalizado que alberga el panel
+	private Usuario u; // El Usuario que utiliza la aplicacion
 	
 	/**
 	 * Constructor de Menu
 	 * @param v El JFrame personalizado que alberga el panel
 	 * @param usuario El Usuario que utiliza la aplicacion
 	 */
-	public Menu(VentanaPrincipal v, Usuario usuario) {
+	public Menu(VentanaPrincipal ventana, Usuario usuario) {
 
 		super();
-		this.v = v;
+		this.v = ventana;
+		this.u = usuario;
 
 		setLayout(null);
 

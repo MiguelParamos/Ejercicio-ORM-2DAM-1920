@@ -5,6 +5,7 @@ package interfaces;
  */
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 
 import clases.Usuario;
 
@@ -118,27 +119,27 @@ public class Registro extends JPanel {
 				String emailRepetido = textFieldRepetirEmail.getText();
 				
 				if(usuario.isEmpty()) {
-					textFieldNombre.setBackground(Color.RED);
+					textFieldNombre.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(password.isEmpty()) {
-					textFieldPassword.setBackground(Color.RED);
+					textFieldPassword.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(passwordRepetido.isEmpty()) {
-					textFieldRepetirPassword.setBackground(Color.RED);
+					textFieldRepetirPassword.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(email.isEmpty()) {
-					textFieldEmail.setBackground(Color.RED);
+					textFieldEmail.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(emailRepetido.isEmpty()) {
-					textFieldRepetirEmail.setBackground(Color.RED);
+					textFieldRepetirEmail.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				

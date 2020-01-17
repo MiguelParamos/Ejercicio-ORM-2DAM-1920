@@ -13,28 +13,23 @@ import javax.swing.JTextField;
 import clases.Articulo;
 
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.NumberFormat;
 
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.NumberFormatter;
 import javax.swing.text.PlainDocument;
 
 public class NuevoArticulo extends JPanel{
-	private JTextField textFieldNombre;
-	private JTextField textField_1;
-	private JTextField textFieldPrecio;
+	private JTextField textFieldNombre, textFieldPrecio;
 	private JTextArea textFieldDescripcion;
 	
 	public NuevoArticulo() {
@@ -107,17 +102,17 @@ public class NuevoArticulo extends JPanel{
 			public void mouseClicked(MouseEvent arg0) {
 				int error = 0; 
 				if(textFieldNombre.getText().isEmpty()) {
-					textFieldNombre.setBackground(Color.RED);
+					textFieldNombre.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(textFieldPrecio.getText().isEmpty()) {
-					textFieldPrecio.setBackground(Color.RED);
+					textFieldPrecio.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
 				if(textFieldDescripcion.getText().isEmpty()) {
-					textFieldDescripcion.setBackground(Color.RED);
+					textFieldDescripcion.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
 				
@@ -127,15 +122,15 @@ public class NuevoArticulo extends JPanel{
 					
 					//Limpia los campos de texto para facilitar la ayuda a un nuevo articulo y devuelve el color original del campo.
 					textFieldNombre.setText("");
-					textFieldNombre.setBackground(Color.WHITE);
+					textFieldNombre.setBorder(new LineBorder(Color.white,1));
 					try {
 						textFieldPrecio.getDocument().remove(0, textFieldPrecio.getText().length());
 					} catch (BadLocationException e) {
 						e.printStackTrace();
 					}
-					textFieldPrecio.setBackground(Color.WHITE);
+					textFieldPrecio.setBorder(new LineBorder(Color.white,1));
 					textFieldDescripcion.setText("");
-					textFieldDescripcion.setBackground(Color.WHITE);
+					textFieldDescripcion.setBorder(new LineBorder(Color.white,1));
 					JOptionPane.showMessageDialog(null, "¡Articulo introducido!");
 				}else{
 					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");

@@ -136,7 +136,7 @@ public class NuevoArticulo extends JPanel{
 				}else{
 					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");
 				}
-				ventana.irAMenu();
+				//ventana.irAMenu();
 			}
 		});
 
@@ -146,7 +146,7 @@ public class NuevoArticulo extends JPanel{
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ventana.irAMenu();
+				//ventana.irAMenu();
 			}
 		});
 	}

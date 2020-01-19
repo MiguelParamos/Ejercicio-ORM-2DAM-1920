@@ -2,6 +2,8 @@ package interfaces;
 /**
  * @author Ivan Diaz
  * @author Jose Maria Osuna
+ * @author Alfredo Molina
+ * @author Antonio Martinez
  */
 
 import javax.swing.*;
@@ -18,6 +20,7 @@ import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
 	private VentanaPrincipal ventana;
+	private Usuario usuario;
 	
 	public Registro(VentanaPrincipal v) {
 		setBackground(new Color(91, 157, 195));
@@ -147,11 +150,15 @@ public class Registro extends JPanel {
 					if(password.equals(passwordRepetido)) {
 						if(email.equals(emailRepetido)) {
 							if(checkboxTienda.isSelected()) {
+								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
+								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Tienda creada");
-								//Usuario nuevoUsuario = new Usuario(usuario, password, email, null, null, null);
+								
 							}else {
+								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Usuario creado");
-								//Usuario nuevoUsuario = new Usuario(usuario, password, email, null, null, null);
+								
 							}
 						}else {
 							JOptionPane.showMessageDialog(null, "Ambos email no coinciden");
@@ -174,6 +181,12 @@ public class Registro extends JPanel {
 		});
 		
 		
+		
+	}
+	/*
+	 * Funcion que se encarga de introducir los datos al registrar un usuario en la base de datos.
+	 */
+	public void introducirDAO() {
 		
 	}
 }

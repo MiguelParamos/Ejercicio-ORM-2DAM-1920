@@ -72,8 +72,20 @@ public class VentanaPrincipal extends JFrame {
 		
 	}
 
+	/**
+	 * Funcion que permite ir al panel de Registro
+	 * @author alfre
+	 * @author TataGolosa
+	 */
 	public void irARegistro() {
-
+		if(this.pantallaMenu!=null) {
+			this.pantallaMenu.setVisible(false);
+		}
+		pantallaRegistro=new Registro(this);
+		this.setTitle("Registro");
+		this.setContentPane(this.pantallaRegistro);
+		this.pantallaRegistro.setVisible(true);
+		
 	}
 
 	/**

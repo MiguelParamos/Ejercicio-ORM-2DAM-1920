@@ -17,7 +17,7 @@ public class Usuario {
 	private String password;
 	private String email;
 	private float saldo;
-	private boolean esTienda;
+	private boolean esTienda;//True si es tienda, False si no lo es.
 	private ArrayList<Articulo> articulosComprados;
 	
 	

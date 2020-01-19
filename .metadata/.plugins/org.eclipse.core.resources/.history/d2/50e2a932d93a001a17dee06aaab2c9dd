@@ -55,7 +55,7 @@ public class Articulo {
 		Connection conexion = null;
 		TreeSet<Articulo> articuloTS = null;
 		try {
-			//CONEXIÓN CON BASE DE DATOS, CREACIÓN DE STATEMENT Y RESULTSET
+			//CONEXIÓN CON BASE DE DATOS Y CREACIÓN DE STATEMENT Y RESULTSET
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			java.sql.Statement articuloStatement = conexion.createStatement();
 			ResultSet articulosBD=articuloStatement.executeQuery("SELECT * FROM Articulo");

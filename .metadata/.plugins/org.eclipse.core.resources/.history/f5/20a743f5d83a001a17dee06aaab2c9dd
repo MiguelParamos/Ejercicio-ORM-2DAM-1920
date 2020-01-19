@@ -51,16 +51,14 @@ public class Articulo {
 	
 	//FUNCION QUE CARGA LOS ARTICULOS DE BASE DE DATO A UN TREESET
 	public static void cargarArticulos(TreeSet<Articulo> todosLosArticulos) {
-		//INICIALIZACIÓN DE VARIABLES
 		Connection conexion = null;
 		TreeSet<Articulo> articuloTS = null;
 		try {
-			//CONEXIÓN CON BASE DE DATOS, CREACIÓN DE STATEMENT Y RESULTSET
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			java.sql.Statement articuloStatement = conexion.createStatement();
+
 			ResultSet articulosBD=articuloStatement.executeQuery("SELECT * FROM Articulo");
 			
-			//RECORRE TODOS LOS ARTICULOS DE LA BASE DE DATOS, METIENDOLOS EN UN TREESET
 			while(articulosBD.next()) {
 				String nombre= articulosBD.getString("nombre");
 				Float precio= articulosBD.getFloat("precio");
@@ -69,6 +67,7 @@ public class Articulo {
 				Articulo articulo= new Articulo(nombre, precio, descripcion);
 				articuloTS.add(articulo);
 			}
+			
 			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

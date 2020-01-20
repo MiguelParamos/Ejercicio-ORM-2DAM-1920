@@ -5,7 +5,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.TreeSet;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
@@ -27,7 +26,7 @@ import java.awt.Color;
  */
 public class VerUsuarios extends JPanel{
 	private VentanaPrincipal vPrincipal; // Variable para la ventana principal de la aplicación
-	private TreeSet<Usuario> setUsuarios; // Array con todos los usuarios registrados
+	private ArrayList<Usuario> arrayUsuarios; // Array con todos los usuarios registrados
 	private VerUsuarios thisRef; // Variable auxiliar de VerUsuarios 
 	
 	/**
@@ -37,7 +36,7 @@ public class VerUsuarios extends JPanel{
 	public VerUsuarios(VentanaPrincipal vp) {
 		this.vPrincipal=vp;
 		thisRef=this;
-		setUsuarios=Usuario.todosLosUsuarios();
+		arrayUsuarios=new ArrayList<Usuario>();
 		initComponents();
 	}
 	
@@ -47,7 +46,7 @@ public class VerUsuarios extends JPanel{
 	public void initComponents() {
 		setLayout(null);
 		DefaultListModel<String> listModel=new DefaultListModel<String>();
-		for (Usuario usuario : setUsuarios) {
+		for (Usuario usuario : arrayUsuarios) {
 			listModel.addElement(usuario.getNombre()+" - Rol: "+(((usuario.isEsTienda()?"Admin":"Usuario"))));
 		}
 		
@@ -82,11 +81,11 @@ public class VerUsuarios extends JPanel{
 		list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				lblNombre.setText("Nombre: "+setUsuarios.get(list.getSelectedIndex()).getNombre());
-				lblContrasenia.setText("Contraseña: "+setUsuarios.get(list.getSelectedIndex()).getPassword());
-				lblEmail.setText("Email: "+setUsuarios.get(list.getSelectedIndex()).getEmail());
-				lblSaldo.setText("Saldo: "+setUsuarios.get(list.getSelectedIndex()).getSaldo()+"€");
-				lblesAdmin.setText("¿Es Admin? "+(setUsuarios.get(list.getSelectedIndex()).isEsTienda()==true?"Si":"No"));
+				lblNombre.setText("Nombre: "+arrayUsuarios.get(list.getSelectedIndex()).getNombre());
+				lblContrasenia.setText("Contraseña: "+arrayUsuarios.get(list.getSelectedIndex()).getPassword());
+				lblEmail.setText("Email: "+arrayUsuarios.get(list.getSelectedIndex()).getEmail());
+				lblSaldo.setText("Saldo: "+arrayUsuarios.get(list.getSelectedIndex()).getSaldo()+"€");
+				lblesAdmin.setText("¿Es Admin? "+(arrayUsuarios.get(list.getSelectedIndex()).isEsTienda()==true?"Si":"No"));
 				panel.setVisible(true);
 			}
 		});

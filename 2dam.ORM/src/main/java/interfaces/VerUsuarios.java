@@ -36,7 +36,7 @@ public class VerUsuarios extends JPanel{
 	public VerUsuarios(VentanaPrincipal vp) {
 		this.vPrincipal=vp;
 		thisRef=this;
-		arrayUsuarios=new ArrayList<Usuario>();
+		arrayUsuarios=new ArrayList<Usuario>(Usuario.todosLosUsuarios());
 		initComponents();
 	}
 	

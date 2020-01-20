@@ -2,17 +2,20 @@ package clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 /***
  * @author Silver (Alejandro)
  * @author Pablo Castellanos
  */
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.TreeSet;
 
 import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Statement;
 
-public class Usuario {
+public class Usuario implements Comparable<Usuario>{
 	private String nombre;
 	private String password;
 	private String email;
@@ -93,7 +96,7 @@ public class Usuario {
 	}
 	
 	/***
-	 * Esta funci�n se encarga de recoger los datos de usuario de la base de datos.
+	 * Esta funci�n se encarga de recoger los datos de usuario de la base de datos.
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
 	 */
@@ -116,6 +119,62 @@ public class Usuario {
 		} 
 		return datos;
 		
+	}
+	
+	/**
+	 * Función que guarda todos los usuarios de la base de datos en un TreeSet
+	 * @return el TreeSet con todos los usuariops
+	 */
+	public static TreeSet<Usuario> todosLosUsuarios() {
+		Connection conexion=null;
+		Statement st=null;
+		ArrayList<Usuario> listaUsuarios=new ArrayList<Usuario>(); 
+		try {
+			conexion=DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
+			st=conexion.createStatement();
+			
+			// ResultSet con todos los usuarios registrados (sin los artículos comprados)
+			ResultSet rSetUsuario=st.executeQuery("SELECT * FROM Usuario");
+			while (rSetUsuario.next()) {
+				listaUsuarios.add(new Usuario(rSetUsuario.getString("nombre"), rSetUsuario.getString("contraseña"), rSetUsuario.getString("email"), rSetUsuario.getFloat("saldo"), rSetUsuario.getBoolean("esTienda"), null));
+			}
+			
+			
+			ResultSet rSetArticulosComprados=null;
+			ResultSet rSetArticulo=null;
+			for (Usuario usuario : listaUsuarios) {
+				ArrayList<Articulo> articulos=new ArrayList<Articulo>();
+				rSetArticulosComprados=st.executeQuery("SELECT nombreArticulos FROM ArticulosComprados WHERE nombreUsuario='"+usuario.getNombre()+"'");
+				while (rSetArticulosComprados.next()) {
+					String nombreArticulo=rSetArticulosComprados.getString("nombreArticulos");
+					rSetArticulo=st.executeQuery("SELECT * FROM Articulo WHERE nombre='"+nombreArticulo+"'");
+					if (rSetArticulo.next()) {
+						articulos.add(new Articulo(rSetArticulo.getString("nombre"), rSetArticulo.getFloat("precio"), rSetArticulo.getString("descripcion")));
+					}
+				}
+				usuario.setArticulosComprados(articulos);
+			}
+			
+			rSetUsuario.close();
+			rSetArticulosComprados.close();
+			rSetArticulo.close();
+			st.close();
+			conexion.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		Collections.sort(listaUsuarios);
+		TreeSet<Usuario> setUsuarios=new TreeSet<Usuario>(listaUsuarios);
+		return setUsuarios;
+	}
+
+	/**
+	 * Función implementada de desde la interfaz 'Comparable'
+	 * Se usa para order la lista de usuarios
+	 */
+	public int compareTo(Usuario u) {
+		return this.getNombre().compareTo(u.getNombre());
 	}
 	
 	

@@ -11,17 +11,25 @@ import com.mysql.cj.protocol.Resultset;
 import com.mysql.cj.xdevapi.Statement;
 
 /*
+ * Esta clase modela Articulo
  * @Author Juan Miguel 
- * @Author Juan Carlos & Javier Rodriguez
+ * @Author Juan Carlos
+ * @Author Javier Rodríguez
  */
 
 public class Articulo {
 	//INTERNAL VAR
-	private String artName;
-	private float artPrice;
-	private String artDesc;
+	private String artName;//Nombre de los articulos
+	private float artPrice;//Precio de los articulos
+	private String artDesc;//Descripcion de los articulos.
 	
 	//CONSTRUCTOR
+	/**
+	 * Constructor articulo
+	 * @param artName Nombre de los articulos que recibe de variable interna.
+	 * @param artPrice Precio de los articulos que recibe de variable interna.
+	 * @param artDesc Descripcion de los articulos que recibe de variable interna.
+	 */
 	public Articulo(String artName, float artPrice, String artDesc) {
 		super();
 		this.artName = artName;
@@ -49,7 +57,11 @@ public class Articulo {
 		this.artDesc = artDesc;
 	}
 	
-	//FUNCION QUE CARGA LOS ARTICULOS DE BASE DE DATO A UN TREESET
+	
+	/**
+	 * FUNCION QUE CARGA LOS ARTICULOS DE BASE DE DATO A UN TREESET
+	 * @param todosLosArticulos pasamos el TreeSet de articulos que contienen todos los articulos que agregamos posteriormente.
+	 */
 	public static void cargarArticulos(TreeSet<Articulo> todosLosArticulos) {
 		//INICIALIZACIÓN DE VARIABLES
 		Connection conexion = null;
@@ -60,7 +72,7 @@ public class Articulo {
 			java.sql.Statement articuloStatement = conexion.createStatement();
 			ResultSet articulosBD=articuloStatement.executeQuery("SELECT * FROM Articulo");
 			
-			//RECORRE TODOS LOS ARTICULOS DE LA BASE DE DATOS, METIENDOLOS EN UN TREESET
+			//RECORRE TODOS LOS ARTICULOS DE LA BASE DE DATOS, METIENDOLOS EN EL TREESET
 			while(articulosBD.next()) {
 				String nombre= articulosBD.getString("nombre");
 				Float precio= articulosBD.getFloat("precio");

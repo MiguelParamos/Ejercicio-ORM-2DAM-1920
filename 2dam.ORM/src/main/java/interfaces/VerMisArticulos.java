@@ -1,15 +1,10 @@
 package interfaces;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-
 import clases.Articulo;
 import clases.Usuario;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

@@ -102,15 +102,37 @@ public class Usuario implements Comparable<Usuario>{
 	 */
 	public String funcionDAOString(String datos) {
 		
+		String nombreDAO = "";
+		String emailDAO = "";
+		String contraseñaDAO = "";
+		
+		
+		
 		Connection conexion = null;
+		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			
-			PreparedStatement consultaStatement = conexion.prepareStatement("SELECT '"+datos+"' FROM Usuario");
+			//PreparedStatement consultaStatement = conexion.prepareStatement("SELECT '"+datos+"' FROM Usuario");
 			
-			Resultset rSet = (Resultset) consultaStatement.executeQuery();
+			String query = "SELECT '" + datos + "' FROM Usuario";
 			
-			datos=rSet.toString();
+			Statement sMent = conexion.createStatement();
+			ResultSet rSet = sMent.executeQuery(query);
+			
+			while(rSet.next()) {
+				
+				nombreDAO = rSet.getString("nombre");
+				emailDAO = rSet.getString("email");
+				contraseñaDAO = rSet.getString("contraseña");
+			
+			}
+			
+		conexion.close();
+		
+		
+			
+			//datos=rSet.toString();
 			
 			conexion.close();
 		} catch (SQLException e) {

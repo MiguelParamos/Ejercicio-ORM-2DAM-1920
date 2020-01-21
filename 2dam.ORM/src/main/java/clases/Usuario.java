@@ -54,9 +54,7 @@ public class Usuario implements Comparable<Usuario>{
 	}
 
 
-	public void setNombre(String nombre) throws SQLException {
-		conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam"); 
-		
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 

@@ -100,7 +100,7 @@ public class Usuario implements Comparable<Usuario>{
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
 	 */
-	public String funcionDAOString(String datos) {
+	public String funcionDAOString(String nombre, String contraseña, String email) {
 		
 		String nombreDAO = "";
 		String emailDAO = "";
@@ -115,7 +115,7 @@ public class Usuario implements Comparable<Usuario>{
 			
 			//PreparedStatement consultaStatement = conexion.prepareStatement("SELECT '"+datos+"' FROM Usuario");
 			
-			String query = "SELECT '" + datos + "' FROM Usuario";
+			String query = "SELECT* FROM Usuario";
 			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
@@ -130,16 +130,23 @@ public class Usuario implements Comparable<Usuario>{
 			
 		conexion.close();
 		
+		if(nombreDAO.equals(nombre) && emailDAO.equals(email) && contraseñaDAO.equals(contraseña)) {
+			
+			return nombreDAO + " " + emailDAO + " " + contraseñaDAO;
+		
+		}else {
+			
+			return "Datos incorrectos";
+		}
 		
 			
-			//datos=rSet.toString();
 			
-			conexion.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
-		return datos;
+		return "Ejecución de la función fallida.";
 		
 	}
 	

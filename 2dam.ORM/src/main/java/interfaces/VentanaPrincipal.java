@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -28,10 +29,11 @@ public class VentanaPrincipal extends JFrame {
 	
 	/**
 	 * Constructor de la ventana principal de la aplicación.
+	 * @throws SQLException 
 	 */
-	public VentanaPrincipal() {
+	public VentanaPrincipal() throws SQLException {
 
-		usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null); // PRUEBA DE ALVARO Y SARA PARA VER QUE FUNCIONABA
+		usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
 		pantallaInicial = new PantallaInicial();
 		this.setSize(500,500);
 		this.setTitle("Tienda Cenec");

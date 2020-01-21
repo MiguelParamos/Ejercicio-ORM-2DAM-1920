@@ -26,7 +26,7 @@ public class Usuario implements Comparable<Usuario>{
 	
 	
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
-			ArrayList<Articulo> articulosComprados) {
+			ArrayList<Articulo> articulosComprados) throws SQLException {
 		super();
 		setNombre(nombre);
 		setPassword(password);

@@ -15,6 +15,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -150,12 +151,22 @@ public class Registro extends JPanel {
 					if(password.equals(passwordRepetido)) {
 						if(email.equals(emailRepetido)) {
 							if(checkboxTienda.isSelected()) {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Tienda creada");
 								
 							}else {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Usuario creado");
 								

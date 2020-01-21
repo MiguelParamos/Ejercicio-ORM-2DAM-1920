@@ -10,16 +10,16 @@ import java.util.HashMap;
 import excepciones.StockNoModificadoException;
 
 /**
- * 
+ * Clase del Stock
  * @author Andrés
  * @author Malkien
  */
 public class Stock {
-
-	private final String baseDatos = "jdbc:mysql://127.0.0.1:3306/nombredb";
-	private final String usuario = "2dam";
-	private final String contraseña = "2dam";
-	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();
+	//CUANDO VEAS ESTO HAY QUE CREAR UNA CLASE CON LAS CONSTANTES
+	private final String baseDatos = "jdbc:mysql://127.0.0.1:3306/nombredb";//LA BBDD
+	private final String usuario = "2dam";//EL USUARIO
+	private final String contraseña = "2dam";//LA CONTRASEÑA
+	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();//El HashMap con los Articulos y su Stock
 	/**
 	 * Constructor de la clase Stock
 	 * @author Malkien

@@ -22,26 +22,41 @@ public class Usuario implements Comparable<Usuario>{
 	private float saldo;
 	private boolean esTienda;//True si es tienda, False si no lo es.
 	private ArrayList<Articulo> articulosComprados;
+	Connection conexion = null;
 	
 	
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
 			ArrayList<Articulo> articulosComprados) {
 		super();
-		this.nombre = nombre;
-		this.password = password;
-		this.email = email;
-		this.saldo = saldo;
-		this.esTienda = esTienda;
-		this.articulosComprados = articulosComprados;
+		setNombre(nombre);
+		setPassword(password);
+		setEmail(email);
+		setSaldo(saldo);
+		setEsTienda(esTienda);
+		setArticulosComprados(articulosComprados);
 	}
 
+	public Usuario(String nombre, String password) {
+		super();
+		this.nombre = nombre;
+		this.password = password;
+		
+		if(comprobarLogin(nombre, password)) {
+			this.email = getEmail();
+			this.saldo = getSaldo();
+			this.esTienda = isEsTienda();
+			this.articulosComprados = getArticulosComprados();
+		}
+	}
 
 	public String getNombre() {
 		return nombre;
 	}
 
 
-	public void setNombre(String nombre) {
+	public void setNombre(String nombre) throws SQLException {
+		conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam"); 
+		
 		this.nombre = nombre;
 	}
 
@@ -100,54 +115,21 @@ public class Usuario implements Comparable<Usuario>{
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
 	 */
-	public String funcionDAOString(String nombre, String contraseña, String email) {
-		
-		String nombreDAO = "";
-		String emailDAO = "";
-		String contraseñaDAO = "";
-		
-		
-		
-		Connection conexion = null;
+	public boolean comprobarLogin(String nombre, String contraseña) {
 		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			
-			//PreparedStatement consultaStatement = conexion.prepareStatement("SELECT '"+datos+"' FROM Usuario");
-			
-			String query = "SELECT* FROM Usuario";
-			
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseña = '"+contraseña+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			
-			while(rSet.next()) {
-				
-				nombreDAO = rSet.getString("nombre");
-				emailDAO = rSet.getString("email");
-				contraseñaDAO = rSet.getString("contraseña");
-			
-			}
-			
-		conexion.close();
-		
-		if(nombreDAO.equals(nombre) && emailDAO.equals(email) && contraseñaDAO.equals(contraseña)) {
-			
-			return nombreDAO + " " + emailDAO + " " + contraseñaDAO;
-		
-		}else {
-			
-			return "Datos incorrectos";
-		}
-		
-			
-			
-			
-		} catch (SQLException e) {
+			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} 
-		return "Ejecución de la función fallida.";
-		
+		return true;
 	}
 	
 	/**

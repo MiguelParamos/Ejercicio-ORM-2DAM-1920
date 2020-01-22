@@ -32,7 +32,7 @@ public class NuevoArticulo extends JPanel{
 	private JTextField textFieldNombre, textFieldPrecio;
 	private JTextArea textFieldDescripcion;
 
-	public NuevoArticulo(VentanaPrincipal v) {
+	public NuevoArticulo(final VentanaPrincipal v) {
 
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
@@ -132,7 +132,7 @@ public class NuevoArticulo extends JPanel{
 					textFieldPrecio.setBorder(new LineBorder(Color.white,1));
 					textFieldDescripcion.setText("");
 					textFieldDescripcion.setBorder(new LineBorder(Color.white,1));
-					JOptionPane.showMessageDialog(null, "�Articulo introducido!");
+					JOptionPane.showMessageDialog(null, "Articulo introducido");
 				}else{
 					JOptionPane.showMessageDialog(null, "Por favor no deje datos sin rellenar");
 				}
@@ -146,19 +146,19 @@ public class NuevoArticulo extends JPanel{
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//ventana.irAMenu();
+				v.irAMenu();
 			}
 		});
 	}
 
 	/**
 	 * Limitamos el numero maximo de caracteres por linea y en total del JTextField, lo usamos para el campo descripcion.
-	 * El numero *120* indica el maximo permitido.
+	 * El numero *100* indica el maximo permitido.
 	 */
 	public class JTextFieldLimit extends PlainDocument {
 		public void insertString(int offset, String  str, AttributeSet attr) throws BadLocationException {
 			if (str == null) return;
-	    	if ((getLength() + str.length()) <= 120){
+	    	if ((getLength() + str.length()) <= 100){
 	    		super.insertString(offset, str, attr);
 	    	}
 	    }

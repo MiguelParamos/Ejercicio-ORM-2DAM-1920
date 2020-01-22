@@ -39,7 +39,8 @@ public class VentanaPrincipal extends JFrame {
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
 
-		irAPantallaInicial();
+		//irAPantallaInicial();
+		irAEditarUsuario();
 
 	}
 

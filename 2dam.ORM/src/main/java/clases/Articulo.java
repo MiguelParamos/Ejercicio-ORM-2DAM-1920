@@ -2,13 +2,12 @@ package clases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.TreeSet;
 
-import com.mysql.cj.protocol.Resultset;
-import com.mysql.cj.xdevapi.Statement;
+
 
 /*
  * Esta clase modela Articulo
@@ -23,6 +22,7 @@ public class Articulo {
 	private float artPrice;//Precio de los articulos
 	private String artDesc;//Descripcion de los articulos.
 	
+	
 	//CONSTRUCTOR
 	/**
 	 * Constructor articulo
@@ -36,6 +36,13 @@ public class Articulo {
 		this.artPrice = artPrice;
 		this.artDesc = artDesc;
 	}
+	
+	
+	public Articulo(String artName) {
+		super();
+		
+	}	
+		
 	
 	//GETTERS AND SETTERS
 	public String getArtName() {
@@ -69,7 +76,7 @@ public class Articulo {
 		try {
 			//CONEXIÓN CON BASE DE DATOS, CREACIÓN DE STATEMENT Y RESULTSET
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
-			java.sql.Statement articuloStatement = conexion.createStatement();
+			Statement articuloStatement = conexion.createStatement();
 			ResultSet articulosBD=articuloStatement.executeQuery("SELECT * FROM Articulo");
 			
 			//RECORRE TODOS LOS ARTICULOS DE LA BASE DE DATOS, METIENDOLOS EN EL TREESET

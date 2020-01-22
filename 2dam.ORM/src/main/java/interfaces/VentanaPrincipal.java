@@ -39,8 +39,8 @@ public class VentanaPrincipal extends JFrame {
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
 
-		//irAPantallaInicial();
-		irAEditarUsuario();
+		irAPantallaInicial();
+		//irAEditarUsuario();
 
 	}
 
@@ -69,6 +69,7 @@ public class VentanaPrincipal extends JFrame {
 
 		}
 
+		this.pantallaMenu = new Menu(this, usu);
 		this.setTitle("Menú");
 		this.setContentPane(this.pantallaMenu);
 		this.pantallaMenu.setVisible(true);

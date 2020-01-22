@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.Usuario;
+import excepciones.LoginIncorrectoException;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -24,11 +25,67 @@ public class PantallaInicial extends JPanel {
 	private JPasswordField pfPass;
 	private JButton btnInicio;
 	private VentanaPrincipal v;
+	private Usuario usuario;
+	
 
 	/**
-	 * Launch the application.
+	 * Create the frame.
 	 */
-
+	public PantallaInicial(VentanaPrincipal v) {
+		super();
+		this.v=v;
+		setSize(500,500);
+		setLayout(null);
+		
+		tfUsuario = new JTextField();
+		tfUsuario.setBounds(190, 215, 96, 19);
+		this.add(tfUsuario);
+		tfUsuario.setColumns(10);
+		btnInicio = new JButton("Iniciar Sesion");
+		btnInicio.setBounds(173, 301, 131, 21);
+		this.add(btnInicio);
+		
+		JLabel lblUser = new JLabel("Usuario");
+		lblUser.setBounds(103, 216, 77, 16);
+		this.add(lblUser);
+		
+		lblPass = new JLabel("Contrase\u00F1a");
+		lblPass.setBounds(103, 260, 77, 13);
+		this.add(lblPass);
+		
+		pfPass = new JPasswordField();
+		pfPass.setBounds(190, 257, 96, 19);
+		this.add(pfPass);
+		
+		// ActionListnener del boton de inicio de sesion
+		btnInicio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String userLogin = getTfUsuario().getText();
+				String passLogin = getPfPass().getPassword().toString();	
+				try
+				{
+					usuario = new Usuario(userLogin, passLogin);
+					irAMenu();
+				} catch (LoginIncorrectoException e1)
+				{
+					showLoginError();
+					e1.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	// Funciones que tienen que ir fuera del action listener, ya que V no puede ser final
+	private void irAMenu(){
+		v.setUsu(usuario);
+		v.irAMenu();
+	}
+	
+	private void showLoginError() {
+		JOptionPane.showMessageDialog(v, "No ha sido posible iniciar sesion.", "Error de login", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	// Getters Setters
 	public JPanel getFrame() {
 		return this;
 	}
@@ -48,60 +105,16 @@ public class PantallaInicial extends JPanel {
 	public void setPfPass(JPasswordField pfPass) {
 		this.pfPass = pfPass;
 	}
-	
 
-	/**
-	 * Create the frame.
-	 */
-	public PantallaInicial(VentanaPrincipal v) {
-		super();
-		this.v=v;
-		setSize(500,500);
-		setLayout(null);
-		
-		tfUsuario = new JTextField();
-		tfUsuario.setBounds(190, 215, 96, 19);
-		this.add(tfUsuario);
-		tfUsuario.setColumns(10);
-		final Usuario userNuevo=v.getUsu();
-		btnInicio = new JButton("Iniciar Sesion");
-		btnInicio.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Usuario userActivo=userNuevo;
-				String userLogin = getTfUsuario().getText();
-				String passLogin = getPfPass().getText();
-				if(userLogin.equals("")||(passLogin.equals(""))) {
-					JOptionPane.showMessageDialog(getFrame(),
-						    "Rellene todos los campos" ,
-						    "Error!",
-						    JOptionPane.WARNING_MESSAGE);
-				}
-				else if((userLogin.equals(userActivo.getNombre()))&&(passLogin.equals(userActivo.getPassword()))){
-					JOptionPane.showMessageDialog(getFrame(),
-						    "¡Hola!" ,
-						    "¡Bienvenido!",
-						    JOptionPane.PLAIN_MESSAGE);
-				}else {
-					JOptionPane.showMessageDialog(getFrame(),
-						    "Usuario o contraseña incorrectos" ,
-						    "Error!",
-						    JOptionPane.WARNING_MESSAGE);
-				}
-			}
-		});
-		btnInicio.setBounds(173, 301, 131, 21);
-		this.add(btnInicio);
-		
-		JLabel lblUser = new JLabel("Usuario");
-		lblUser.setBounds(103, 216, 77, 16);
-		this.add(lblUser);
-		
-		lblPass = new JLabel("Contrase\u00F1a");
-		lblPass.setBounds(103, 260, 77, 13);
-		this.add(lblPass);
-		
-		pfPass = new JPasswordField();
-		pfPass.setBounds(190, 257, 96, 19);
-		this.add(pfPass);
+	public Usuario getUsuario()
+	{
+		return usuario;
 	}
+
+	public void setUsuario(Usuario usuario)
+	{
+		this.usuario = usuario;
+	}
+	
+	
 }

@@ -105,12 +105,12 @@ public class Usuario implements Comparable<Usuario>{
 	 * @return -> Los datos del usuario de la base de datos.
 	 * @throws LoginIncorrectoException 
 	 */
-	public void comprobarLogin(String nombre, String contrase�a) throws LoginIncorrectoException {
+	public void comprobarLogin(String nombre, String contrasenia) throws LoginIncorrectoException {
 		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			
-			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contrase�a = '"+contrase�a+"'";			
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contrase�a = '"+contrasenia+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			

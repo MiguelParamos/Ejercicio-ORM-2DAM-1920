@@ -17,6 +17,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.awt.event.ActionListener;
+import excepciones.RegistroIncorrectoException;
 import java.awt.event.ActionEvent;
 
 public class Registro extends JPanel {
@@ -24,6 +25,7 @@ public class Registro extends JPanel {
 	private Usuario usuario;
 	
 	public Registro(VentanaPrincipal v) {
+		ventana=v;
 		setBackground(new Color(91, 157, 195));
 		setSize(500,500);
 		setLayout(null);
@@ -114,7 +116,7 @@ public class Registro extends JPanel {
 		 */
 		btnRegistrar.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e){
 				int error = 0; 
 				String usuario = textFieldNombre.getText();
 				String password = String.valueOf(textFieldPassword.getPassword());
@@ -154,21 +156,30 @@ public class Registro extends JPanel {
 								try {
 									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
 								} catch (SQLException e1) {
-									// TODO Auto-generated catch block
+									try {
+										throw new RegistroIncorrectoException();
+									}catch(RegistroIncorrectoException ex) {
+										ex.printStackTrace();
+									}
 									e1.printStackTrace();
 								}
-								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Tienda creada");
+								ventana.irAMenu();
 								
 							}else {
 								try {
 									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
 								} catch (SQLException e1) {
+									try {
+										throw new RegistroIncorrectoException();
+									}catch(RegistroIncorrectoException ex) {
+										ex.printStackTrace();
+									}
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								//introducirDAO();
 								JOptionPane.showMessageDialog(null, "Usuario creado");
+								ventana.irAMenu();
 								
 							}
 						}else {
@@ -182,7 +193,6 @@ public class Registro extends JPanel {
 				}
 			}
 		});
-		
 		//Boton Atras
 		btnAtras.addMouseListener(new MouseAdapter() {
 			@Override
@@ -190,14 +200,5 @@ public class Registro extends JPanel {
                 ventana.irAPantallaInicial();
 			}
 		});
-		
-		
-		
-	}
-	/*
-	 * Funcion que se encarga de introducir los datos al registrar un usuario en la base de datos.
-	 */
-	public void introducirDAO() {
-		
 	}
 }

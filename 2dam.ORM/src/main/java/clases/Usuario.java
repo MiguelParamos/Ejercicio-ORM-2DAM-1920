@@ -1,7 +1,6 @@
 package clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
 
-import com.mysql.cj.protocol.Resultset;
+import excepciones.LoginIncorrectoException;
 
 public class Usuario implements Comparable<Usuario>{
 	private String nombre;
@@ -36,7 +35,7 @@ public class Usuario implements Comparable<Usuario>{
 		setArticulosComprados(articulosComprados);
 	}
 
-	public Usuario(String nombre, String password) {
+	public Usuario(String nombre, String password) throws LoginIncorrectoException {
 		super();
 		comprobarLogin(nombre, password);
 	}
@@ -104,8 +103,9 @@ public class Usuario implements Comparable<Usuario>{
 	 * Esta funciï¿½n se encarga de recoger los datos de usuario de la base de datos.
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
+	 * @throws LoginIncorrectoException 
 	 */
-	public void comprobarLogin(String nombre, String contraseña) {
+	public void comprobarLogin(String nombre, String contraseña) throws LoginIncorrectoException {
 		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");

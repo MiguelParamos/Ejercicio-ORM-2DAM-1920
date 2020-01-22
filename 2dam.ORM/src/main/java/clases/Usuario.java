@@ -105,19 +105,19 @@ public class Usuario implements Comparable<Usuario>{
 	 * @return -> Los datos del usuario de la base de datos.
 	 * @throws LoginIncorrectoException 
 	 */
-	public void comprobarLogin(String nombre, String contraseña) throws LoginIncorrectoException {
+	public void comprobarLogin(String nombre, String contraseï¿½a) throws LoginIncorrectoException {
 		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			
-			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseña = '"+contraseña+"'";			
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseï¿½a = '"+contraseï¿½a+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			
 			while(rSet.next()) {
 				this.nombre= rSet.getString("nombre");
 				this.email= rSet.getString("email");
-				this.password= rSet.getString("contraseña");
+				this.password= rSet.getString("contraseï¿½a");
 				this.saldo=rSet.getFloat("saldo");
 				this.esTienda=rSet.getBoolean("esTienda");
 			}			
@@ -193,8 +193,12 @@ public class Usuario implements Comparable<Usuario>{
 				if (rSetUsuarios!=null) {
 					rSetUsuarios.close();
 				}
-				st.close();
-				conexion.close();
+				if (st!=null) {
+					st.close();
+				}
+				if (conexion!=null) {
+					conexion.close();
+				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

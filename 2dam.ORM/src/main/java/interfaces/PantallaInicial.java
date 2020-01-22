@@ -61,7 +61,7 @@ public class PantallaInicial extends JPanel {
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String userLogin = getTfUsuario().getText();
-				String passLogin = getPfPass().getPassword().toString();	
+				String passLogin = String.valueOf(getPfPass().getPassword());
 				try
 				{
 					usuario = new Usuario(userLogin, passLogin);

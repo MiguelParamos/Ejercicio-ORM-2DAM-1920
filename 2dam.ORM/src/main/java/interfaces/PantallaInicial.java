@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clases.Usuario;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -20,24 +23,12 @@ public class PantallaInicial extends JPanel {
 	private JLabel lblPass;
 	private JPasswordField pfPass;
 	private JButton btnInicio;
+	private VentanaPrincipal v;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PantallaInicial frame = new PantallaInicial();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	
-	
+
 	public JPanel getFrame() {
 		return this;
 	}
@@ -62,8 +53,9 @@ public class PantallaInicial extends JPanel {
 	/**
 	 * Create the frame.
 	 */
-	public PantallaInicial() {
-
+	public PantallaInicial(VentanaPrincipal v) {
+		super();
+		this.v=v;
 		setSize(500,500);
 		setLayout(null);
 		
@@ -71,19 +63,20 @@ public class PantallaInicial extends JPanel {
 		tfUsuario.setBounds(190, 215, 96, 19);
 		this.add(tfUsuario);
 		tfUsuario.setColumns(10);
-		
+		final Usuario userNuevo=v.getUsu();
 		btnInicio = new JButton("Iniciar Sesion");
 		btnInicio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String user = getTfUsuario().getText();
-				String pass = getPfPass().getText();
-				if(user.equals("")||(pass.equals(""))) {
+				Usuario userActivo=userNuevo;
+				String userLogin = getTfUsuario().getText();
+				String passLogin = getPfPass().getText();
+				if(userLogin.equals("")||(passLogin.equals(""))) {
 					JOptionPane.showMessageDialog(getFrame(),
 						    "Rellene todos los campos" ,
 						    "Error!",
 						    JOptionPane.WARNING_MESSAGE);
 				}
-				else if((user=="WilergioVargarado")&&(pass=="CheekyBreeky")){
+				else if((userLogin.equals(userActivo.getNombre()))&&(passLogin.equals(userActivo.getPassword()))){
 					JOptionPane.showMessageDialog(getFrame(),
 						    "¡Hola!" ,
 						    "¡Bienvenido!",

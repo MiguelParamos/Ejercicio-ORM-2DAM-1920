@@ -34,7 +34,7 @@ public class VentanaPrincipal extends JFrame {
 	public VentanaPrincipal() throws SQLException {
 
 		usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
-		pantallaInicial = new PantallaInicial();
+		pantallaInicial = new PantallaInicial(this);
 		this.setSize(500,500);
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
@@ -253,5 +253,15 @@ public class VentanaPrincipal extends JFrame {
 		this.pantallaEditarUsuario.setVisible(true);
 		
 	}
+
+	public Usuario getUsu() {
+		return usu;
+	}
+
+	public void setUsu(Usuario usu) {
+		this.usu = usu;
+	}
+	
+	
 
 }

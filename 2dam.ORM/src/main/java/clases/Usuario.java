@@ -38,15 +38,7 @@ public class Usuario implements Comparable<Usuario>{
 
 	public Usuario(String nombre, String password) {
 		super();
-		this.nombre = nombre;
-		this.password = password;
-		
-		if(comprobarLogin(nombre, password)) {
-			this.email = getEmail();
-			this.saldo = getSaldo();
-			this.esTienda = isEsTienda();
-			this.articulosComprados = getArticulosComprados();
-		}
+		comprobarLogin(nombre, password);
 	}
 
 	public String getNombre() {
@@ -113,7 +105,7 @@ public class Usuario implements Comparable<Usuario>{
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
 	 */
-	public boolean comprobarLogin(String nombre, String contraseña) {
+	public void comprobarLogin(String nombre, String contraseña) {
 		
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
@@ -122,12 +114,23 @@ public class Usuario implements Comparable<Usuario>{
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			
+			while(rSet.next()) {
+				this.nombre= rSet.getString("nombre");
+				this.email= rSet.getString("email");
+				this.password= rSet.getString("contraseña");
+				this.saldo=rSet.getFloat("saldo");
+				this.esTienda=rSet.getBoolean("esTienda");
+			}			
+		}catch (Exception e) {
+			throw new LoginIncorrectoException();
+		}finally {
+			try {
+				conexion.close();
 			} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-		} 
-		return true;
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**

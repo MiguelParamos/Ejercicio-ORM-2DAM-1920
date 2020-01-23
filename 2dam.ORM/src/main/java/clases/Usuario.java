@@ -23,7 +23,7 @@ public class Usuario implements Comparable<Usuario>{
 	private float saldo;
 	private boolean esTienda;//True si es tienda, False si no lo es.
 	private ArrayList<Articulo> articulosComprados;
-	Connection conexion = null;
+	private Connection conexion = null;
 	
 	/***
 	 * Constructor que recibe todos los datos para registro

@@ -123,11 +123,10 @@ public class NuevoArticulo extends JPanel{
 					try {
 						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText());
 					} catch (NumberFormatException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Se ha detectado un problema en el campo precio");
+						
 					} catch (ArticuloNoInsertadoException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Articulo no se ha podido introducir");
 					}
 
 					//Limpia los campos de texto para facilitar la ayuda a un nuevo articulo y devuelve el color original del campo.

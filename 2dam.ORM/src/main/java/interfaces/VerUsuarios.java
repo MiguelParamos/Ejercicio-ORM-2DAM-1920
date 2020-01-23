@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.border.MatteBorder;
 
 import clases.Usuario;
+import excepciones.LoginIncorrectoException;
 
 import java.awt.Color;
 
@@ -27,17 +28,19 @@ import java.awt.Color;
 public class VerUsuarios extends JPanel{
 	private VentanaPrincipal vPrincipal; // Variable para la ventana principal de la aplicación
 	private ArrayList<Usuario> arrayUsuarios; // Array con todos los usuarios registrados
-	private VerUsuarios thisRef; // Variable auxiliar de VerUsuarios 
 	
 	/**
 	 * Constructor del JPanel
 	 * @param vp Ventana principal
 	 */
 	public VerUsuarios(VentanaPrincipal vp) {
-		this.vPrincipal=vp;
-		thisRef=this;
-		arrayUsuarios=new ArrayList<Usuario>(Usuario.todosLosUsuarios());
-		initComponents();
+		try {
+			this.vPrincipal=vp;
+			arrayUsuarios=new ArrayList<Usuario>(Usuario.todosLosUsuarios());
+			initComponents();
+		} catch (LoginIncorrectoException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

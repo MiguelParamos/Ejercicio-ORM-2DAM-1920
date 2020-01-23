@@ -46,7 +46,7 @@ public class Usuario implements Comparable<Usuario>{
 		realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
 	}
 	/***
-	 * Constructor que recibe nombre y contraseña para login
+	 * Constructor que recibe nombre y contraseï¿½a para login
 	 * @author Silver (Alejandro)
 	 * @author Pablo Castellanos
 	 * @throws LoginIncorrectoException
@@ -165,13 +165,13 @@ public class Usuario implements Comparable<Usuario>{
 	 * Realiza el registro
 	 * @author Silver (Alejandro)
 	 * @author Pablo Castellanos 
-	 * @param Parámetros pasados por constructor
+	 * @param Parï¿½metros pasados por constructor
 	 * @throws RegistroIncorrectoException
 	 */
 	//TODO cambiar realizarRegistro y realizarLogin a private
 	private void realizarRegistro(String nom,String pass,String ema,float sal,boolean et,ArrayList<Articulo> ac) throws RegistroIncorrectoException {
 		//TODO hacer que la excepcion se lance si el usuario ya existia.
-		//Esa excepción se debe lanzar, no capturar aqui
+		//Esa excepciï¿½n se debe lanzar, no capturar aqui
 		try {
 			conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			PreparedStatement pSment = conexion.prepareStatement("INSERT into Usuario VALUES (?,?,?,?,?)");
@@ -210,8 +210,9 @@ public class Usuario implements Comparable<Usuario>{
 	 * Devuelve un TreeSet para evitar duplicidad
 	 * @return Set con los datos de los usuarios
 	 * @author Darash
+	 * @throws LoginIncorrectoException 
 	 */
-	public static TreeSet<Usuario> todosLosUsuarios() {
+	public static TreeSet<Usuario> todosLosUsuarios() throws LoginIncorrectoException {
 		Connection conexion=null;
 		Statement st=null;
 		ResultSet rSetUsuarios=null;
@@ -226,7 +227,7 @@ public class Usuario implements Comparable<Usuario>{
 			// Recoge los datos de todos los usuarios registrados (sin ArtÃ­culos comprados)
 			rSetUsuarios=st.executeQuery("SELECT * FROM Usuario");
 			while (rSetUsuarios.next()) {
-				listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseÃ±a")));
+				listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("password")));
 			}
 			rSetUsuarios.close();
 			
@@ -238,7 +239,6 @@ public class Usuario implements Comparable<Usuario>{
 					try {
 						listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
 					} catch (ArticuloNoInsertadoException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

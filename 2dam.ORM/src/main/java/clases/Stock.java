@@ -17,7 +17,7 @@ import excepciones.StockNoModificadoException;
  */
 public class Stock {
 	//CUANDO VEAS ESTO HAY QUE CREAR UNA CLASE CON LAS CONSTANTES
-	private final String baseDatos = "jdbc:mysql://127.0.0.1:3306/nombredb";//LA BBDD
+	private final String baseDatos = "jdbc:mysql://85.214.120.213:3306/2dam";//LA BBDD
 	private final String usuario = "2dam";//EL USUARIO
 	private final String contraseña = "2dam";//LA CONTRASEÑA
 	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();//El HashMap con los Articulos y su Stock
@@ -43,7 +43,7 @@ public class Stock {
 						articulosBD.getString("nombre")
 						);
 				
-				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo="+articulo.getArtName());
+				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo='"+articulo.getArtName()+"'");
 				stockBD.next();//OBVIO QUE SOLO HAY UNO
 				
 				HashMap.put(articulo, stockBD.getShort("cantidad"));//AÑADO AL HASHMAP EL ARTICULO Y LA CANTIDAD
@@ -98,15 +98,15 @@ public class Stock {
 	 * @throws StockNoModificadoException 
 	 */
 	private void modificarStock(Articulo articulo, Short cantidad) throws StockNoModificadoException {
+		if(cantidad == HashMap.get(articulo)) {
+			throw new StockNoModificadoException();//Excepcion personalizada
+		}
 		Connection conexion = null;
 		try {
 			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
 			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo='"+articulo.getArtName()+"'");
-			if(modificarEnBD.getUpdateCount()<0) {
-				throw new StockNoModificadoException();//Excepcion personalizada
-			}
 			//Actualiza el stock en el HashMap
 			this.HashMap.replace(articulo, cantidad);
 		}catch(SQLException e) {

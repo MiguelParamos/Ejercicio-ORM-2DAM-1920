@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import clases.Articulo;
 import clases.Stock;
 import clases.Usuario;
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.StockNoModificadoException;
 
 import java.awt.event.ActionListener;
@@ -49,11 +50,16 @@ public class MasStock extends JPanel {
 			ResultSet articulosBD=statement.executeQuery("SELECT * FROM Articulo");
 			while(articulosBD.next()) {
 				
-				articulo= new Articulo(
-						articulosBD.getString("nombre"),
-						articulosBD.getFloat("precio"),
-						articulosBD.getString("descripcion")
-						);
+				try {
+					articulo= new Articulo(
+							articulosBD.getString("nombre"),
+							articulosBD.getFloat("precio"),
+							articulosBD.getString("descripcion")
+							);
+				} catch (ArticuloNoInsertadoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo="+articulo.getArtName());
 				stockBD.next();
 				

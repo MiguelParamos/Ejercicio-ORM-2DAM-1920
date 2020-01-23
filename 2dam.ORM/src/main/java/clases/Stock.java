@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.StockNoModificadoException;
 
 /**
@@ -24,6 +25,7 @@ public class Stock {
 	 * Constructor de la clase Stock
 	 * @author Malkien
 	 * @param HashMap con clave del tipo Articulo y valores del tipo cantidad
+	 * @throws ArticuloNoInsertadoException 
 	 */
 	public Stock() {
 		super();
@@ -50,6 +52,9 @@ public class Stock {
 			
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ArticuloNoInsertadoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {

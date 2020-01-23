@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import clases.Articulo;
+import excepciones.ArticuloNoInsertadoException;
 
 import javax.swing.JButton;
 
@@ -119,7 +120,15 @@ public class NuevoArticulo extends JPanel{
 
 				if(error!=1) {
 					//Crea el nuevo articulo.
-					Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText());
+					try {
+						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText());
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ArticuloNoInsertadoException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
 					//Limpia los campos de texto para facilitar la ayuda a un nuevo articulo y devuelve el color original del campo.
 					textFieldNombre.setText("");

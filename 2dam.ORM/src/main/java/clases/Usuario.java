@@ -55,14 +55,9 @@ public class Usuario implements Comparable<Usuario>{
 	 * @author Pablo Castellanos
 	 * @throws LoginIncorrectoException
 	 */
-	public Usuario(String nombre, String password) {
+	public Usuario(String nombre, String password) throws LoginIncorrectoException {
 		super();
-		try {
 			comprobarLogin(nombre, password);
-		} catch (LoginIncorrectoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public String getNombre() {
@@ -154,7 +149,7 @@ public class Usuario implements Comparable<Usuario>{
 					this.saldo=rSet.getFloat("saldo");
 					this.esTienda=rSet.getBoolean("esTienda");
 				}else {
-					throw new LoginIncorrectoException("Usuario/contraseña incorrectos");
+					//throw new LoginIncorrectoException("Usuario/contraseña incorrectos");
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

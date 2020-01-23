@@ -23,7 +23,7 @@ public class Usuario implements Comparable<Usuario>{
 	private float saldo;
 	private boolean esTienda;//True si es tienda, False si no lo es.
 	private ArrayList<Articulo> articulosComprados;
-	Connection conexion = null;
+	private Connection conexion = null;
 	
 	/***
 	 * Constructor que recibe todos los datos para registro
@@ -32,22 +32,17 @@ public class Usuario implements Comparable<Usuario>{
 	 * @throws RegistroIncorrectoException
 	 */
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
-			ArrayList<Articulo> articulosComprados) {
+			ArrayList<Articulo> articulosComprados) throws RegistroIncorrectoException{
 		super();
 		//TODO quitar los setter y establecer variables internas
-		setNombre(nombre);
-		setPassword(password);
-		setEmail(email);
-		setSaldo(saldo);
-		setEsTienda(esTienda);
-		setArticulosComprados(articulosComprados);
+		this.nombre=nombre;
+		this.password=password;
+		this.email=email;
+		this.saldo=saldo;
+		this.esTienda=esTienda;
+		this.articulosComprados=articulosComprados;
 		
-		try {
-			realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
-		} catch (RegistroIncorrectoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
 	}
 	/***
 	 * Constructor que recibe nombre y contraseña para login
@@ -55,14 +50,9 @@ public class Usuario implements Comparable<Usuario>{
 	 * @author Pablo Castellanos
 	 * @throws LoginIncorrectoException
 	 */
-	public Usuario(String nombre, String password) {
+	public Usuario(String nombre, String password) throws LoginIncorrectoException{
 		super();
-		try {
-			comprobarLogin(nombre, password);
-		} catch (LoginIncorrectoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		comprobarLogin(nombre, password);
 	}
 
 	public String getNombre() {
@@ -133,12 +123,12 @@ public class Usuario implements Comparable<Usuario>{
 	 * @return -> Los datos del usuario de la base de datos.
 	 * @throws LoginIncorrectoException 
 	 */
-	public void comprobarLogin(String nombre, String contrasenia) throws LoginIncorrectoException {
+	private void comprobarLogin(String nombre, String contrasenia) throws LoginIncorrectoException {
 		
 		
 			try{
 				//TODO todas las conexiones al servidor, no a local
-				conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/2dam", "2dam", "2dam");
+				conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			
 			
 				String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseña = '"+contrasenia+"'";			
@@ -153,9 +143,12 @@ public class Usuario implements Comparable<Usuario>{
 					this.password= rSet.getString("contraseña");
 					this.saldo=rSet.getFloat("saldo");
 					this.esTienda=rSet.getBoolean("esTienda");
+					this.articulosComprados=null;
+					
 				}else {
-					throw new LoginIncorrectoException("Usuario/contraseña incorrectos");
-				}
+					throw new LoginIncorrectoException();
+				}				
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -176,24 +169,32 @@ public class Usuario implements Comparable<Usuario>{
 	 * @throws RegistroIncorrectoException
 	 */
 	//TODO cambiar realizarRegistro y realizarLogin a private
-	public void realizarRegistro(String nom,String pass,String ema,float sal,boolean et,ArrayList<Articulo> ac) throws RegistroIncorrectoException {
+	private void realizarRegistro(String nom,String pass,String ema,float sal,boolean et,ArrayList<Articulo> ac) throws RegistroIncorrectoException {
 		//TODO hacer que la excepcion se lance si el usuario ya existia.
 		//Esa excepción se debe lanzar, no capturar aqui
 		try {
 			conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			PreparedStatement pSment = conexion.prepareStatement("INSERT into Usuario VALUES (?,?,?,?,?)");
 			
-			pSment.setString(1,nom);
-			pSment.setString(2,ema);
-			pSment.setString(3,pass);
-			pSment.setFloat(4,sal);
-			pSment.setBoolean(5,et);
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nom+"' AND contraseña = '"+pass+"'";			
+			Statement sMent = conexion.createStatement();
+			ResultSet rSet = sMent.executeQuery(query);
 			
-			pSment.execute();
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			throw new RegistroIncorrectoException();
+			if(rSet.next()) {
+				throw new RegistroIncorrectoException();
+			}else {
+				pSment.setString(1,nom);
+				pSment.setString(2,ema);
+				pSment.setString(3,pass);
+				pSment.setFloat(4,sal);
+				pSment.setBoolean(5,et);
+				
+				pSment.execute();
+				
+			}	
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}finally {
 			try {
 				conexion.close();

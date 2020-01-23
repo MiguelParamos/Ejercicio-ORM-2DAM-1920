@@ -62,7 +62,12 @@ public class PantallaInicial extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String userLogin = getTfUsuario().getText();
 				String passLogin = String.valueOf(getPfPass().getPassword());
-				usuario = new Usuario(userLogin, passLogin);
+				try {
+					usuario = new Usuario(userLogin, passLogin);
+				} catch (LoginIncorrectoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				irAMenu();
 			}
 		});

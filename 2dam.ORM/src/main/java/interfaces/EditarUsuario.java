@@ -25,7 +25,7 @@ public class EditarUsuario  extends JPanel{
 	public EditarUsuario(VentanaPrincipal v) {
 		super();
 		this.v = v;
-		final Usuario user=v.getUsu();
+		final Usuario user=new Usuario("Alvaro","uwu");
 		setSize(500,500);
 		setLayout(null);
 		

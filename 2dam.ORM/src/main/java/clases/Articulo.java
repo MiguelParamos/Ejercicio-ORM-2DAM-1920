@@ -154,7 +154,7 @@ public class Articulo {
 	 *                          los articulos que agregamos posteriormente.
 	 * @throws ArticuloNoInsertadoException 
 	 */
-	public static void cargarArticulos(TreeSet<Articulo> todosLosArticulos) throws ArticuloNoInsertadoException {
+	public static TreeSet<Articulo> todosLosArticulos() {
 		// INICIALIZACI�N DE VARIABLES
 		Connection conexion = null;
 		TreeSet<Articulo> articuloTS = null;
@@ -162,22 +162,20 @@ public class Articulo {
 			// CONEXI�N CON BASE DE DATOS, CREACI�N DE STATEMENT Y RESULTSET
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			Statement articuloStatement = conexion.createStatement();
-			ResultSet articulosBD = articuloStatement.executeQuery("SELECT * FROM Articulo");
+			ResultSet articulosBD = articuloStatement.executeQuery("SELECT nombre FROM Articulo");
 
 			// RECORRE TODOS LOS ARTICULOS DE LA BASE DE DATOS, METIENDOLOS EN EL TREESET
 			while (articulosBD.next()) {
-				String nombre = articulosBD.getString("nombre");
-				Float precio = articulosBD.getFloat("precio");
-				String descripcion = articulosBD.getString("descripcion");
+			
 
-				Articulo articulo = new Articulo(nombre, precio, descripcion);
-				articuloTS.add(articulo);
+				articuloTS.add(new Articulo(articulosBD.getString("nombre")));
 			}
 			conexion.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return articuloTS;
 	}
 	
 	/***

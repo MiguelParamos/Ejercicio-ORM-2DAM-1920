@@ -222,7 +222,7 @@ public class Usuario implements Comparable<Usuario>{
 			// Recoge los datos de todos los usuarios registrados (sin Artículos comprados)
 			rSetUsuarios=st.executeQuery("SELECT * FROM Usuario");
 			while (rSetUsuarios.next()) {
-				//TODO cambiar listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña"), rSetUsuarios.getString("email"), rSetUsuarios.getFloat("saldo"), rSetUsuarios.getBoolean("esTienda"), null));
+				listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña")));
 			}
 			rSetUsuarios.close();
 			
@@ -240,7 +240,7 @@ public class Usuario implements Comparable<Usuario>{
 				}
 				rSetArticulos.close();
 				
-				for (Articulo art : listaArticulos) {
+				/*for (Articulo art : listaArticulos) {
 					rsDatosArticulos=st.executeQuery("SELECT * FROM Articulo WHERE nombre='"+art.getArtName()+"'");
 					while (rsDatosArticulos.next()) {
 						art.setArtPrice(rsDatosArticulos.getFloat("precio"));
@@ -249,6 +249,7 @@ public class Usuario implements Comparable<Usuario>{
 					rsDatosArticulos.close();
 				}
 				usuario.setArticulosComprados(listaArticulos); // Una vez obtenido todos los datos del articulo, se le mete al objeto Usuario
+				*/
 			}
 			
 		} catch (SQLException e) {

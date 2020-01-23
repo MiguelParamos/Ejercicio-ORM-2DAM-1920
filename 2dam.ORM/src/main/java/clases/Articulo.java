@@ -47,7 +47,7 @@ public class Articulo {
 
 	public Articulo(String artName) {
 
-		//TODO Abrir conexion, consultar, coger los datos de BD, cerrar conexion
+	
 		try {
 			buscarUnArticulo(artName);
 		} catch (ArticuloNoExisteException e) {
@@ -67,7 +67,7 @@ public class Articulo {
 		try {
 			//TODO cambiar la conexion al servidor
 			String cons = "SELECT * FROM Articulo WHERE nombre = '" + artName + "'";
-			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
+			conexion = DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery(cons);
 
@@ -160,7 +160,7 @@ public class Articulo {
 		TreeSet<Articulo> articuloTS = null;
 		try {
 			// CONEXI�N CON BASE DE DATOS, CREACI�N DE STATEMENT Y RESULTSET
-			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
+			conexion = DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			Statement articuloStatement = conexion.createStatement();
 			ResultSet articulosBD = articuloStatement.executeQuery("SELECT * FROM Articulo");
 

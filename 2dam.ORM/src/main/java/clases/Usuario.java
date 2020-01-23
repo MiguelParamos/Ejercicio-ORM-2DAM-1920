@@ -132,7 +132,7 @@ public class Usuario implements Comparable<Usuario>{
 				conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			
 			
-				String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseña = '"+contrasenia+"'";			
+				String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND password = '"+contrasenia+"'";			
 				Statement sMent = conexion.createStatement();
 				ResultSet rSet = sMent.executeQuery(query);
 				
@@ -141,7 +141,7 @@ public class Usuario implements Comparable<Usuario>{
 				if(rSet.next()) {
 					this.nombre= rSet.getString("nombre");
 					this.email= rSet.getString("email");
-					this.password= rSet.getString("contraseña");
+					this.password= rSet.getString("password");
 					this.saldo=rSet.getFloat("saldo");
 					this.esTienda=rSet.getBoolean("esTienda");
 					this.articulosComprados=null;
@@ -176,7 +176,7 @@ public class Usuario implements Comparable<Usuario>{
 			conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
 			PreparedStatement pSment = conexion.prepareStatement("INSERT into Usuario VALUES (?,?,?,?,?)");
 			
-			String query = "SELECT * FROM Usuario WHERE nombre = '"+nom+"' AND contraseña = '"+pass+"'";			
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nom+"' AND password = '"+pass+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			

@@ -154,7 +154,7 @@ public class Usuario implements Comparable<Usuario>{
 					this.saldo=rSet.getFloat("saldo");
 					this.esTienda=rSet.getBoolean("esTienda");
 				}else {
-					throw new LoginIncorrectoException("Usuario/contraseña incorrectos");
+					throw new LoginIncorrectoException();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();

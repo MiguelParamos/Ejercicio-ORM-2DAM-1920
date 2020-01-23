@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
 
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.LoginIncorrectoException;
 
 public class Usuario implements Comparable<Usuario>{
@@ -163,7 +164,12 @@ public class Usuario implements Comparable<Usuario>{
 				ArrayList<Articulo> listaArticulos=new ArrayList<Articulo>();
 				rSetArticulos=st.executeQuery("SELECT nombreArticulos FROM ArticulosComprados WHERE nombreUsuario='"+usuario.getNombre()+"'");
 				while (rSetArticulos.next()) {
-					listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					try {
+						listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					} catch (ArticuloNoInsertadoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				rSetArticulos.close();
 				

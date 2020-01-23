@@ -66,11 +66,11 @@ public class MasStock extends JPanel {
 		
 		
 		final JComboBox selector = new JComboBox();
-		selector.setBounds(116, 91, 153, 28);
+		selector.setBounds(180, 129, 153, 28);
 		add(selector);
 	
-		ArrayList<Articulo> lista=new ArrayList<Articulo>(Articulo.cargarArticulos());
-		for (Articulo art : lista) {
+		ArrayList<Articulo> lista=new ArrayList<Articulo>(Articulo.todosLosArticulos());
+		for(Articulo art : lista) {
 			selector.addItem(art.getArtName());
 		}
 		String n = campoNumericoMasStock.getText();

@@ -222,7 +222,7 @@ public class Usuario implements Comparable<Usuario>{
 			// Recoge los datos de todos los usuarios registrados (sin Artículos comprados)
 			rSetUsuarios=st.executeQuery("SELECT * FROM Usuario");
 			while (rSetUsuarios.next()) {
-				listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña"), rSetUsuarios.getString("email"), rSetUsuarios.getFloat("saldo"), rSetUsuarios.getBoolean("esTienda"), null));
+				//TODO cambiar listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña"), rSetUsuarios.getString("email"), rSetUsuarios.getFloat("saldo"), rSetUsuarios.getBoolean("esTienda"), null));
 			}
 			rSetUsuarios.close();
 			

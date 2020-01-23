@@ -33,7 +33,7 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public VentanaPrincipal() throws SQLException {
 
-		usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
+		//usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
 		pantallaInicial = new PantallaInicial(this);
 		this.setSize(500,500);
 		this.setTitle("Tienda Cenec");

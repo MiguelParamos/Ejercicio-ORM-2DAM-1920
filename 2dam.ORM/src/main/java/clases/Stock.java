@@ -54,9 +54,6 @@ public class Stock {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ArticuloNoInsertadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}finally {
 			try {
 				conexion.close();

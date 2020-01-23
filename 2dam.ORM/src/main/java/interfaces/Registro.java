@@ -153,12 +153,22 @@ public class Registro extends JPanel {
 					if(password.equals(passwordRepetido)) {
 						if(email.equals(emailRepetido)) {
 							if(checkboxTienda.isSelected()) {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
-								JOptionPane.showMessageDialog(null, "Tienda creada");
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
+									JOptionPane.showMessageDialog(null, "Tienda creada");
+								} catch (RegistroIncorrectoException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								ventana.irAMenu();
 								
 							}else {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+								} catch (RegistroIncorrectoException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 								JOptionPane.showMessageDialog(null, "Usuario creado");
 								ventana.irAMenu();
 								

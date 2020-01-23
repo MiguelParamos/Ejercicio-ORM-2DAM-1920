@@ -32,7 +32,7 @@ public class Usuario implements Comparable<Usuario>{
 	 * @throws RegistroIncorrectoException
 	 */
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
-			ArrayList<Articulo> articulosComprados) {
+			ArrayList<Articulo> articulosComprados) throws RegistroIncorrectoException {
 		super();
 		//TODO quitar los setter y establecer variables internas
 		setNombre(nombre);
@@ -42,12 +42,8 @@ public class Usuario implements Comparable<Usuario>{
 		setEsTienda(esTienda);
 		setArticulosComprados(articulosComprados);
 		
-		try {
-			realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
-		} catch (RegistroIncorrectoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
+	
 	}
 	/***
 	 * Constructor que recibe nombre y contraseña para login

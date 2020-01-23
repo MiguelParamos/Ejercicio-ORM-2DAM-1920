@@ -10,8 +10,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 
+import javax.swing.ComboBoxEditor;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -23,12 +26,14 @@ import excepciones.ArticuloNoInsertadoException;
 import excepciones.StockNoModificadoException;
 
 import java.awt.event.ActionListener;
+import java.nio.channels.Selector;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
 public class MasStock extends JPanel {
 	private JTextField campoNumericoMasStock;
 	private VentanaPrincipal ventana;
+	private Articulo articulo;
 	/**
 	 * Create the panel.
 	 */
@@ -58,21 +63,31 @@ public class MasStock extends JPanel {
 		add(campoNumericoMasStock);
 		campoNumericoMasStock.setColumns(10);
 		
+		
+		
+		final JComboBox selector = new JComboBox();
+		selector.setBounds(116, 91, 153, 28);
+		add(selector);
+	
+		ArrayList<Articulo> lista=new ArrayList<Articulo>(Articulo.cargarArticulos());
+		for (Articulo art : lista) {
+			selector.addItem(art.getArtName());
+		}
 		String n = campoNumericoMasStock.getText();
 		int CantidadNumero=Integer.parseInt(n);
-		 final short campoNumeroStock =(short)CantidadNumero;
+		final short campoNumeroStock =(short)CantidadNumero;
 		 
 		//Boton  añadir stock a la lista
 		JButton btnAñadirMasStock = new JButton("A\u00F1adir");
 		btnAñadirMasStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Stock s=new Stock();		
-				/*try {
-					//s.añadirStock(articulo,campoNumeroStock);
+				try {
+					s.añadirStock((Articulo)selector.getSelectedItem(),campoNumeroStock);
 				} catch (StockNoModificadoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}*/
+				}
 			}
 			
 		});
@@ -80,9 +95,7 @@ public class MasStock extends JPanel {
 		btnAñadirMasStock.setBounds(237, 252, 89, 23);
 		add(btnAñadirMasStock);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(173, 95, 153, 28);
-		add(comboBox);
+	;
 		
 		
 		

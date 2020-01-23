@@ -156,22 +156,20 @@ public class Registro extends JPanel {
 								try {
 									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
 									JOptionPane.showMessageDialog(null, "Tienda creada");
+									ventana.irAMenu();
 								} catch (RegistroIncorrectoException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								ventana.irAMenu();
-								
 							}else {
 								try {
 									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+									JOptionPane.showMessageDialog(null, "Usuario creado");
+									ventana.irAMenu();
 								} catch (RegistroIncorrectoException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
-								JOptionPane.showMessageDialog(null, "Usuario creado");
-								ventana.irAMenu();
-								
 							}
 						}else {
 							JOptionPane.showMessageDialog(null, "Ambos email no coinciden");

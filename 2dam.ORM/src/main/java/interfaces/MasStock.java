@@ -67,12 +67,12 @@ public class MasStock extends JPanel {
 		btnAñadirMasStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Stock s=new Stock();		
-				try {
+				/*try {
 					//s.añadirStock(articulo,campoNumeroStock);
 				} catch (StockNoModificadoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			}
 			
 		});

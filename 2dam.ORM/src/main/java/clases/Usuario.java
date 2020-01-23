@@ -1,6 +1,7 @@
 package clases;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +15,7 @@ import java.util.TreeSet;
 
 import excepciones.ArticuloNoInsertadoException;
 import excepciones.LoginIncorrectoException;
+import excepciones.RegistroIncorrectoException;
 
 public class Usuario implements Comparable<Usuario>{
 	private String nombre;
@@ -24,9 +26,14 @@ public class Usuario implements Comparable<Usuario>{
 	private ArrayList<Articulo> articulosComprados;
 	Connection conexion = null;
 	
-	
+	/***
+	 * Constructor que recibe todos los datos para registro
+	 * @author Silver (Alejandro)
+	 * @author Pablo Castellanos
+	 * @throws RegistroIncorrectoException
+	 */
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
-			ArrayList<Articulo> articulosComprados) throws SQLException {
+			ArrayList<Articulo> articulosComprados) {
 		super();
 		setNombre(nombre);
 		setPassword(password);
@@ -34,11 +41,28 @@ public class Usuario implements Comparable<Usuario>{
 		setSaldo(saldo);
 		setEsTienda(esTienda);
 		setArticulosComprados(articulosComprados);
+		
+		try {
+			realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
+		} catch (RegistroIncorrectoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-	public Usuario(String nombre, String password) throws LoginIncorrectoException {
+	/***
+	 * Constructor que recibe nombre y contraseña para login
+	 * @author Silver (Alejandro)
+	 * @author Pablo Castellanos
+	 * @throws LoginIncorrectoException
+	 */
+	public Usuario(String nombre, String password) {
 		super();
-		comprobarLogin(nombre, password);
+		try {
+			comprobarLogin(nombre, password);
+		} catch (LoginIncorrectoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getNombre() {
@@ -102,6 +126,8 @@ public class Usuario implements Comparable<Usuario>{
 	
 	/***
 	 * Esta funciï¿½n se encarga de recoger los datos de usuario de la base de datos.
+	 * @author Silver (Alejandro)
+	 * @author Pablo Castellanos
 	 * @param datos -> Los datos del usuario que se van a consultar en la base de datos.
 	 * @return -> Los datos del usuario de la base de datos.
 	 * @throws LoginIncorrectoException 
@@ -109,21 +135,52 @@ public class Usuario implements Comparable<Usuario>{
 	public void comprobarLogin(String nombre, String contrasenia) throws LoginIncorrectoException {
 		
 		try {
-			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
+			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/2dam", "2dam", "2dam");
 			
-			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseï¿½a = '"+contrasenia+"'";			
+			String query = "SELECT * FROM Usuario WHERE nombre = '"+nombre+"' AND contraseña = '"+contrasenia+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			
 			while(rSet.next()) {
 				this.nombre= rSet.getString("nombre");
 				this.email= rSet.getString("email");
-				this.password= rSet.getString("contraseï¿½a");
+				this.password= rSet.getString("contraseña");
 				this.saldo=rSet.getFloat("saldo");
 				this.esTienda=rSet.getBoolean("esTienda");
 			}			
 		}catch (Exception e) {
 			throw new LoginIncorrectoException();
+		}finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	/***
+	 * Realiza el registro
+	 * @author Silver (Alejandro)
+	 * @author Pablo Castellanos 
+	 * @param Parámetros pasados por constructor
+	 * @throws RegistroIncorrectoException
+	 */
+	public void realizarRegistro(String nom,String pass,String ema,float sal,boolean et,ArrayList<Articulo> ac) throws RegistroIncorrectoException {
+		
+		try {
+			conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
+			PreparedStatement pSment = conexion.prepareStatement("INSERT into Usuario VALUES (?,?,?,?,?)");
+			
+			pSment.setString(1,nom);
+			pSment.setString(2,ema);
+			pSment.setString(3,pass);
+			pSment.setFloat(4,sal);
+			pSment.setBoolean(5,et);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new RegistroIncorrectoException();
 		}finally {
 			try {
 				conexion.close();

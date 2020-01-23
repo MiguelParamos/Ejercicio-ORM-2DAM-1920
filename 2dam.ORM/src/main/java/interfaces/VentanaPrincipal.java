@@ -213,28 +213,6 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	/**
-	 * Función que permite cambiar al panel de Ver Stock.
-	 * @author Sara Pedrosa
-	 * @author Alvaro de Francisco
-	 * 
-	 * TODO: Preguntar a Miguel por el Panel: verStock, no existe
-	 */
-	public void irAVerStock() {
-		
-		if (this.pantallaMenu != null) { 
-
-			this.pantallaMenu.setVisible(false); 
-
-		}
-		
-		pantallaMasStock = new MasStock(this);
-		this.setTitle("Ver Stock");
-		this.setContentPane(this.pantallaMasStock);
-		this.pantallaMasStock.setVisible(true);
-		
-	}
-	
-	/**
 	 * Función que permite cambiar al panel de Editar Usuario.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
@@ -263,7 +241,5 @@ public class VentanaPrincipal extends JFrame {
 	public void setUsu(Usuario usu) {
 		this.usu = usu;
 	}
-	
-	
 
 }

@@ -15,7 +15,7 @@ import excepciones.ArticuloNoInsertadoException;
  * @Author Juan Miguel 
  * @Author Alvarop627
  * @Author Juan Carlos
- * @Author Javier Rodríguez
+ * @Author Javier Rodrï¿½guez
  */
 
 public class Articulo {
@@ -46,9 +46,10 @@ public class Articulo {
 	}
 
 	public Articulo(String artName) {
-		super();
+
+		//TODO Abrir conexion, consultar, coger los datos de BD, cerrar conexion
 		try {
-			recorrerArticulos(artName);
+			buscarUnArticulo(artName);
 		} catch (ArticuloNoExisteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,22 +63,25 @@ public class Articulo {
 	 * @return Devuelve los datos de los articulos existentes en la BD
 	 * @throws ArticuloNoExisteException como resultado de un articulo inexistente.
 	 */
-	public void recorrerArticulos(String artName) throws ArticuloNoExisteException {
+	public void buscarUnArticulo(String artName) throws ArticuloNoExisteException {
 		try {
+			//TODO cambiar la conexion al servidor
 			String cons = "SELECT * FROM Articulo WHERE nombre = '" + artName + "'";
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery(cons);
 
-			while (rs.next()) {
+			if (rs.next()) {
 				this.artName = rs.getString("nombre");
 				this.artPrice = rs.getFloat("precio");
 				this.artDesc = rs.getString("descripcion");
+			}else {
+				throw new ArticuloNoExisteException();
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new ArticuloNoExisteException();
+			e.printStackTrace();
 		} finally {
 			try {
 				conexion.close();
@@ -151,11 +155,11 @@ public class Articulo {
 	 * @throws ArticuloNoInsertadoException 
 	 */
 	public static void cargarArticulos(TreeSet<Articulo> todosLosArticulos) throws ArticuloNoInsertadoException {
-		// INICIALIZACIÓN DE VARIABLES
+		// INICIALIZACIï¿½N DE VARIABLES
 		Connection conexion = null;
 		TreeSet<Articulo> articuloTS = null;
 		try {
-			// CONEXIÓN CON BASE DE DATOS, CREACIÓN DE STATEMENT Y RESULTSET
+			// CONEXIï¿½N CON BASE DE DATOS, CREACIï¿½N DE STATEMENT Y RESULTSET
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			Statement articuloStatement = conexion.createStatement();
 			ResultSet articulosBD = articuloStatement.executeQuery("SELECT * FROM Articulo");
@@ -205,7 +209,7 @@ public class Articulo {
 	}
 	
 	/***
-	 * Funcion que se encarga de actualizar los datos de un artículo.
+	 * Funcion que se encarga de actualizar los datos de un artï¿½culo.
 	 * @author Alvarop627
 	 * @throws ArticuloNoInsertadoException como resultado de un articulo que no se ha podido modificar.
 	 * @throws SQLException 

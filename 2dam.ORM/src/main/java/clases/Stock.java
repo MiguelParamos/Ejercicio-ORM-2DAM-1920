@@ -40,10 +40,9 @@ public class Stock {
 			while(articulosBD.next()) {//RECORRO TODOS LOS ARTICULOS DE LA BBDD, SUPONGO QUE HAY TANTOS ARTICULOS EN LA TABLA COMO EN LA TABLA DE STOCK 
 				
 				Articulo articulo = new Articulo(
-						articulosBD.getString("nombre"),
-						articulosBD.getFloat("precio"),
-						articulosBD.getString("descripcion")
+						articulosBD.getString("nombre")
 						);
+				
 				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo="+articulo.getArtName());
 				stockBD.next();//OBVIO QUE SOLO HAY UNO
 				
@@ -104,11 +103,14 @@ public class Stock {
 			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
-			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo="+articulo.getArtName());
+			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo='"+articulo.getArtName()+"'");
+			if(modificarEnBD.getUpdateCount()<0) {
+				throw new StockNoModificadoException();//Excepcion personalizada
+			}
 			//Actualiza el stock en el HashMap
 			this.HashMap.replace(articulo, cantidad);
-		}catch(Exception e) {
-			throw new StockNoModificadoException();//Excepcion personalizada
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}finally {
 			try {
 				conexion.close();

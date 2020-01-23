@@ -100,10 +100,13 @@ public class Stock {
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
 			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo="+articulo.getArtName());
+			if(modificarEnBD.getUpdateCount()<0) {
+				throw new StockNoModificadoException();//Excepcion personalizada
+			}
 			//Actualiza el stock en el HashMap
 			this.HashMap.replace(articulo, cantidad);
-		}catch(Exception e) {
-			throw new StockNoModificadoException();//Excepcion personalizada
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}finally {
 			try {
 				conexion.close();

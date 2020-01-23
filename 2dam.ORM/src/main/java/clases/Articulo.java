@@ -20,7 +20,7 @@ public class Articulo {
 	private String artName;// Nombre de los articulos
 	private float artPrice;// Precio de los articulos
 	private String artDesc;// Descripcion de los articulos.
-	Connection conexion = null;
+	private Connection conexion = null;
 
 	// CONSTRUCTOR
 	/**
@@ -34,12 +34,14 @@ public class Articulo {
 		this.artName = artName;
 		this.artPrice = artPrice;
 		this.artDesc = artDesc;
+		//TODO Abrir conexion, persistir, cerrar conexion
 	}
 
 	public Articulo(String artName) {
-		super();
+
+		//TODO Abrir conexion, consultar, coger los datos de BD, cerrar conexion
 		try {
-			recorrerArticulos(artName);
+			buscarUnArticulo(artName);
 		} catch (ArticuloNoExisteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,22 +55,25 @@ public class Articulo {
 	 * @return Devuelve los datos de los articulos existentes en la BD
 	 * @throws ArticuloNoExisteException como resultado de un articulo inexistente.
 	 */
-	public void recorrerArticulos(String artName) throws ArticuloNoExisteException {
+	public void buscarUnArticulo(String artName) throws ArticuloNoExisteException {
 		try {
+			//TODO cambiar la conexion al servidor
 			String cons = "SELECT * FROM Articulo WHERE nombre = '" + artName + "'";
 			conexion = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/nombredb", "2dam", "2dam");
 			Statement st = conexion.createStatement();
 			ResultSet rs = st.executeQuery(cons);
 
-			while (rs.next()) {
+			if (rs.next()) {
 				this.artName = rs.getString("nombre");
 				this.artPrice = rs.getFloat("precio");
 				this.artDesc = rs.getString("descripcion");
+			}else {
+				throw new ArticuloNoExisteException();
 			}
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			throw new ArticuloNoExisteException();
+			e.printStackTrace();
 		} finally {
 			try {
 				conexion.close();
@@ -86,6 +91,7 @@ public class Articulo {
 	}
 
 	public void setArtName(String artName) {
+		//Persistir en todos los setters TODO
 		this.artName = artName;
 	}
 

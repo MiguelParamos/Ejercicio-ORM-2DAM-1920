@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
 
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.LoginIncorrectoException;
 import excepciones.RegistroIncorrectoException;
 
@@ -51,9 +52,14 @@ public class Usuario implements Comparable<Usuario>{
 	 * @author Pablo Castellanos
 	 * @throws LoginIncorrectoException
 	 */
-	public Usuario(String nombre, String password) throws LoginIncorrectoException {
+	public Usuario(String nombre, String password) {
 		super();
+		try {
 			comprobarLogin(nombre, password);
+		} catch (LoginIncorrectoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public String getNombre() {
@@ -145,7 +151,7 @@ public class Usuario implements Comparable<Usuario>{
 					this.saldo=rSet.getFloat("saldo");
 					this.esTienda=rSet.getBoolean("esTienda");
 				}else {
-					//throw new LoginIncorrectoException("Usuario/contraseña incorrectos");
+					throw new LoginIncorrectoException();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -225,7 +231,12 @@ public class Usuario implements Comparable<Usuario>{
 				ArrayList<Articulo> listaArticulos=new ArrayList<Articulo>();
 				rSetArticulos=st.executeQuery("SELECT nombreArticulos FROM ArticulosComprados WHERE nombreUsuario='"+usuario.getNombre()+"'");
 				while (rSetArticulos.next()) {
-					listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					try {
+						listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					} catch (ArticuloNoInsertadoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				rSetArticulos.close();
 				

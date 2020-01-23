@@ -153,15 +153,23 @@ public class Registro extends JPanel {
 					if(password.equals(passwordRepetido)) {
 						if(email.equals(emailRepetido)) {
 							if(checkboxTienda.isSelected()) {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
-								JOptionPane.showMessageDialog(null, "Tienda creada");
-								ventana.irAMenu();
-								
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
+									JOptionPane.showMessageDialog(null, "Tienda creada");
+									ventana.irAMenu();
+								} catch (RegistroIncorrectoException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 							}else {
-								Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
-								JOptionPane.showMessageDialog(null, "Usuario creado");
-								ventana.irAMenu();
-								
+								try {
+									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, false, null);
+									JOptionPane.showMessageDialog(null, "Usuario creado");
+									ventana.irAMenu();
+								} catch (RegistroIncorrectoException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 							}
 						}else {
 							JOptionPane.showMessageDialog(null, "Ambos email no coinciden");

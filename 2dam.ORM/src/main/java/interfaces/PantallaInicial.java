@@ -59,12 +59,21 @@ public class PantallaInicial extends JPanel {
 		
 		// ActionListnener del boton de inicio de sesion
 		btnInicio.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				String userLogin = getTfUsuario().getText();
 				String passLogin = String.valueOf(getPfPass().getPassword());
-				usuario = new Usuario(userLogin, passLogin);
-				irAMenu();
+				try
+				{
+					usuario = new Usuario(userLogin, passLogin);
+					irAMenu();
+				} catch (LoginIncorrectoException e1)
+				{
+					showLoginError();
+					e1.printStackTrace();
+				}
 			}
+		
 		});
 	}
 	

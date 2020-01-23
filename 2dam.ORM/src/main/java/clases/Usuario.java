@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.TreeSet;
 
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.LoginIncorrectoException;
 import excepciones.RegistroIncorrectoException;
 
@@ -32,7 +33,7 @@ public class Usuario implements Comparable<Usuario>{
 	 * @throws RegistroIncorrectoException
 	 */
 	public Usuario(String nombre, String password, String email, float saldo, boolean esTienda,
-			ArrayList<Articulo> articulosComprados) throws RegistroIncorrectoException{
+			ArrayList<Articulo> articulosComprados) throws RegistroIncorrectoException {
 		super();
 		//TODO quitar los setter y establecer variables internas
 		this.nombre=nombre;
@@ -147,8 +148,7 @@ public class Usuario implements Comparable<Usuario>{
 					
 				}else {
 					throw new LoginIncorrectoException();
-				}				
-				
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}finally {
@@ -226,7 +226,7 @@ public class Usuario implements Comparable<Usuario>{
 			// Recoge los datos de todos los usuarios registrados (sin Artículos comprados)
 			rSetUsuarios=st.executeQuery("SELECT * FROM Usuario");
 			while (rSetUsuarios.next()) {
-				listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña"), rSetUsuarios.getString("email"), rSetUsuarios.getFloat("saldo"), rSetUsuarios.getBoolean("esTienda"), null));
+				//TODO cambiar listaUsuarios.add(new Usuario(rSetUsuarios.getString("nombre"), rSetUsuarios.getString("contraseña"), rSetUsuarios.getString("email"), rSetUsuarios.getFloat("saldo"), rSetUsuarios.getBoolean("esTienda"), null));
 			}
 			rSetUsuarios.close();
 			
@@ -235,7 +235,12 @@ public class Usuario implements Comparable<Usuario>{
 				ArrayList<Articulo> listaArticulos=new ArrayList<Articulo>();
 				rSetArticulos=st.executeQuery("SELECT nombreArticulos FROM ArticulosComprados WHERE nombreUsuario='"+usuario.getNombre()+"'");
 				while (rSetArticulos.next()) {
-					listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					try {
+						listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
+					} catch (ArticuloNoInsertadoException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				rSetArticulos.close();
 				

@@ -19,48 +19,22 @@ import javax.swing.JTextField;
 import clases.Articulo;
 import clases.Stock;
 import clases.Usuario;
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.StockNoModificadoException;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class MasStock extends JPanel {
 	private JTextField campoNumericoMasStock;
-	private Usuario usuario;
 	private VentanaPrincipal ventana;
-	private final String baseDatos = "jdbc:mysql://127.0.0.1:3306/nombredb";//LA BBDD
-	private final String usuarioBd = "2dam";//EL USUARIO
-	private final String contraseña = "2dam";//LA CONTRASEÑA
-	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();//El HashMap con los Articulos y su Stock
-	 private  Articulo articulo ;
 	/**
 	 * Create the panel.
 	 */
 	public MasStock(VentanaPrincipal v) {
 		setLayout(null);
-		Connection conexion = null;
-		
-		try {
-			/**
-			 * Conexión a la bd 
-			 */
-			conexion = DriverManager.getConnection(baseDatos,usuarioBd,contraseña);
-			Statement statement = conexion.createStatement();
-			ResultSet articulosBD=statement.executeQuery("SELECT * FROM Articulo");
-			while(articulosBD.next()) {
-				
-				articulo= new Articulo(
-						articulosBD.getString("nombre"),
-						articulosBD.getFloat("precio"),
-						articulosBD.getString("descripcion")
-						);
-				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo="+articulo.getArtName());
-				stockBD.next();
-				
-				// Se añade al 'HasMap' el artículo y la cantidad del stock 
-				HashMap.put(articulo, stockBD.getShort("cantidad"));
-				stockBD.close();
-			}
+		this.ventana=v;
 
 		//Boton atras
 		JButton btnAtrasMasStock = new JButton("Atras");
@@ -93,12 +67,12 @@ public class MasStock extends JPanel {
 		btnAñadirMasStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Stock s=new Stock();		
-				try {
-					s.añadirStock(articulo,campoNumeroStock);
+				/*try {
+					//s.añadirStock(articulo,campoNumeroStock);
 				} catch (StockNoModificadoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 			}
 			
 		});
@@ -106,17 +80,11 @@ public class MasStock extends JPanel {
 		btnAñadirMasStock.setBounds(237, 252, 89, 23);
 		add(btnAñadirMasStock);
 		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			try {
-				conexion.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(173, 95, 153, 28);
+		add(comboBox);
+		
+		
 		
 	
 	}

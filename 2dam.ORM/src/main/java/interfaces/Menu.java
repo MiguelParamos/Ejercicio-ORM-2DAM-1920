@@ -31,7 +31,7 @@ public class Menu extends JPanel {
 
 		setLayout(null);
 
-		if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
+		if (true) { // Comprueba si el Usuario es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");

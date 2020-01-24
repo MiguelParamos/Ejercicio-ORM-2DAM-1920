@@ -44,6 +44,8 @@ public class Usuario implements Comparable<Usuario>{
 		this.articulosComprados=articulosComprados;
 		
 		realizarRegistro(nombre,password,email,saldo,esTienda,articulosComprados);
+		
+		
 	}
 	/***
 	 * Constructor que recibe nombre y contraseï¿½a para login
@@ -62,7 +64,12 @@ public class Usuario implements Comparable<Usuario>{
 
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		
+		try {
+			update(nombre, this.getPassword(), this.getEmail(), this.getSaldo(), this.getNombre());
+		} catch (LoginIncorrectoException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -77,12 +84,20 @@ public class Usuario implements Comparable<Usuario>{
 
 
 	public void setEmail(String email) {
-		this.email = email;
+		try {
+			update(this.getNombre(), this.getPassword(), email, this.getSaldo(), this.getNombre());
+		} catch (LoginIncorrectoException e) {
+			e.printStackTrace();
+		}
 	}
 
 
 	public void setPassword(String password) {
-		this.password = password;
+		try {
+		update(this.getNombre(), password, this.getEmail(), this.getSaldo(), this.getNombre());
+	} catch (LoginIncorrectoException e) {
+		e.printStackTrace();
+	}
 	}
 
 
@@ -92,7 +107,11 @@ public class Usuario implements Comparable<Usuario>{
 
 
 	public void setSaldo(float saldo) {
-		this.saldo = saldo;
+		try {
+			update(this.getNombre(), this.getPassword(), this.getEmail(), saldo, this.getNombre());
+		} catch (LoginIncorrectoException e) {
+			e.printStackTrace();
+		}
 	}
 
 
@@ -256,6 +275,7 @@ public class Usuario implements Comparable<Usuario>{
 				*/
 			}
 			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -298,5 +318,30 @@ public class Usuario implements Comparable<Usuario>{
 		return this.nombre.compareTo(u.getNombre());
 	}
 	
+	public void update(String nombreBD, String passwordBD, String emailBD, float saldoBD, String nombre) throws LoginIncorrectoException {
+		
+		try {
+		
+		Connection conn = DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
+		PreparedStatement pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseña = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
+		
+		
+			pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseña = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
+			pStatement.setString(1, nombreBD);
+			pStatement.setString(2, passwordBD);
+			pStatement.setString(3, emailBD);
+			pStatement.setFloat(4, saldoBD);
+			
+			if(pStatement.executeUpdate() == 0) {
+				throw new LoginIncorrectoException();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 }
+
+

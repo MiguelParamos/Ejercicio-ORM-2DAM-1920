@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 import excepciones.ArticuloNoInsertadoException;
+import excepciones.RegistroIncorrectoException;
 import excepciones.StockNoModificadoException;
 
 /**
@@ -117,6 +118,37 @@ public class Stock {
 			}
 		}
 	}
-	
-	
+	/***
+	 * Método que resta cantidad de stock al artículo seleccionado
+	 * @author Silver (Alejandro)
+	 * @author Pablo Castellanos
+	 * @throws StockNoModificadoException
+	 */
+	public void restarStock(Articulo a,short c) throws StockNoModificadoException {
+		
+		Connection conexion = null;		
+		try {
+			conexion = DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
+			
+			String query = "SELECT * FROM Stock WHERE nombre_Articulo = '"+a.getArtName()+"'";			
+			Statement sMent = conexion.createStatement();
+			ResultSet rSet = sMent.executeQuery(query);
+			
+			if(rSet.next()&&rSet.getShort("cantidad")<c) {
+				Statement modificarEnBD = conexion.createStatement();
+				modificarEnBD.executeUpdate("Update Stock SET cantidad="+(rSet.getShort("cantidad")-c)+" WHERE nombre_Articulo='"+a.getArtName()+"'");
+			}else {
+				throw new StockNoModificadoException();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				conexion.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
 }

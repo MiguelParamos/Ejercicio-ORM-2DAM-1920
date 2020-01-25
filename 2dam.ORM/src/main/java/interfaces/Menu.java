@@ -30,13 +30,13 @@ public class Menu extends JPanel {
 		this.u = usuario;
 
 		setLayout(null);
-
-		if (true) { // Comprueba si el Usuario es una Tienda
+		
+		if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");
-			BotonMenu annadirStock = new BotonMenu("A�adir Stock");
-			BotonMenu annadirArticulo = new BotonMenu("A�adir Art�culo");
+			BotonMenu annadirStock = new BotonMenu("Añadir Stock");
+			BotonMenu annadirArticulo = new BotonMenu("Añadir Artículo");
 			BotonMenu verUsuarios = new BotonMenu("Ver Usuarios");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
 
@@ -80,7 +80,7 @@ public class Menu extends JPanel {
 			verStock.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-	                v.irAVerStock();
+	                //  TODO v.irAVerStock(); Todavia no se ha creado la función
 				}
 			});
 			
@@ -104,14 +104,14 @@ public class Menu extends JPanel {
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verMisArticulos = new BotonMenu("Ver mis Articulos");
 			BotonMenu comprar = new BotonMenu("Comprar");
-			BotonMenu annadirSaldo = new BotonMenu("A�adirSaldo");
+			BotonMenu annadirSaldo = new BotonMenu("Añadir Saldo");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
 
 			logout.setBounds(10, 108, 172, 50);
 			verMisArticulos.setBounds(191, 108, 172, 50);
 			comprar.setBounds(373, 108, 172, 50);
-			annadirSaldo.setBounds(192, 191, 172, 50);
-			editarUsuario.setBounds(373, 191, 172, 50);
+			annadirSaldo.setBounds(95, 191, 172, 50);
+			editarUsuario.setBounds(276, 191, 172, 50);
 
 			add(logout);
 			add(verMisArticulos);

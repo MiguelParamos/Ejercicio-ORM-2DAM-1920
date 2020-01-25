@@ -117,6 +117,15 @@ public class VerUsuarios extends JPanel{
 		btnArtculosComprados.setBounds(230, 120, 170, 20);
 		panel.add(btnArtculosComprados);
 		
+		JButton btnAtrs = new JButton("Atrás");
+		btnAtrs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				vPrincipal.irAMenu();
+			}
+		});
+		btnAtrs.setBounds(10, 446, 89, 23);
+		add(btnAtrs);
+		
 		btnEliminarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int x=JOptionPane.showOptionDialog(vPrincipal, "¿Estás seguro de que quieres borrar este usuario?", "Borrar Usuario", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, new String[] {"Si", "No"}, "Si");

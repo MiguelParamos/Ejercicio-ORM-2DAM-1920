@@ -9,7 +9,7 @@ import clases.Articulo;
 import clases.Usuario;
 
 /**
- * JFrame personalizado que corresponde a la ventana de la aplicación. Herede de JFrame.
+ * JFrame personalizado que corresponde a la ventana de la aplicaciï¿½n. Herede de JFrame.
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
  */
@@ -17,7 +17,7 @@ public class VentanaPrincipal extends JFrame {
 
 	private Registro pantallaRegistro; // Panel de Registro
 	private PantallaInicial pantallaInicial; // Panel Inicial
-	private Menu pantallaMenu; // Panel Menú
+	private Menu pantallaMenu; // Panel Menï¿½
 	private Comprar pantallaComprar; // Panel de Comprar
 	private MasSaldo pantallaMasSaldo;
 	private MasStock pantallaMasStock;
@@ -28,7 +28,7 @@ public class VentanaPrincipal extends JFrame {
 	private Usuario usu;
 	
 	/**
-	 * Constructor de la ventana principal de la aplicación.
+	 * Constructor de la ventana principal de la aplicaciï¿½n.
 	 * @throws SQLException 
 	 */
 	public VentanaPrincipal() throws SQLException {
@@ -45,7 +45,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	/**
-	 * Esta función nos sirve para movernos a la pantalla inicial.
+	 * Esta funciï¿½n nos sirve para movernos a la pantalla inicial.
 	 */
 	public void irAPantallaInicial() {
 
@@ -56,6 +56,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 
 		this.setTitle("pantallaMenu");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaInicial);
 		this.pantallaInicial.setVisible(true);
 
@@ -70,7 +71,8 @@ public class VentanaPrincipal extends JFrame {
 		}
 
 		this.pantallaMenu = new Menu(this, usu);
-		this.setTitle("Menú");
+		this.setTitle("MenÃº");
+		this.setSize(575, 350);
 		this.setContentPane(this.pantallaMenu);
 		this.pantallaMenu.setVisible(true);
 		
@@ -87,13 +89,14 @@ public class VentanaPrincipal extends JFrame {
 		}
 		pantallaRegistro=new Registro(this);
 		this.setTitle("Registro");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaRegistro);
 		this.pantallaRegistro.setVisible(true);
 		
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Comprar.
+	 * Funciï¿½n que permite cambiar al panel de Comprar.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -107,13 +110,14 @@ public class VentanaPrincipal extends JFrame {
 		
 		pantallaComprar = new Comprar();
 		this.setTitle("Comprar");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaComprar);
 		this.pantallaComprar.setVisible(true);
 
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Más Saldo.
+	 * Funciï¿½n que permite cambiar al panel de Mï¿½s Saldo.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -126,14 +130,15 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaMasSaldo = new MasSaldo(this, usu);
-		this.setTitle("Más Saldo");
+		this.setTitle("MÃ¡s Saldo");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaMasSaldo);
 		this.pantallaMasSaldo.setVisible(true);
 
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Más Stock.
+	 * Funciï¿½n que permite cambiar al panel de Mï¿½s Stock.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -146,14 +151,15 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaMasStock = new MasStock(this);
-		this.setTitle("Más Stock");
+		this.setTitle("MÃ¡s Stock");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaMasStock);
 		this.pantallaMasStock.setVisible(true);
 		
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Nuevo Artículo.
+	 * Funciï¿½n que permite cambiar al panel de Nuevo Artï¿½culo.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -166,14 +172,15 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaNuevoArticulo = new NuevoArticulo(this);
-		this.setTitle("Nuevo Artículo");
+		this.setTitle("Nuevo ArtÃ­culo");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaNuevoArticulo);
 		this.pantallaNuevoArticulo.setVisible(true);
 		
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Mis Artículos.
+	 * Funciï¿½n que permite cambiar al panel de Mis Artï¿½culos.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -186,14 +193,14 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaVerMisArticulos = new VerMisArticulos(this, usu);
-		this.setTitle("Ver mis Artículos");
+		this.setTitle("Ver mis ArtÃ­culos");
 		this.setContentPane(this.pantallaVerMisArticulos);
 		this.pantallaVerMisArticulos.setVisible(true);
 		
 	}
 
 	/**
-	 * Función que permite cambiar al panel de Ver Usuarios.
+	 * Funciï¿½n que permite cambiar al panel de Ver Usuarios.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
@@ -207,13 +214,14 @@ public class VentanaPrincipal extends JFrame {
 		
 		pantallaVerUsuarios = new VerUsuarios(this);
 		this.setTitle("Ver Usuarios");
+		this.setSize(500, 525);
 		this.setContentPane(this.pantallaVerUsuarios);
 		this.pantallaVerUsuarios.setVisible(true);
 		
 	}
 	
 	/**
-	 * Función que permite cambiar al panel de Editar Usuario.
+	 * Funciï¿½n que permite cambiar al panel de Editar Usuario.
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 * 
@@ -229,6 +237,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		pantallaEditarUsuario = new EditarUsuario(this);
 		this.setTitle("Editar Usuario");
+		this.setSize(500, 500);
 		this.setContentPane(this.pantallaEditarUsuario);
 		this.pantallaEditarUsuario.setVisible(true);
 		

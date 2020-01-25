@@ -28,10 +28,12 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
+import javax.swing.JList;
 
 public class NuevoArticulo extends JPanel{
 	private JTextField textFieldNombre, textFieldPrecio;
 	private JTextArea textFieldDescripcion;
+	private JList listaProveedores;
 
 	public NuevoArticulo(final VentanaPrincipal v) {
 
@@ -78,21 +80,30 @@ public class NuevoArticulo extends JPanel{
 		textFieldDescripcion = new JTextArea();
 		textFieldDescripcion.setDocument(new JTextFieldLimit());
 		textFieldDescripcion.setLineWrap(true);
-		textFieldDescripcion.setBounds(194, 186, 178, 90);
+		textFieldDescripcion.setBounds(194, 186, 178, 61);
 		add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 
 		//Boton para introducir nuevo articulo.
 		JButton btnIntroducir = new JButton("Introducir");
 		btnIntroducir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnIntroducir.setBounds(179, 320, 166, 37);
+		btnIntroducir.setBounds(179, 376, 166, 37);
 		add(btnIntroducir);
 
 		//Boton para salir.
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAtras.setBounds(179, 367, 166, 37);
+		btnAtras.setBounds(179, 426, 166, 37);
 		add(btnAtras);
+		
+		listaProveedores = new JList();
+		listaProveedores.setBounds(193, 268, 179, 82);
+		add(listaProveedores);
+		
+		JLabel lblProveedor = new JLabel("Proveedor:");
+		lblProveedor.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblProveedor.setBounds(102, 269, 81, 14);
+		add(lblProveedor);
 
 		/**
 		 * Evento Boton Introducir
@@ -117,7 +128,9 @@ public class NuevoArticulo extends JPanel{
 					textFieldDescripcion.setBorder(new LineBorder(Color.red,2));
 					error = 1;
 				}
-
+                if(listaProveedores.isSelectionEmpty()) {
+                	listaProveedores.setBorder(new LineBorder(Color.red,2));
+                }
 				if(error!=1) {
 					//Crea el nuevo articulo.
 					try {

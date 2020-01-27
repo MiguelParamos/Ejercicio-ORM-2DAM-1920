@@ -13,14 +13,14 @@ import excepciones.StockNoModificadoException;
 
 /**
  * Clase del Stock
- * @author Andrés
+ * @author Andrï¿½s
  * @author Malkien
  */
 public class Stock {
 	//CUANDO VEAS ESTO HAY QUE CREAR UNA CLASE CON LAS CONSTANTES
 	private final String baseDatos = "jdbc:mysql://85.214.120.213:3306/2dam";//LA BBDD
 	private final String usuario = "2dam";//EL USUARIO
-	private final String contraseña = "2dam";//LA CONTRASEÑA
+	private final String contraseÃ±a = "2dam";//LA CONTRASEï¿½A
 	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();//El HashMap con los Articulos y su Stock
 	/**
 	 * Constructor de la clase Stock
@@ -31,11 +31,11 @@ public class Stock {
 	public Stock() {
 		super();
 		
-		//CONEXIÓN CON BASE DE DATOS, CREACIÓN DE STATEMENT Y RESULTSET
+		//CONEXIï¿½N CON BASE DE DATOS, CREACIï¿½N DE STATEMENT Y RESULTSET
 		Connection conexion = null;
 		
 		try {
-			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
+			conexion = DriverManager.getConnection(baseDatos,usuario,contraseÃ±a);
 			Statement statement = conexion.createStatement();
 			ResultSet articulosBD=statement.executeQuery("SELECT * FROM Articulo");
 			while(articulosBD.next()) {//RECORRO TODOS LOS ARTICULOS DE LA BBDD, SUPONGO QUE HAY TANTOS ARTICULOS EN LA TABLA COMO EN LA TABLA DE STOCK 
@@ -47,7 +47,7 @@ public class Stock {
 				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo='"+articulo.getArtName()+"'");
 				stockBD.next();//OBVIO QUE SOLO HAY UNO
 				
-				HashMap.put(articulo, stockBD.getShort("cantidad"));//AÑADO AL HASHMAP EL ARTICULO Y LA CANTIDAD
+				HashMap.put(articulo, stockBD.getShort("cantidad"));//Aï¿½ADO AL HASHMAP EL ARTICULO Y LA CANTIDAD
 				stockBD.close();
 			}
 			
@@ -67,16 +67,16 @@ public class Stock {
 	}
 	
 	/**
-	 * Funcion que añade la cantidad que le damos más la que tiene un articulo en el stock tanto en la bbdd como en el programa
+	 * Funcion que aï¿½ade la cantidad que le damos mï¿½s la que tiene un articulo en el stock tanto en la bbdd como en el programa
 	 * @author Malkien
-	 * @param articulo el articulo al que le vas a añadir el stock
-	 * @param cantidad la cantidad que le vas a añadir
+	 * @param articulo el articulo al que le vas a aï¿½adir el stock
+	 * @param cantidad la cantidad que le vas a aï¿½adir
 	 * @throws StockNoModificadoException 
 	 */
-	public void añadirStock(Articulo articulo,short cantidad) throws StockNoModificadoException {
+	public void aÃ±adirStock(Articulo articulo,short cantidad) throws StockNoModificadoException {
 		
 		Short total = (short) (this.HashMap.get(articulo)+cantidad);//Calcula la nueva cantidad que habra en el stock
-		modificarStock(articulo,total);//Le pasamos la suma de la cantidad que tiene con la que le añadimos
+		modificarStock(articulo,total);//Le pasamos la suma de la cantidad que tiene con la que le aï¿½adimos
 		
 	}
 	/**
@@ -86,7 +86,7 @@ public class Stock {
 	 * @throws StockNoModificadoException
 	 */
 	public void setStock(Articulo articulo, Short cantidad) throws StockNoModificadoException {
-		modificarStock(articulo,cantidad);//Le pasamos la cantidad que tendrá ahora
+		modificarStock(articulo,cantidad);//Le pasamos la cantidad que tendrï¿½ ahora
 	}
 	/**
 	 * Funcion para modificar el stock a la bbdd y al HashMap
@@ -101,7 +101,7 @@ public class Stock {
 		}
 		Connection conexion = null;
 		try {
-			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
+			conexion = DriverManager.getConnection(baseDatos,usuario,contraseÃ±a);
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
 			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo='"+articulo.getArtName()+"'");
@@ -119,7 +119,7 @@ public class Stock {
 		}
 	}
 	/***
-	 * Método que resta cantidad de stock al artículo seleccionado
+	 * Mï¿½todo que resta cantidad de stock al artï¿½culo seleccionado
 	 * @author Silver (Alejandro)
 	 * @author Pablo Castellanos
 	 * @throws StockNoModificadoException

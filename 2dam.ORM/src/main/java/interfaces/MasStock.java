@@ -51,10 +51,10 @@ public class MasStock extends JPanel {
 		btnAtrasMasStock.setBounds(332, 252, 89, 23);
 		add(btnAtrasMasStock);
 		
-		//Label "añadir stock"
-		JLabel lblAñadirStock = new JLabel("A\u00F1adir Stock");
-		lblAñadirStock.setBounds(29, 256, 70, 14);
-		add(lblAñadirStock);
+		//Label "aÃ±adir stock"
+		JLabel lblAÃ±adirStock = new JLabel("A\u00F1adir Stock");
+		lblAÃ±adirStock.setBounds(29, 256, 70, 14);
+		add(lblAÃ±adirStock);
 
 		//JTextField "campoNumericoMasStock"
 		campoNumericoMasStock = new JTextField();
@@ -77,13 +77,13 @@ public class MasStock extends JPanel {
 		int CantidadNumero=Integer.parseInt(n);
 		final short campoNumeroStock =(short)CantidadNumero;
 		 
-		//Boton  añadir stock a la lista
-		JButton btnAñadirMasStock = new JButton("A\u00F1adir");
-		btnAñadirMasStock.addActionListener(new ActionListener() {
+		//Boton  aÃ±adir stock a la lista
+		JButton btnAÃ±adirMasStock = new JButton("A\u00F1adir");
+		btnAÃ±adirMasStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Stock s=new Stock();		
 				try {
-					s.añadirStock((Articulo)selector.getSelectedItem(),campoNumeroStock);
+					s.aÃ±adirStock((Articulo)selector.getSelectedItem(),campoNumeroStock);
 				} catch (StockNoModificadoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -92,8 +92,8 @@ public class MasStock extends JPanel {
 			
 		});
 		
-		btnAñadirMasStock.setBounds(237, 252, 89, 23);
-		add(btnAñadirMasStock);
+		btnAÃ±adirMasStock.setBounds(237, 252, 89, 23);
+		add(btnAÃ±adirMasStock);
 		
 	;
 		

@@ -111,6 +111,7 @@ public class VerUsuarios extends JPanel{
 		btnArtculosComprados.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				vPrincipal.irAVerMisArticulos();
 				// TODO Click para mostrar los artículos comprados (usar clase VerMisArtículos)
 			}
 		});

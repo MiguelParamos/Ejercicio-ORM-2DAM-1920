@@ -11,8 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 /**
  * Esta clase modela los articulos que ha comprado un usuario.
- * @author Javier Rodríguez y Juan Carlos
- *
+ * 	@author Javier Rodríguez.
+ *	@author Juan Carlos.
  */
 public class VerMisArticulos extends JPanel{
 	private VentanaPrincipal ventanaPrincipal;

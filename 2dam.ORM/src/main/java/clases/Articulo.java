@@ -150,8 +150,9 @@ public class Articulo {
 
 	/**
 	 * FUNCION QUE CARGA LOS ARTICULOS DE BASE DE DATO A UN TREESET
-	 * @param todosLosArticulos pasamos el TreeSet de articulos que contienen todos
-	 *                          los articulos que agregamos posteriormente.
+	 * @param todosLosArticulos pasamos el TreeSet de articulos que contienen todos los articulos que agregamos posteriormente.
+	 * @author Javier Rodriguez.
+	 * @author Juan Carlos.
 	 * @throws ArticuloNoInsertadoException 
 	 */
 	public static TreeSet<Articulo> todosLosArticulos() {

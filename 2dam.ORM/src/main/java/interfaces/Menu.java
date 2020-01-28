@@ -12,6 +12,7 @@ import componentes.BotonMenu;
  * El panel Menu de la aplicacion. Hereda de JPanel.
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
+ * @author Alvarop627
  */
 public class Menu extends JPanel {
 
@@ -35,17 +36,19 @@ public class Menu extends JPanel {
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");
-			BotonMenu annadirStock = new BotonMenu("Añadir Stock");
-			BotonMenu annadirArticulo = new BotonMenu("Añadir Artículo");
+			BotonMenu annadirStock = new BotonMenu("Anadir Stock");
+			BotonMenu annadirArticulo = new BotonMenu("Anadir Articulo");
 			BotonMenu verUsuarios = new BotonMenu("Ver Usuarios");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
+			BotonMenu annadirProveedor = new BotonMenu("Anadir Proveedor");
 
-			logout.setBounds(10, 108, 172, 50);
-			verStock.setBounds(191, 108, 172, 50);
-			annadirStock.setBounds(373, 108, 172, 50);
-			annadirArticulo.setBounds(191, 191, 172, 50);
-			verUsuarios.setBounds(10, 191, 172, 50);
-			editarUsuario.setBounds(373, 191, 172, 50);
+			logout.setBounds(10, 58, 172, 50);
+			verStock.setBounds(191, 58, 172, 50);
+			annadirStock.setBounds(373, 58, 172, 50);
+			annadirArticulo.setBounds(191, 141, 172, 50);
+			verUsuarios.setBounds(10, 141, 172, 50);
+			editarUsuario.setBounds(373, 141, 172, 50);
+			annadirProveedor.setBounds(191, 224, 172, 50);
 
 			add(logout);
 			add(verStock);
@@ -53,6 +56,7 @@ public class Menu extends JPanel {
 			add(annadirArticulo);
 			add(verUsuarios);
 			add(editarUsuario);
+			add(annadirProveedor);
 			
 			// ------------------ EVENTOS DE LOS BOTONES ------------------
 			
@@ -98,6 +102,13 @@ public class Menu extends JPanel {
 	                v.irAEditarUsuario();
 				}
 			});
+			
+			annadirProveedor.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+	                v.irANuevoProveedor();
+				}
+			});
 
 		} else { // Comprueba si el Usuario NO es una Tienda
 
@@ -107,11 +118,11 @@ public class Menu extends JPanel {
 			BotonMenu annadirSaldo = new BotonMenu("Añadir Saldo");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
 
-			logout.setBounds(10, 108, 172, 50);
-			verMisArticulos.setBounds(191, 108, 172, 50);
-			comprar.setBounds(373, 108, 172, 50);
-			annadirSaldo.setBounds(95, 191, 172, 50);
-			editarUsuario.setBounds(276, 191, 172, 50);
+			logout.setBounds(10, 58, 172, 50);
+			verMisArticulos.setBounds(191, 58, 172, 50);
+			comprar.setBounds(373, 58, 172, 50);
+			annadirSaldo.setBounds(95, 141, 172, 50);
+			editarUsuario.setBounds(276, 141, 172, 50);
 
 			add(logout);
 			add(verMisArticulos);

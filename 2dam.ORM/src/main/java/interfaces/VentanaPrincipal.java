@@ -12,6 +12,7 @@ import clases.Usuario;
  * JFrame personalizado que corresponde a la ventana de la aplicaci�n. Herede de JFrame.
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
+ * @author Alvarop627
  */
 public class VentanaPrincipal extends JFrame {
 
@@ -25,6 +26,7 @@ public class VentanaPrincipal extends JFrame {
 	private VerMisArticulos pantallaVerMisArticulos;
 	private VerUsuarios pantallaVerUsuarios;
 	private EditarUsuario pantallaEditarUsuario;
+	private PantallaProveedor pantallaProveedor;
 	private Usuario usu;
 	
 	/**
@@ -71,7 +73,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 
 		this.pantallaMenu = new Menu(this, usu);
-		this.setTitle("Menú");
+		this.setTitle("Menu");
 		this.setSize(575, 350);
 		this.setContentPane(this.pantallaMenu);
 		this.pantallaMenu.setVisible(true);
@@ -130,7 +132,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaMasSaldo = new MasSaldo(this, usu);
-		this.setTitle("Más Saldo");
+		this.setTitle("Mas Saldo");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaMasSaldo);
 		this.pantallaMasSaldo.setVisible(true);
@@ -151,7 +153,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaMasStock = new MasStock(this);
-		this.setTitle("Más Stock");
+		this.setTitle("Mas Stock");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaMasStock);
 		this.pantallaMasStock.setVisible(true);
@@ -172,7 +174,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaNuevoArticulo = new NuevoArticulo(this);
-		this.setTitle("Nuevo Artículo");
+		this.setTitle("Nuevo Articulo");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaNuevoArticulo);
 		this.pantallaNuevoArticulo.setVisible(true);
@@ -193,7 +195,7 @@ public class VentanaPrincipal extends JFrame {
 		}
 		
 		pantallaVerMisArticulos = new VerMisArticulos(this, usu);
-		this.setTitle("Ver mis Artículos");
+		this.setTitle("Ver mis Articulos");
 		this.setContentPane(this.pantallaVerMisArticulos);
 		this.pantallaVerMisArticulos.setVisible(true);
 		
@@ -242,6 +244,25 @@ public class VentanaPrincipal extends JFrame {
 		this.pantallaEditarUsuario.setVisible(true);
 		
 	}
+	
+	/**
+	 * Funcion que permite incluir un nuevo proveedor.
+	 * @author Alvarop627
+	 */
+	public void irANuevoProveedor() {
+		if (this.pantallaMenu != null) { 
+
+			this.pantallaMenu.setVisible(false); 
+
+		}
+		
+		pantallaProveedor = new PantallaProveedor(this);
+		this.setTitle("Incluir nuevo proveedor");
+		this.setSize(500, 500);
+		this.setContentPane(this.pantallaProveedor);
+		this.pantallaProveedor.setVisible(true);
+		
+	}
 
 	public Usuario getUsu() {
 		return usu;
@@ -250,5 +271,7 @@ public class VentanaPrincipal extends JFrame {
 	public void setUsu(Usuario usu) {
 		this.usu = usu;
 	}
+
+	
 
 }

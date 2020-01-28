@@ -22,31 +22,38 @@ import javax.swing.JSpinner;
 
 public class Comprar extends JPanel {
 
-	private Usuario user;//Usuario que se pasa por el constructor
-	private VentanaPrincipal ventana;
-	private JList listaComprar; //Jlist que muestra los artículos en stock
-	private JTextField saldo; //JTextField que muestra el saldo del que dispone el Usuario
-	private JLabel lblComprar;//Label que muestra el texto principal de la pantalla
-	private BotonMenu botonComprar; //Boton que lleva al evento que realiza la compra de un articulo
-	private JSpinner cantidadSpinner;// Spinner que muestra la cantidad de articulos que el usuario puede comprar
-	private SpinnerNumberModel m_numberSpinnerModel;//Numeros maximos y mínimos que se mostraran en el Spinner
-
+	private Usuario user; // Usuario que se pasa por el constructor
+	private VentanaPrincipal ventana; // JFrame que alberga los paneles
+	private JList listaComprar; // Jlist que muestra los artículos en stock
+	private JTextField saldo; // JTextField que muestra el saldo del que dispone el Usuario
+	private JLabel lblComprar; // Label que muestra el texto principal de la pantalla
+	private BotonMenu botonComprar; // Boton que lleva al evento que realiza la compra de un articulo
+	private JSpinner cantidadSpinner; // Spinner que muestra la cantidad de articulos que el usuario puede comprar
+	private SpinnerNumberModel m_numberSpinnerModel; // Numeros maximos y mínimos que se mostraran en el Spinner
+	
+	/**
+	 * Constructor del JPanel Comprar.
+	 * @param user Usuario de la aplicacion
+	 * @param ventana JFrame de la aplicacion
+	 * @author Sara Pedrosa
+	 * @author Alvaro de Francisco
+	 */
 	public Comprar(Usuario user, VentanaPrincipal ventana) {
 		
-		this.user=user;
-		this.ventana=ventana;
+		this.user = user;
+		this.ventana = ventana;
 
 		setLayout(null);
 
 		
-		//-----------------------LABEL CON EL TÍTULO DE LA PANTALLA---------------------------------
+		// ----------------------- LABEL CON EL TÍTULO DE LA PANTALLA ---------------------------------
 		
 		this.lblComprar = new JLabel("COMPRAR");
 		lblComprar.setFont(new Font("Yu Gothic", Font.BOLD, 14));
 		lblComprar.setBounds(10, 11, 117, 23);
 		add(lblComprar);		
 		
-		//-----------------------JLIST EN LA QUE SE AÑADEN LOS ARTÍCULOS-----------------------------
+		// ----------------------- JLIST EN LA QUE SE AÑADEN LOS ARTÍCULOS -----------------------------
 		
 		DefaultListModel model = new DefaultListModel();
 		this.listaComprar = new JList(model);
@@ -56,18 +63,20 @@ public class Comprar extends JPanel {
 		ArrayList<Articulo> articulo = user.getArticulosComprados();
 		
 		for	(int i = 0; i < articulo.size(); i++) {
+			
 			Articulo articuloMostrado = articulo.get(i);
 			model.add(i, articuloMostrado.getArtName());
+			
 		}
 
 
-		//-----------------------BOTON QUE REALIZA LA COMPRA-------------------------------------
+		// ----------------------- BOTON QUE REALIZA LA COMPRA -------------------------------------
 
 		this.botonComprar = new BotonMenu("Comprar");
 		botonComprar.setBounds(144, 239, 172, 50);
 		add(botonComprar);
 		
-		//-----------------------JTEXTFIEL QUE MUESTRA EL SALDO-------------------------------------
+		// ----------------------- JTEXTFIEL QUE MUESTRA EL SALDO -------------------------------------
 		
 		saldo = new JTextField();
 		saldo.setBounds(124, 45, 86, 20);
@@ -75,12 +84,12 @@ public class Comprar extends JPanel {
 		saldo.setColumns(10);
 		saldo.setText(String.valueOf(user.getSaldo()));
 		
-		//-----------------------SPINNER QUE MUESTRA LA CANTIDAD QUE SE PUEDE COMPRAR-------------------------------------
+		// ----------------------- SPINNER QUE MUESTRA LA CANTIDAD QUE SE PUEDE COMPRAR -------------------------------------
 		
-		int current = new Integer(1);
-		int min = new Integer(1);
-		int max = new Integer(articulo.size());
-		int step = new Integer(1);
+		int current = 1;
+		int min = 1;
+		int max = articulo.size();
+		int step = 1;
 	    this.m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	   
 		this.cantidadSpinner = new JSpinner(m_numberSpinnerModel);
@@ -88,19 +97,16 @@ public class Comprar extends JPanel {
 		
 		add(cantidadSpinner);
 		
-		
-		
-		
-		
 		// ------------------ EVENTOS DE LOS BOTONES ------------------
 
 		botonComprar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				user.
+				// TODO ESPERAR A QUE IMPLEMENTEN LA FUNCION DE COMPRAR DEL USUARIO
 
 			}
 		});
 	}
+	
 }

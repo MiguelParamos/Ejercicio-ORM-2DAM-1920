@@ -9,7 +9,9 @@ import clases.Articulo;
 import clases.Usuario;
 
 /**
- * JFrame personalizado que corresponde a la ventana de la aplicaci�n. Herede de JFrame.
+ * JFrame personalizado que corresponde a la ventana de la aplicaci�n. Herede
+ * de JFrame.
+ * 
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
  * @author Alvarop627
@@ -28,21 +30,22 @@ public class VentanaPrincipal extends JFrame {
 	private EditarUsuario pantallaEditarUsuario;
 	private PantallaProveedor pantallaProveedor;
 	private Usuario usu;
-	
+
 	/**
 	 * Constructor de la ventana principal de la aplicaci�n.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public VentanaPrincipal() throws SQLException {
 
-		//usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
+		// usu = new Usuario("Alvaro", "uwu", "a@a.com", 1900f, true, null);
 		pantallaInicial = new PantallaInicial(this);
-		this.setSize(500,500);
+		this.setSize(500, 500);
 		this.setTitle("Tienda Cenec");
 		this.setVisible(true);
 
 		irAPantallaInicial();
-		//irAEditarUsuario();
+		// irAEditarUsuario();
 
 	}
 
@@ -51,9 +54,9 @@ public class VentanaPrincipal extends JFrame {
 	 */
 	public void irAPantallaInicial() {
 
-		if (this.pantallaRegistro != null) { 
+		if (this.pantallaRegistro != null) {
 
-			this.pantallaRegistro.setVisible(false); 
+			this.pantallaRegistro.setVisible(false);
 
 		}
 
@@ -65,10 +68,10 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	public void irAMenu() {
-		
-		if (this.pantallaInicial != null) { 
 
-			this.pantallaInicial.setVisible(false); 
+		if (this.pantallaInicial != null) {
+
+			this.pantallaInicial.setVisible(false);
 
 		}
 
@@ -77,39 +80,41 @@ public class VentanaPrincipal extends JFrame {
 		this.setSize(575, 350);
 		this.setContentPane(this.pantallaMenu);
 		this.pantallaMenu.setVisible(true);
-		
+
 	}
 
 	/**
 	 * Funcion que permite ir al panel de Registro
+	 * 
 	 * @author alfre
 	 * @author TataGolosa
 	 */
 	public void irARegistro() {
-		if(this.pantallaMenu!=null) {
+		if (this.pantallaMenu != null) {
 			this.pantallaMenu.setVisible(false);
 		}
-		pantallaRegistro=new Registro(this);
+		pantallaRegistro = new Registro(this);
 		this.setTitle("Registro");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaRegistro);
 		this.pantallaRegistro.setVisible(true);
-		
+
 	}
 
 	/**
 	 * Funci�n que permite cambiar al panel de Comprar.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irAComprar() {
 
-		if (this.pantallaMenu != null) { 
+		if (this.pantallaMenu != null) {
 
-			this.pantallaMenu.setVisible(false); 
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaComprar = new Comprar(usu, this);
 		this.setTitle("Comprar");
 		this.setSize(500, 500);
@@ -120,17 +125,18 @@ public class VentanaPrincipal extends JFrame {
 
 	/**
 	 * Funci�n que permite cambiar al panel de M�s Saldo.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irAMasSaldo() {
 
-		if (this.pantallaMenu != null) { 
+		if (this.pantallaMenu != null) {
 
-			this.pantallaMenu.setVisible(false); 
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaMasSaldo = new MasSaldo(this, usu);
 		this.setTitle("Mas Saldo");
 		this.setSize(500, 500);
@@ -141,127 +147,134 @@ public class VentanaPrincipal extends JFrame {
 
 	/**
 	 * Funci�n que permite cambiar al panel de M�s Stock.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irAMasStock() {
-			
-		if (this.pantallaMenu != null) { 
 
-			this.pantallaMenu.setVisible(false); 
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaMasStock = new MasStock(this);
 		this.setTitle("Mas Stock");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaMasStock);
 		this.pantallaMasStock.setVisible(true);
-		
+
 	}
 
 	/**
 	 * Funci�n que permite cambiar al panel de Nuevo Art�culo.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irANuevoArticulo() {
-		
-		if (this.pantallaMenu != null) { 
 
-			this.pantallaMenu.setVisible(false); 
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaNuevoArticulo = new NuevoArticulo(this);
 		this.setTitle("Nuevo Articulo");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaNuevoArticulo);
 		this.pantallaNuevoArticulo.setVisible(true);
-		
+
 	}
 
 	/**
 	 * Funci�n que permite cambiar al panel de Mis Art�culos.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irAVerMisArticulos() {
-		
-		if (this.pantallaMenu != null) { 
 
-			this.pantallaMenu.setVisible(false); 
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaVerMisArticulos = new VerMisArticulos(this, usu);
 		this.setTitle("Ver mis Articulos");
 		this.setContentPane(this.pantallaVerMisArticulos);
 		this.pantallaVerMisArticulos.setVisible(true);
-		
+
 	}
 
 	/**
 	 * Funci�n que permite cambiar al panel de Ver Usuarios.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 */
 	public void irAVerUsuarios() {
-		
-		if (this.pantallaMenu != null) { 
 
-			this.pantallaMenu.setVisible(false); 
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaVerUsuarios = new VerUsuarios(this);
 		this.setTitle("Ver Usuarios");
 		this.setSize(500, 525);
 		this.setContentPane(this.pantallaVerUsuarios);
 		this.pantallaVerUsuarios.setVisible(true);
-		
+
 	}
-	
+
 	/**
 	 * Funci�n que permite cambiar al panel de Editar Usuario.
+	 * 
 	 * @author Sara Pedrosa
 	 * @author Alvaro de Francisco
 	 * 
-	 * TODO: Comprobar cuando implementen los companneros la clase EditarUsuario.
+	 *         TODO: Comprobar cuando implementen los companneros la clase
+	 *         EditarUsuario.
 	 */
 	public void irAEditarUsuario() {
-		
-		if (this.pantallaMenu != null) { 
 
-			this.pantallaMenu.setVisible(false); 
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaEditarUsuario = new EditarUsuario(this);
 		this.setTitle("Editar Usuario");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaEditarUsuario);
 		this.pantallaEditarUsuario.setVisible(true);
-		
+
 	}
-	
+
 	/**
 	 * Funcion que permite incluir un nuevo proveedor.
+	 * 
 	 * @author Alvarop627
 	 */
 	public void irANuevoProveedor() {
-		if (this.pantallaMenu != null) { 
+		if (this.pantallaMenu != null) {
 
-			this.pantallaMenu.setVisible(false); 
+			this.pantallaMenu.setVisible(false);
 
 		}
-		
+
 		pantallaProveedor = new PantallaProveedor(this);
 		this.setTitle("Incluir nuevo proveedor");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaProveedor);
 		this.pantallaProveedor.setVisible(true);
-		
+
 	}
 
 	public Usuario getUsu() {
@@ -271,7 +284,5 @@ public class VentanaPrincipal extends JFrame {
 	public void setUsu(Usuario usu) {
 		this.usu = usu;
 	}
-
-	
 
 }

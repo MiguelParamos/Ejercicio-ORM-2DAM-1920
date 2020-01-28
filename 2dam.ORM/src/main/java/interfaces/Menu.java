@@ -155,6 +155,15 @@ public class Menu extends JPanel {
 	                v.irAEditarUsuario();
 				}
 			});
+			
+			
+			comprar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+	                v.irAComprar();;
+				}
+			});
+			
 
 		}
 

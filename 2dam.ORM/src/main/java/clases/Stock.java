@@ -66,6 +66,28 @@ public class Stock {
 		
 	}
 	
+	
+	
+	/**
+	 * @author Alvaro de Francisco
+	 * @author Sara Pedrosa Ruiz
+	 * @return El HasMap de los articulos
+	 */
+	public HashMap<Articulo, Short> getHashMap() {
+		return HashMap;
+	}
+
+
+
+	/**
+	 * @param hashMap the hashMap to set
+	 */
+	public void setHashMap(HashMap<Articulo, Short> hashMap) {
+		HashMap = hashMap;
+	}
+
+
+
 	/**
 	 * Funcion que a�ade la cantidad que le damos m�s la que tiene un articulo en el stock tanto en la bbdd como en el programa
 	 * @author Malkien

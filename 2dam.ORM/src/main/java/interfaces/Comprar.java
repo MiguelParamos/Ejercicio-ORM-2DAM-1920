@@ -5,6 +5,7 @@ package interfaces;
  */
 import javax.swing.JPanel;
 import clases.Articulo;
+import clases.Stock;
 import clases.Usuario;
 import componentes.BotonMenu;
 
@@ -14,6 +15,8 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
 import javax.swing.SpinnerNumberModel;
@@ -30,6 +33,7 @@ public class Comprar extends JPanel {
 	private BotonMenu botonComprar; // Boton que lleva al evento que realiza la compra de un articulo
 	private JSpinner cantidadSpinner; // Spinner que muestra la cantidad de articulos que el usuario puede comprar
 	private SpinnerNumberModel m_numberSpinnerModel; // Numeros maximos y mínimos que se mostraran en el Spinner
+	private Stock stockTienda; // Stock de la tienda 
 	
 	/**
 	 * Constructor del JPanel Comprar.
@@ -60,14 +64,21 @@ public class Comprar extends JPanel {
 		listaComprar.setBounds(10, 47, 99, 185);
 		add(listaComprar);
 		
+		
 		ArrayList<Articulo> articulo = user.getArticulosComprados();
 		
-		for	(int i = 0; i < articulo.size(); i++) {
-			
-			Articulo articuloMostrado = articulo.get(i);
-			model.add(i, articuloMostrado.getArtName());
-			
+
+		HashMap <Articulo, Short> articulos = stockTienda.getHashMap();
+		
+		Iterator<HashMap.Entry<Articulo, Short>> entries = articulos.entrySet().iterator();
+		
+		while (entries.hasNext()) {
+		    HashMap.Entry<Articulo, Short> articuloMostrado = entries.next();
+		    
+		    System.out.println("Key = " + articuloMostrado.getKey() + ", Value = " + articuloMostrado.getValue());
+		    model.add( (int)articuloMostrado.getValue(), articuloMostrado.getKey());
 		}
+	
 
 
 		// ----------------------- BOTON QUE REALIZA LA COMPRA -------------------------------------

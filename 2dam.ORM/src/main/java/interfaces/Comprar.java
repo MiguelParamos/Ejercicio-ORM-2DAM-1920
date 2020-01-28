@@ -8,8 +8,10 @@ import clases.Articulo;
 import clases.Stock;
 import clases.Usuario;
 import componentes.BotonMenu;
+import excepciones.CompraFallidaException;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -34,6 +36,7 @@ public class Comprar extends JPanel {
 	private JSpinner cantidadSpinner; // Spinner que muestra la cantidad de articulos que el usuario puede comprar
 	private SpinnerNumberModel m_numberSpinnerModel; // Numeros maximos y mínimos que se mostraran en el Spinner
 	private Stock stockTienda; // Stock de la tienda 
+	private Menu pantallaMenu; //Pantalla Menu
 	
 	/**
 	 * Constructor del JPanel Comprar.
@@ -65,8 +68,6 @@ public class Comprar extends JPanel {
 		add(listaComprar);
 		
 		
-		ArrayList<Articulo> articulo = user.getArticulosComprados();
-		
 
 		HashMap <Articulo, Short> articulos = stockTienda.getHashMap();
 		
@@ -93,13 +94,14 @@ public class Comprar extends JPanel {
 		saldo.setBounds(124, 45, 86, 20);
 		add(saldo);
 		saldo.setColumns(10);
-		saldo.setText(String.valueOf(user.getSaldo()));
+		float saldoPrimero = user.getSaldo();
+		saldo.setText(String.valueOf(saldoPrimero));
 		
 		// ----------------------- SPINNER QUE MUESTRA LA CANTIDAD QUE SE PUEDE COMPRAR -------------------------------------
 		
 		int current = 1;
 		int min = 1;
-		int max = articulo.size();
+		int max = articulos.size();
 		int step = 1;
 	    this.m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
 	   
@@ -114,7 +116,21 @@ public class Comprar extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				// TODO ESPERAR A QUE IMPLEMENTEN LA FUNCION DE COMPRAR DEL USUARIO
+				try {
+					float saldoSegundo = saldoPrimero;
+					user.comprar((Articulo)listaComprar.getSelectedValue() , (short)cantidadSpinner.getValue());
+					
+					
+					if(saldoPrimero >= saldoSegundo) {
+						JOptionPane.showMessageDialog(null, "Se ha producido un error en su compra", "Error Compra", JOptionPane.WARNING_MESSAGE);
+					}else {
+						
+						JOptionPane.showMessageDialog(null, "Compra realizada correctamente");
+						
+						ventana.irAMenu();
+						
+					}
+				} catch (CompraFallidaException e1) {e1.printStackTrace();}
 
 			}
 		});

@@ -52,9 +52,9 @@ public class MasStock extends JPanel {
 		add(btnAtrasMasStock);
 		
 		//Label "añadir stock"
-		JLabel lblAñadirStock = new JLabel("A\u00F1adir Stock");
-		lblAñadirStock.setBounds(29, 256, 70, 14);
-		add(lblAñadirStock);
+		JLabel lblAnnadirStock = new JLabel("A\u00F1adir Stock");
+		lblAnnadirStock.setBounds(29, 256, 70, 14);
+		add(lblAnnadirStock);
 
 		//JTextField "campoNumericoMasStock"
 		campoNumericoMasStock = new JTextField();
@@ -78,12 +78,12 @@ public class MasStock extends JPanel {
 		final short campoNumeroStock =(short)CantidadNumero;
 		 
 		//Boton  añadir stock a la lista
-		JButton btnAñadirMasStock = new JButton("A\u00F1adir");
-		btnAñadirMasStock.addActionListener(new ActionListener() {
+		JButton btnAnnadirMasStock = new JButton("A\u00F1adir");
+		btnAnnadirMasStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Stock s=new Stock();		
 				try {
-					s.añadirStock((Articulo)selector.getSelectedItem(),campoNumeroStock);
+					s.aniadirStock((Articulo)selector.getSelectedItem(),campoNumeroStock);
 				} catch (StockNoModificadoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -92,8 +92,8 @@ public class MasStock extends JPanel {
 			
 		});
 		
-		btnAñadirMasStock.setBounds(237, 252, 89, 23);
-		add(btnAñadirMasStock);
+		btnAnnadirMasStock.setBounds(237, 252, 89, 23);
+		add(btnAnnadirMasStock);
 		
 	;
 		

@@ -108,7 +108,7 @@ public class VentanaPrincipal extends JFrame {
 
 		}
 		
-		pantallaComprar = new Comprar();
+		pantallaComprar = new Comprar(usu, this);
 		this.setTitle("Comprar");
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaComprar);

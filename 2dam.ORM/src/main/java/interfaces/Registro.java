@@ -86,6 +86,7 @@ public class Registro extends JPanel {
 		
 		//Checkbox para indicar si el usuario se registra como tienda o no.
 		final JCheckBox checkboxTienda = new JCheckBox("\u00BFTienda?");
+		checkboxTienda.setBackground(new Color(91, 157, 195));
 		checkboxTienda.setHorizontalAlignment(SwingConstants.CENTER);
 		checkboxTienda.setBounds(201, 255, 116, 21);
 		checkboxTienda.setFont(new Font("Dialog", Font.BOLD, 12));

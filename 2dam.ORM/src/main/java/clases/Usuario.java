@@ -55,22 +55,24 @@ public class Usuario implements Comparable<Usuario>{
 	 * @param cantidad cantidad del articulo
 	 * @throws CompraFallidaException, StockNoModificadoException
 	 */
-	/*----------------------------------------------
 	public void comprar(Articulo art, short cantidad) throws CompraFallidaException {
-		Stock st=null;
-		if(saldo>art.getArtPrice()) {
+		Stock st=new Stock();
+		
+		
+		if(saldo>art.getArtPrice()*cantidad) {
 			articulosComprados.add(art);
-			saldo-=art.getArtPrice();
+			setSaldo(saldo-art.getArtPrice()*cantidad);
 			try {
 				st.restarStock(art, cantidad);
 			} catch (StockNoModificadoException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else {
+			throw new CompraFallidaException();
 		}
 	
 	} 
-	--------------------------------------------------*/
 	
 	/***
 	 * Constructor que recibe nombre y contrase�a para login

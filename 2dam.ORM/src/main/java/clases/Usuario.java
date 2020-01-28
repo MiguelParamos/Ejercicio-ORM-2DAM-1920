@@ -14,8 +14,10 @@ import java.util.Collections;
 import java.util.TreeSet;
 
 import excepciones.ArticuloNoInsertadoException;
+import excepciones.CompraFallidaException;
 import excepciones.LoginIncorrectoException;
 import excepciones.RegistroIncorrectoException;
+import excepciones.StockNoModificadoException;
 
 public class Usuario implements Comparable<Usuario>{
 	private String nombre;
@@ -47,6 +49,29 @@ public class Usuario implements Comparable<Usuario>{
 		
 		
 	}
+	/**
+	 * 
+	 * @param art nombre del articulo
+	 * @param cantidad cantidad del articulo
+	 * @throws CompraFallidaException, StockNoModificadoException
+	 */
+	/*----------------------------------------------
+	public void comprar(Articulo art, short cantidad) throws CompraFallidaException {
+		Stock st=null;
+		if(saldo>art.getArtPrice()) {
+			articulosComprados.add(art);
+			saldo-=art.getArtPrice();
+			try {
+				st.restarStock(art, cantidad);
+			} catch (StockNoModificadoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	
+	} 
+	--------------------------------------------------*/
+	
 	/***
 	 * Constructor que recibe nombre y contrase�a para login
 	 * @author Silver (Alejandro)
@@ -308,6 +333,7 @@ public class Usuario implements Comparable<Usuario>{
 		
 		return setUsuarios;
 	}
+	
 
 	/**
 	 * Función que va comparando nombres de usuario para el ordenamiento. Usa la interfaz Comparabale

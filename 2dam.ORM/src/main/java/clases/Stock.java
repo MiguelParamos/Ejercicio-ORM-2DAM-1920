@@ -20,7 +20,7 @@ public class Stock {
 	//CUANDO VEAS ESTO HAY QUE CREAR UNA CLASE CON LAS CONSTANTES
 	private final String baseDatos = "jdbc:mysql://85.214.120.213:3306/2dam";//LA BBDD
 	private final String usuario = "2dam";//EL USUARIO
-	private final String contraseña = "2dam";//LA CONTRASE�A
+	private final String contrasenia = "2dam";//LA CONTRASE�A
 	private HashMap<Articulo, Short> HashMap=new HashMap<Articulo, Short>();//El HashMap con los Articulos y su Stock
 	/**
 	 * Constructor de la clase Stock
@@ -35,7 +35,7 @@ public class Stock {
 		Connection conexion = null;
 		
 		try {
-			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
+			conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
 			Statement statement = conexion.createStatement();
 			ResultSet articulosBD=statement.executeQuery("SELECT * FROM Articulo");
 			while(articulosBD.next()) {//RECORRO TODOS LOS ARTICULOS DE LA BBDD, SUPONGO QUE HAY TANTOS ARTICULOS EN LA TABLA COMO EN LA TABLA DE STOCK 
@@ -73,7 +73,7 @@ public class Stock {
 	 * @param cantidad la cantidad que le vas a a�adir
 	 * @throws StockNoModificadoException 
 	 */
-	public void añadirStock(Articulo articulo,short cantidad) throws StockNoModificadoException {
+	public void aniadirStock(Articulo articulo,short cantidad) throws StockNoModificadoException {
 		
 		Short total = (short) (this.HashMap.get(articulo)+cantidad);//Calcula la nueva cantidad que habra en el stock
 		modificarStock(articulo,total);//Le pasamos la suma de la cantidad que tiene con la que le a�adimos
@@ -101,7 +101,7 @@ public class Stock {
 		}
 		Connection conexion = null;
 		try {
-			conexion = DriverManager.getConnection(baseDatos,usuario,contraseña);
+			conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
 			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo='"+articulo.getArtName()+"'");

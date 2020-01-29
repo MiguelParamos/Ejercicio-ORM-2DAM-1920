@@ -15,6 +15,7 @@ import clases.Usuario;
  * @author Sara Pedrosa
  * @author Alvaro de Francisco
  * @author Alvarop627
+ * @author Alberto Riera
  */
 public class VentanaPrincipal extends JFrame {
 
@@ -31,6 +32,7 @@ public class VentanaPrincipal extends JFrame {
 	private PantallaProveedor pantallaProveedor;
 	private VerTodosLosProveedores pantallaTodosProveedores;
 	private Usuario usu;
+	private Usuario usuarioRegistrado; //Usuario para tomar desde Registro
 
 	/**
 	 * Constructor de la ventana principal de la aplicaci�n.
@@ -49,6 +51,7 @@ public class VentanaPrincipal extends JFrame {
 		// irAEditarUsuario();
 
 	}
+	
 
 	/**
 	 * Esta funci�n nos sirve para movernos a la pantalla inicial.
@@ -299,6 +302,16 @@ public class VentanaPrincipal extends JFrame {
 
 	public void setUsu(Usuario usu) {
 		this.usu = usu;
+	}
+	
+	
+	//Setter que toma el usuario desde registro
+	public void setUsuarioRegistrado(Usuario usuarioRegistrado) {
+		this.usuarioRegistrado = Registro.getUsuarioRegistrado();
+	}
+	
+	public Usuario getUsuarioRegistrado() {
+		return this.usuarioRegistrado;
 	}
 
 }

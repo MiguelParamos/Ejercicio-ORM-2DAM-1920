@@ -191,4 +191,8 @@ public class Registro extends JPanel {
 			}
 		});
 	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
 }

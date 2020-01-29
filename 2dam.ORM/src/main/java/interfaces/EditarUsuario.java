@@ -2,6 +2,8 @@ package interfaces;
 
 import javax.swing.JPanel;
 
+
+
 import clases.Usuario;
 import excepciones.LoginIncorrectoException;
 
@@ -19,6 +21,7 @@ public class EditarUsuario  extends JPanel{
 	private JTextField tUser;
 	private JTextField tPass;
 	private JTextField tMail;
+	private Usuario user; //Usuario que recibirá desde VentanaPrincipal
 
 	/**
 	 * @param v

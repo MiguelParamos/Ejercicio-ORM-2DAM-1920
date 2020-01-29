@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
+import excepciones.ArticuloNoInsertadoException;
 import excepciones.LoginIncorrectoException;
 import excepciones.ProveedorNoExisteException;
 import excepciones.RegistroIncorrectoException;
@@ -18,7 +20,7 @@ import excepciones.RegistroIncorrectoException;
  * @throws RegistroIncorrectoException
  */
 
-public class Proveedor {
+public class Proveedor{
 
 	private String nombre;
 	private String nombreCiudad;
@@ -201,6 +203,80 @@ public class Proveedor {
 		
 	}
 	
+
+	/**
+	 * Funcion estatica que devuelve a todos los proveedores de BD y los almacena en una lista.
+	 * @return devuelve un TreeSet que almacena a todos los proveedores.
+	 * @author Javier Rodriguez
+	 * @author Juan Carlos Alarcon
+	 */
+	public static TreeSet<Proveedor> todosLosProveedores()  {
+		Connection conexion=null;
+		Statement st=null;
+		ResultSet rSetProveedorNombre=null;
+		ResultSet rSetArticulos=null;
+		ArrayList<Proveedor> listaProveedores=new ArrayList<Proveedor>();
+		try {
+			// Creacion de conexiones y statements
+			conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
+			st=conexion.createStatement();
+			
+			// Recoge los datos de todos los proveedores.
+			rSetProveedorNombre=st.executeQuery("SELECT * FROM Proveedor");
+			int contador=0;
+			while (rSetProveedorNombre.next()) {
+				listaProveedores.add(new Proveedor(rSetProveedorNombre.getString("nombre"), rSetProveedorNombre.getString("ciudad"),new ArrayList<Articulo>()));
+				listaProveedores.get(contador).getArticulosEnVenta().add(new Articulo(rSetProveedorNombre.getString("Articulo_nombre"),0f,""));
+				contador++;
+			}
+			rSetProveedorNombre.close();
+			
+			// Recoge los datos de los articulos que haya comprado los proveedores.
+			for (Proveedor proveedor : listaProveedores) {
+				rSetArticulos=st.executeQuery("SELECT precio,descripcion FROM Articulo WHERE nombre='"+proveedor.getArticulosEnVenta().get(0).getArtName()+"'");
+				while (rSetArticulos.next()) {
+					proveedor.getArticulosEnVenta().get(0).setArtPrice(rSetArticulos.getFloat("precio"));
+					proveedor.getArticulosEnVenta().get(0).setArtDesc(rSetArticulos.getString("descripcion"));
+				}
+				rSetArticulos.close();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (RegistroIncorrectoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ArticuloNoInsertadoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			// Cierre de todos los ResultSets, Statements y Conexiones
+			try {
+				
+				if (rSetArticulos!=null) {
+					rSetArticulos.close();
+				}
+				if (rSetProveedorNombre!=null) {
+					rSetProveedorNombre.close();
+				}
+				if (st!=null) {
+					st.close();
+				}
+				if (conexion!=null) {
+					conexion.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		TreeSet<Proveedor> setProveedor=new TreeSet<Proveedor>(listaProveedores); // Se crea un nuevo TreeSet a partir del ArrayList
+		
+		return setProveedor;
+	}
+
 	
 	
 }

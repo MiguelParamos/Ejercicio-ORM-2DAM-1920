@@ -4,6 +4,10 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import clases.Proveedor;
+import excepciones.RegistroIncorrectoException;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -12,6 +16,7 @@ import java.awt.event.ActionEvent;
 /**
  * 
  * @author Juan Miguel 
+ * @author Alvarop627
  *
  */
 
@@ -20,7 +25,7 @@ public class PantallaProveedor extends JPanel {
 	private VentanaPrincipal ventana;
 	private JTextField tfNombreProveedor;
 	private JTextField tfCiudadProveedor;
-	
+	private	Proveedor p;
 	
 	
 	public PantallaProveedor(VentanaPrincipal v) {
@@ -28,6 +33,7 @@ public class PantallaProveedor extends JPanel {
 		setBackground(new Color(91, 157, 195));
 		setSize(500,500);
 		setLayout(null);
+	
 		
 		// JLabels para nombre del proveedor y ciudad del proveedor
 		JLabel lblNombreProveedor = new JLabel("Nombre Proveedor");
@@ -43,6 +49,18 @@ public class PantallaProveedor extends JPanel {
 		
 		//Botones para añadir proveedor y otro para volver a menu
 		JButton btnAnadirProveedor = new JButton("Añadir Proveedor");
+		btnAnadirProveedor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(tfNombreProveedor.getText()!="" && tfCiudadProveedor.getText()!="") {
+				try {
+					p = new Proveedor(tfNombreProveedor.getText(), tfCiudadProveedor.getText(), null);
+				} catch (RegistroIncorrectoException e) {
+					e.printStackTrace();
+				}
+				}
+				
+			}
+		});
 		btnAnadirProveedor.setBounds(181, 281, 153, 25);
 		btnAnadirProveedor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		add(btnAnadirProveedor);

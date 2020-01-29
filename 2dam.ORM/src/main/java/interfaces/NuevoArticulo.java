@@ -19,6 +19,7 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -34,13 +35,41 @@ public class NuevoArticulo extends JPanel{
 	private JTextField textFieldNombre, textFieldPrecio;
 	private JTextArea textFieldDescripcion;
 	private JList listaProveedores;
+	private final String baseDatos = "jdbc:mysql://85.214.120.213:3306/2dam";
+	private final String usuario = "2dam";
+	private final String contrasenia = "2dam";
 
 	public NuevoArticulo(final VentanaPrincipal v) {
 
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
 		setLayout(null);
+		Connection conexion = null;
 
+  try{
+		conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
+
+		Statement statement = conexion.createStatement();
+		ResultSet proveedorBD=statement.executeQuery("SELECT * FROM Proveedor");
+		while(proveedorBD.next()) {
+
+			Proveedor proveedor = new Proveedor(
+					proveedorBD.getString("nombre")
+			);
+            listaProveedores.add(proveedor.getnombre());
+			proveedorBD.close();
+		}
+  } catch (SQLException e) {
+	  // TODO Auto-generated catch block
+	  e.printStackTrace();
+  }finally {
+	  try {
+		  conexion.close();
+	  } catch (SQLException e) {
+		  // TODO Auto-generated catch block
+		  e.printStackTrace();
+	  }
+  }
 		//JLabel utilizados como etiquetas.
 		JLabel lblCabecera = new JLabel("Nuevo Articulo");
 		lblCabecera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,7 +163,7 @@ public class NuevoArticulo extends JPanel{
 				if(error!=1) {
 					//Crea el nuevo articulo.
 					try {
-						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText());
+						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText(),listaProveedores.getSelectedValue());
 					} catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(null, "Se ha detectado un problema en el campo precio");
 						

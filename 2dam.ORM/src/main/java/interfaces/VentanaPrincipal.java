@@ -29,6 +29,7 @@ public class VentanaPrincipal extends JFrame {
 	private VerUsuarios pantallaVerUsuarios;
 	private EditarUsuario pantallaEditarUsuario;
 	private PantallaProveedor pantallaProveedor;
+	private VerTodosLosProveedores pantallaTodosProveedores;
 	private Usuario usu;
 
 	/**
@@ -274,6 +275,21 @@ public class VentanaPrincipal extends JFrame {
 		this.setSize(500, 500);
 		this.setContentPane(this.pantallaProveedor);
 		this.pantallaProveedor.setVisible(true);
+
+	}
+	public void irVerTodosLosProveedores() {
+
+		if (this.pantallaMenu != null) {
+
+			this.pantallaMenu.setVisible(false);
+
+		}
+
+		pantallaTodosProveedores = new VerTodosLosProveedores(this);
+		this.setTitle("Editar Usuario");
+		this.setSize(500, 500);
+		this.setContentPane(this.pantallaTodosProveedores);
+		this.pantallaTodosProveedores.setVisible(true);
 
 	}
 

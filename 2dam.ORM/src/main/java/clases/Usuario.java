@@ -354,14 +354,18 @@ public class Usuario implements Comparable<Usuario>{
 		PreparedStatement pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseña = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
 		
 		
-			pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseña = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
+			pStatement = conn.prepareStatement("UPDATE Usuario SET nombre=?, email=?, PASSWORD=?, saldo=?, esTienda=? WHERE nombre=?");
 			pStatement.setString(1, nombreBD);
-			pStatement.setString(2, passwordBD);
-			pStatement.setString(3, emailBD);
+			pStatement.setString(2, emailBD);
+			pStatement.setString(3, passwordBD);
 			pStatement.setFloat(4, saldoBD);
+			pStatement.setBoolean(5, esTienda);
+			pStatement.setString(6, nombreBD);
 			
 			if(pStatement.executeUpdate() == 0) {
 				throw new LoginIncorrectoException();
+			} else {
+				this.comprobarLogin(nombreBD, passwordBD);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

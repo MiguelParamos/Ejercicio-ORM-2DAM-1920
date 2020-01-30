@@ -222,7 +222,7 @@ public class Proveedor{
 			st=conexion.createStatement();
 			
 			// Recoge los datos de todos los proveedores.
-			rSetProveedorNombre=st.executeQuery("SELECT * FROM Proveedor");
+			rSetProveedorNombre=st.executeQuery("SELECT * FROM Proveedores");
 			int contador=0;
 			while (rSetProveedorNombre.next()) {
 				listaProveedores.add(new Proveedor(rSetProveedorNombre.getString("nombre"), rSetProveedorNombre.getString("ciudad"),new ArrayList<Articulo>()));

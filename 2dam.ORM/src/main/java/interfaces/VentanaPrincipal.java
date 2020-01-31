@@ -307,7 +307,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	//Setter que toma el usuario desde registro
 	public void setUsuarioRegistrado(Usuario usuarioRegistrado) {
-		this.usuarioRegistrado = Registro.getUsuarioRegistrado();
+		this.usuarioRegistrado = (Usuario)getUsuarioRegistrado();
 	}
 	
 	public Usuario getUsuarioRegistrado() {

@@ -4,24 +4,19 @@ package interfaces;
  * @author Jose Maria Osuna
  */
 
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import clases.Articulo;
+import clases.Proveedor;
 import excepciones.ArticuloNoInsertadoException;
-
-import javax.swing.JButton;
 
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
+import java.util.ArrayList;
 
-import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.text.AbstractDocument;
@@ -29,47 +24,25 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
-import javax.swing.JList;
 
 public class NuevoArticulo extends JPanel{
 	private JTextField textFieldNombre, textFieldPrecio;
 	private JTextArea textFieldDescripcion;
 	private JList listaProveedores;
-	private final String baseDatos = "jdbc:mysql://85.214.120.213:3306/2dam";
-	private final String usuario = "2dam";
-	private final String contrasenia = "2dam";
+	private ArrayList<Proveedor> arrayProveedores;
 
 	public NuevoArticulo(final VentanaPrincipal v) {
 
 		setBackground(Color.decode("#5b9dc3"));
 		setSize(500,500);
 		setLayout(null);
-		Connection conexion = null;
+		this.arrayProveedores=new ArrayList<Proveedor>(Proveedor.todosLosProveedores());
 
-  try{
-		conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
-
-		Statement statement = conexion.createStatement();
-		ResultSet proveedorBD=statement.executeQuery("SELECT * FROM Proveedor");
-		while(proveedorBD.next()) {
-
-			Proveedor proveedor = new Proveedor(
-					proveedorBD.getString("nombre")
-			);
-            listaProveedores.add(proveedor.getnombre());
-			proveedorBD.close();
+		DefaultListModel<String> dlm=new DefaultListModel<String>();
+		for(Proveedor proveedor:arrayProveedores){
+			dlm.addElement(proveedor.getNombre());
 		}
-  } catch (SQLException e) {
-	  // TODO Auto-generated catch block
-	  e.printStackTrace();
-  }finally {
-	  try {
-		  conexion.close();
-	  } catch (SQLException e) {
-		  // TODO Auto-generated catch block
-		  e.printStackTrace();
-	  }
-  }
+
 		//JLabel utilizados como etiquetas.
 		JLabel lblCabecera = new JLabel("Nuevo Articulo");
 		lblCabecera.setHorizontalAlignment(SwingConstants.CENTER);
@@ -125,7 +98,7 @@ public class NuevoArticulo extends JPanel{
 		btnAtras.setBounds(179, 426, 166, 37);
 		add(btnAtras);
 		
-		listaProveedores = new JList();
+		listaProveedores = new JList(dlm);
 		listaProveedores.setBounds(193, 268, 179, 82);
 		add(listaProveedores);
 		
@@ -163,7 +136,7 @@ public class NuevoArticulo extends JPanel{
 				if(error!=1) {
 					//Crea el nuevo articulo.
 					try {
-						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText(),listaProveedores.getSelectedValue());
+						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText(), (Proveedor) listaProveedores.getSelectedValue());
 					} catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(null, "Se ha detectado un problema en el campo precio");
 						

@@ -187,7 +187,7 @@ public class VentanaPrincipal extends JFrame {
 
 		pantallaNuevoArticulo = new NuevoArticulo(this);
 		this.setTitle("Nuevo Articulo");
-		this.setSize(500, 500);
+		this.setSize(500, 570);
 		this.setContentPane(this.pantallaNuevoArticulo);
 		this.pantallaNuevoArticulo.setVisible(true);
 
@@ -307,7 +307,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	//Setter que toma el usuario desde registro
 	public void setUsuarioRegistrado(Usuario usuarioRegistrado) {
-		this.usuarioRegistrado = Registro.getUsuarioRegistrado();
+		this.usuarioRegistrado = this.getUsuarioRegistrado();
 	}
 	
 	public Usuario getUsuarioRegistrado() {

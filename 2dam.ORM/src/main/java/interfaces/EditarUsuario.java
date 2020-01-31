@@ -21,7 +21,7 @@ public class EditarUsuario  extends JPanel{
 	private JTextField tUser;
 	private JTextField tPass;
 	private JTextField tMail;
-	private Usuario user; //Usuario que recibirá desde VentanaPrincipal
+	private Usuario user; //Usuario que recibirï¿½ desde VentanaPrincipal
 
 	/**
 	 * @param v
@@ -29,7 +29,7 @@ public class EditarUsuario  extends JPanel{
 	public EditarUsuario(VentanaPrincipal v) {
 		super();
 		this.v = v;
-		Usuario user;
+		final Usuario user;
 		try {
 			user = new Usuario("Alvaro","uwu");
 			

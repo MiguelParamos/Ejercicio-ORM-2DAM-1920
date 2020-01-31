@@ -282,11 +282,7 @@ public class Usuario implements Comparable<Usuario>{
 				ArrayList<Articulo> listaArticulos=new ArrayList<Articulo>();
 				rSetArticulos=st.executeQuery("SELECT nombreArticulos FROM ArticulosComprados WHERE nombreUsuario='"+usuario.getNombre()+"'");
 				while (rSetArticulos.next()) {
-					try {
-						listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos"), 0, null));
-					} catch (ArticuloNoInsertadoException e) {
-						e.printStackTrace();
-					}
+					listaArticulos.add(new Articulo(rSetArticulos.getString("nombreArticulos")));
 				}
 				rSetArticulos.close();
 				
@@ -351,7 +347,7 @@ public class Usuario implements Comparable<Usuario>{
 		try {
 		
 		Connection conn = DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
-		PreparedStatement pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseña = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
+		PreparedStatement pStatement = conn.prepareStatement("UPDATE Usuario SET nombre = ?, contraseï¿½a = ?, email = ?, saldo, = ?, esTienda = ? WHERE nombre = ?");
 		
 		
 			pStatement = conn.prepareStatement("UPDATE Usuario SET nombre=?, email=?, PASSWORD=?, saldo=?, esTienda=? WHERE nombre=?");

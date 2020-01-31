@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c7332da5-36f4-4ba5-a9c0-2da263905083" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/clases/Articulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/clases/Articulo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/clases/Proveedor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/clases/Proveedor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/clases/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/clases/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/Comprar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/Comprar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/EditarUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/EditarUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/MasSaldo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/MasSaldo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/NuevoArticulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/NuevoArticulo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/interfaces/VentanaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/interfaces/VentanaPrincipal.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="2dam.ORM" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1580468210953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1580468210953" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1580468210953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1580468210953" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1580468210953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1580468210953" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1580468210953">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1580468210953" />
+  </component>
+</project>

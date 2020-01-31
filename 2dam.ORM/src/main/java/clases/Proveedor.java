@@ -226,7 +226,7 @@ public class Proveedor{
 			int contador=0;
 			while (rSetProveedorNombre.next()) {
 				listaProveedores.add(new Proveedor(rSetProveedorNombre.getString("nombre"), rSetProveedorNombre.getString("ciudad"),new ArrayList<Articulo>()));
-				listaProveedores.get(contador).getArticulosEnVenta().add(new Articulo(rSetProveedorNombre.getString("Articulo_nombre"),0f,""));
+				listaProveedores.get(contador).getArticulosEnVenta().add(new Articulo(rSetProveedorNombre.getString("Articulo_nombre")));
 				contador++;
 			}
 			rSetProveedorNombre.close();
@@ -246,11 +246,7 @@ public class Proveedor{
 		} catch (RegistroIncorrectoException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (ArticuloNoInsertadoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally {
+		} finally {
 			// Cierre de todos los ResultSets, Statements y Conexiones
 			try {
 				

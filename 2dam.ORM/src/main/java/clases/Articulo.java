@@ -23,6 +23,7 @@ public class Articulo {
 	private String artName;// Nombre de los articulos
 	private float artPrice;// Precio de los articulos
 	private String artDesc;// Descripcion de los articulos.
+	private String proveedor;
 	Connection conexion = null;
 	
 	
@@ -35,10 +36,10 @@ public class Articulo {
 	 * @param artDesc  Descripcion de los articulos que recibe de variable interna.
 	 * @throws ArticuloNoInsertadoException 
 	 */
-	public Articulo(String artName, float artPrice, String artDesc) throws ArticuloNoInsertadoException {
+	public Articulo(String artName, float artPrice, String artDesc,Proveedor proveedor) throws ArticuloNoInsertadoException {
 		super();
 		try {
-			insert(artName,artPrice,artDesc);
+			insert(artName,artPrice,artDesc,proveedor);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,6 +76,7 @@ public class Articulo {
 				this.artName = rs.getString("nombre");
 				this.artPrice = rs.getFloat("precio");
 				this.artDesc = rs.getString("descripcion");
+				this.proveedor=rs.getString("nombreProveedor");
 			}else {
 				throw new ArticuloNoExisteException();
 			}
@@ -185,7 +187,7 @@ public class Articulo {
 	 * @throws ArticuloNoInsertadoException como resultado de un articulo que no se puede crear.
 	 * @throws SQLException 
 	 */
-	public void insert(String artName, float artPrice, String artDesc) throws ArticuloNoInsertadoException, SQLException {
+	public void insert(String artName, float artPrice, String artDesc, Proveedor proveedor) throws ArticuloNoInsertadoException, SQLException {
 		
 		final String INSERT = "INSERT INTO Articulo(nombre,precio,descripcion) VALUES(?,?,?)";
 		conexion=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");

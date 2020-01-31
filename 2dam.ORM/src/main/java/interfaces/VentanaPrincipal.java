@@ -187,7 +187,7 @@ public class VentanaPrincipal extends JFrame {
 
 		pantallaNuevoArticulo = new NuevoArticulo(this);
 		this.setTitle("Nuevo Articulo");
-		this.setSize(500, 500);
+		this.setSize(500, 570);
 		this.setContentPane(this.pantallaNuevoArticulo);
 		this.pantallaNuevoArticulo.setVisible(true);
 

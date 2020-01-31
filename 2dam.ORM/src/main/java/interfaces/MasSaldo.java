@@ -32,7 +32,7 @@ public class MasSaldo extends JPanel
 	 * @author Jose Luis Gallardo
 	 * @author Balint Salamon Mark
 	 */
-	public MasSaldo(VentanaPrincipal v, Usuario usuario)
+	public MasSaldo(final VentanaPrincipal v, Usuario usuario)
 	{
 		this.usuario = usuario;
 		bigd = new BigDecimal(v.getUsu().getSaldo());
@@ -67,7 +67,7 @@ public class MasSaldo extends JPanel
 		lblSaldoAnadido.setBounds(10, 167, 430, 86);
 		add(lblSaldoAnadido);
 
-		saldoActual = new JLabel("Saldo actual: " + bigd.toPlainString() + "€");
+		saldoActual = new JLabel("Saldo actual: " + bigd.toPlainString() + "ï¿½");
 		saldoActual.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		saldoActual.setHorizontalAlignment(SwingConstants.LEFT);
 		saldoActual.setForeground(new Color(255, 165, 0));
@@ -83,7 +83,7 @@ public class MasSaldo extends JPanel
 			}
 		});
 
-		// Funcion que añade saldo
+		// Funcion que aï¿½ade saldo
 		addSaldo.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent arg0)
@@ -98,14 +98,14 @@ public class MasSaldo extends JPanel
 						// Comprueba que el numero no sea negativo ni mayor al numero permitido por java
 						if (saldoAAnadir >= 0.01f && saldoAAnadir <= Integer.MAX_VALUE)
 						{
-							// Si todo ha ido bien hasta este punto se le añade el saldo al usuario y se
+							// Si todo ha ido bien hasta este punto se le aï¿½ade el saldo al usuario y se
 							// actualiza la ventana
 							float newBal = (float) (saldoAAnadir + getUsuario().getSaldo());
 							v.getUsu().setSaldo(newBal);
-							getLblSaldoAnadido().setText("Saldo añadido correctamente");
+							getLblSaldoAnadido().setText("Saldo aï¿½adido correctamente");
 							addSaldoText.setText("");
 							bigd = new BigDecimal(v.getUsu().getSaldo());
-							getSaldoActual().setText("Saldo actual: " + bigd.toPlainString() + "€");
+							getSaldoActual().setText("Saldo actual: " + bigd.toPlainString() + "ï¿½");
 
 						} else
 						{

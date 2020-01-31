@@ -136,7 +136,11 @@ public class NuevoArticulo extends JPanel{
 				if(error!=1) {
 					//Crea el nuevo articulo.
 					try {
-						Articulo articulo=new Articulo(textFieldNombre.getText(), Float.parseFloat(textFieldPrecio.getText()), textFieldDescripcion.getText(), (Proveedor) listaProveedores.getSelectedValue());
+						String a1=textFieldNombre.getText();
+						float a2=Float.parseFloat(textFieldPrecio.getText());
+						String a3=textFieldDescripcion.getText();
+						Proveedor a4= new Proveedor((String)listaProveedores.getSelectedValue());
+						Articulo articulo=new Articulo(a1,a2,a3,a4);
 					} catch (NumberFormatException e1) {
 						JOptionPane.showMessageDialog(null, "Se ha detectado un problema en el campo precio");
 						

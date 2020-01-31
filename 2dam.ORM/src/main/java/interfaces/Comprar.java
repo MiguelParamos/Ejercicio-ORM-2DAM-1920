@@ -61,7 +61,7 @@ public class Comprar extends JPanel {
 		// ----------------------- JLIST EN LA QUE SE A�ADEN LOS ART�CULOS -----------------------------
 
 		DefaultListModel model = new DefaultListModel();
-
+		stockTienda=new Stock();
 		HashMap <Articulo, Short> articulos = stockTienda.getHashMap();
 
 		Iterator<HashMap.Entry<Articulo, Short>> entries = articulos.entrySet().iterator();

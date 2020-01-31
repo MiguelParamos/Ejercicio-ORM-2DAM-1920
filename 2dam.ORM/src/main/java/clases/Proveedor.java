@@ -20,14 +20,14 @@ import excepciones.RegistroIncorrectoException;
  * @throws RegistroIncorrectoException
  */
 
-public class Proveedor{
+public class Proveedor implements Comparable{
 
 	private String nombre;
 	private String nombreCiudad;
 	private ArrayList <Articulo>articulosEnVenta;
 	private Connection conn;
 	
-	public Proveedor(String nombre, String nombreCiudad, ArrayList<Articulo> articulosEnVenta) throws RegistroIncorrectoException {
+	public Proveedor(String nombre, String nombreCiudad, ArrayList<Articulo> articulosEnVenta) throws ProveedorNoExisteException {
 		super();
 		this.nombre = nombre;
 		this.nombreCiudad = nombreCiudad;
@@ -84,20 +84,21 @@ public class Proveedor{
 	 * @param nomCiu: ciudad del proveedor
 	 * @param av: articulos en venta del proveedor
 	 * @throws RegistroIncorrectoException
+	 * @throws ProveedorNoExisteException 
 	 */
 	
-	private void registraProveedor(String nom, String nomCiu, ArrayList <Articulo> av) throws RegistroIncorrectoException {
+	private void registraProveedor(String nom, String nomCiu, ArrayList <Articulo> av) throws ProveedorNoExisteException {
 		
 		try {
 			conn=DriverManager.getConnection("jdbc:mysql://85.214.120.213:3306/2dam", "2dam", "2dam");
-			PreparedStatement pSment = conn.prepareStatement("INSERT into Proveedores VALUES (?,?,?)");
+			PreparedStatement pSment = conn.prepareStatement("INSERT into Proveedores VALUES (?,?)");
 			
 			String query = "SELECT * FROM Proveedores WHERE nombre = '"+nom+"'";			
 			Statement sMent = conn.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
 			
 			if(rSet.next()) {
-				throw new RegistroIncorrectoException();
+				throw new ProveedorNoExisteException();
 			}else {
 				pSment.setString(1,nombre);
 				pSment.setString(2,nombreCiudad);
@@ -225,28 +226,29 @@ public class Proveedor{
 			rSetProveedorNombre=st.executeQuery("SELECT * FROM Proveedores");
 			int contador=0;
 			while (rSetProveedorNombre.next()) {
-				listaProveedores.add(new Proveedor(rSetProveedorNombre.getString("nombre"), rSetProveedorNombre.getString("ciudad"),new ArrayList<Articulo>()));
-				listaProveedores.get(contador).getArticulosEnVenta().add(new Articulo(rSetProveedorNombre.getString("Articulo_nombre")));
+			
+					listaProveedores.add(new Proveedor(rSetProveedorNombre.getString("nombre")));
+	
+				//listaProveedores.get(contador).getArticulosEnVenta().add(new Articulo(rSetProveedorNombre.getString("Articulo_nombre")));
 				contador++;
 			}
 			rSetProveedorNombre.close();
 			
 			// Recoge los datos de los articulos que haya comprado los proveedores.
 			for (Proveedor proveedor : listaProveedores) {
-				rSetArticulos=st.executeQuery("SELECT precio,descripcion FROM Articulo WHERE nombre='"+proveedor.getArticulosEnVenta().get(0).getArtName()+"'");
-				while (rSetArticulos.next()) {
-					proveedor.getArticulosEnVenta().get(0).setArtPrice(rSetArticulos.getFloat("precio"));
-					proveedor.getArticulosEnVenta().get(0).setArtDesc(rSetArticulos.getString("descripcion"));
+				if(proveedor.getArticulosEnVenta()!=null) {
+					rSetArticulos=st.executeQuery("SELECT precio,descripcion FROM Articulo WHERE nombre='"+proveedor.getArticulosEnVenta().get(0).getArtName()+"'");
+					while (rSetArticulos.next()) {
+						proveedor.getArticulosEnVenta().get(0).setArtPrice(rSetArticulos.getFloat("precio"));
+						proveedor.getArticulosEnVenta().get(0).setArtDesc(rSetArticulos.getString("descripcion"));
+					}
+					rSetArticulos.close();
 				}
-				rSetArticulos.close();
 				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (RegistroIncorrectoException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+		}  finally {
 			// Cierre de todos los ResultSets, Statements y Conexiones
 			try {
 				
@@ -271,6 +273,12 @@ public class Proveedor{
 		TreeSet<Proveedor> setProveedor=new TreeSet<Proveedor>(listaProveedores); // Se crea un nuevo TreeSet a partir del ArrayList
 		
 		return setProveedor;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		
+		return nombre.compareTo(((Proveedor)arg0).nombre);
 	}
 
 	

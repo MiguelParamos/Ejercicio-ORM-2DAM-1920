@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import clases.Proveedor;
+import excepciones.ProveedorNoExisteException;
 import excepciones.RegistroIncorrectoException;
 
 import javax.swing.JButton;
@@ -54,7 +55,8 @@ public class PantallaProveedor extends JPanel {
 				if(tfNombreProveedor.getText()!="" && tfCiudadProveedor.getText()!="") {
 				try {
 					p = new Proveedor(tfNombreProveedor.getText(), tfCiudadProveedor.getText(), null);
-				} catch (RegistroIncorrectoException e) {
+				} catch (ProveedorNoExisteException e) {
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				}

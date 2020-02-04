@@ -32,7 +32,7 @@ public class Menu extends JPanel {
 
 		setLayout(null);
 		
-		if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
+		//if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");
@@ -41,6 +41,7 @@ public class Menu extends JPanel {
 			BotonMenu verUsuarios = new BotonMenu("Ver Usuarios");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
 			BotonMenu annadirProveedor = new BotonMenu("Anadir Proveedor");
+			BotonMenu verProveedor = new BotonMenu("Ver Proveedores");
 
 			logout.setBounds(10, 58, 172, 50);
 			verStock.setBounds(191, 58, 172, 50);
@@ -49,6 +50,7 @@ public class Menu extends JPanel {
 			verUsuarios.setBounds(10, 141, 172, 50);
 			editarUsuario.setBounds(373, 141, 172, 50);
 			annadirProveedor.setBounds(191, 224, 172, 50);
+			verProveedor.setBounds(10, 224, 172, 50);
 
 			add(logout);
 			add(verStock);
@@ -57,7 +59,7 @@ public class Menu extends JPanel {
 			add(verUsuarios);
 			add(editarUsuario);
 			add(annadirProveedor);
-			
+			add(verProveedor);			
 			// ------------------ EVENTOS DE LOS BOTONES ------------------
 			
 			logout.addMouseListener(new MouseAdapter() {
@@ -109,26 +111,35 @@ public class Menu extends JPanel {
 	                v.irANuevoProveedor();
 				}
 			});
+			verProveedor.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+	                v.irVerTodosLosProveedores();
+				}
+			});
 
-		} else { // Comprueba si el Usuario NO es una Tienda
+		/*} else { // Comprueba si el Usuario NO es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verMisArticulos = new BotonMenu("Ver mis Articulos");
 			BotonMenu comprar = new BotonMenu("Comprar");
 			BotonMenu annadirSaldo = new BotonMenu("Añadir Saldo");
 			BotonMenu editarUsuario = new BotonMenu("Editar Usuario");
+			BotonMenu verProveedor = new BotonMenu("Ver Proveedores");
 
 			logout.setBounds(10, 58, 172, 50);
 			verMisArticulos.setBounds(191, 58, 172, 50);
 			comprar.setBounds(373, 58, 172, 50);
 			annadirSaldo.setBounds(95, 141, 172, 50);
 			editarUsuario.setBounds(276, 141, 172, 50);
+			verProveedor.setBounds(191, 223, 172, 50);
 
 			add(logout);
 			add(verMisArticulos);
 			add(comprar);
 			add(annadirSaldo);
 			add(editarUsuario);
+			add(verProveedor);
 			
 			// ------------------ EVENTOS DE LOS BOTONES ------------------
 			
@@ -174,9 +185,15 @@ public class Menu extends JPanel {
 	                v.irAComprar();;
 				}
 			});
+			verProveedor.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+	                v.irVerTodosLosProveedores();
+				}
+			});
 			
 
-		}
+		}*/
 
 		setVisible(true);
 

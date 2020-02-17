@@ -2,12 +2,15 @@ package interfaces;
 import javax.swing.JPanel;
 import clases.Articulo;
 import clases.Usuario;
+import excepciones.CompraFallidaException;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 /**
  * Esta clase modela los articulos que ha comprado un usuario.
@@ -25,14 +28,26 @@ public class VerMisArticulos extends JPanel{
 	public VerMisArticulos(VentanaPrincipal vp,Usuario us) {
 		this.ventanaPrincipal=vp;
 		this.user=us;
+		System.out.println("PI: "+this.user);
 		setSize(new Dimension(500, 500));
 		setLayout(null);
 		setBackground(new Color(38, 49, 179));
 		//LISTA DE ARTICULOS
 		//Foreach para rellenar los articulos que dependan del usuario.
 		DefaultListModel dLM=new DefaultListModel<String>();
-		for(Articulo a: user.getArticulosComprados()) {
-			dLM.addElement(a.getArtName());
+		try {
+			user.comprar(new Articulo("patata"),(short)3);
+		} catch (CompraFallidaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		user.setArticulosComprados(new ArrayList<Articulo>());
+		user.getArticulosComprados().add(new Articulo("patata"));
+		user.getArticulosComprados().add(new Articulo("Petardos"));
+		if(user.getArticulosComprados()!=null) {
+			for(Articulo a: user.getArticulosComprados()) {
+				dLM.addElement(a.getArtName());
+			}
 		}
 		JList listaArticulos = new JList(dLM);
 		listaArticulos.setBounds(135, 54, 233, 282);

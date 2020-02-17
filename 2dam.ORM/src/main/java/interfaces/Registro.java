@@ -157,6 +157,7 @@ public class Registro extends JPanel {
 								try {
 									Usuario nuevoUsuario = new Usuario(usuario, password, email, 0, true, null);
 									JOptionPane.showMessageDialog(null, "Tienda creada");
+									ventana.setUsuarioRegistrado(nuevoUsuario);
 									ventana.irAMenu();
 								} catch (RegistroIncorrectoException e1) {
 									// TODO Auto-generated catch block

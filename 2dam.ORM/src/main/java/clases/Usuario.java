@@ -57,7 +57,7 @@ public class Usuario implements Comparable<Usuario>{
 	 */
 	public void comprar(Articulo art, short cantidad) throws CompraFallidaException {
 		Stock st=new Stock();
-		
+		articulosComprados=new ArrayList<Articulo>();
 		
 		if(saldo>art.getArtPrice()*cantidad) {
 			articulosComprados.add(art);

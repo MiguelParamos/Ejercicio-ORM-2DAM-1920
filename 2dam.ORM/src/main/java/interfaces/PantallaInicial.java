@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class PantallaInicial extends JPanel {
 
@@ -57,6 +59,16 @@ public class PantallaInicial extends JPanel {
 		pfPass.setBounds(190, 257, 96, 19);
 		this.add(pfPass);
 		
+		JButton btnRegistro = new JButton("Registro");
+		btnRegistro.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				v.irARegistro();
+			}
+		});
+		btnRegistro.setBounds(190, 333, 89, 23);
+		add(btnRegistro);
+		
 		// ActionListnener del boton de inicio de sesion
 		btnInicio.addActionListener(new ActionListener() {
 			
@@ -66,6 +78,8 @@ public class PantallaInicial extends JPanel {
 				try
 				{
 					usuario = new Usuario(userLogin, passLogin);
+					v.setUsu(usuario);
+					v.setUsuarioRegistrado(usuario);
 					irAMenu();
 				} catch (LoginIncorrectoException e1)
 				{
@@ -117,6 +131,4 @@ public class PantallaInicial extends JPanel {
 	{
 		this.usuario = usuario;
 	}
-	
-	
 }

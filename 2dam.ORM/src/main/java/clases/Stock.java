@@ -37,6 +37,7 @@ public class Stock {
 		try {
 			conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
 			Statement statement = conexion.createStatement();
+			Statement statement2 = conexion.createStatement();
 			ResultSet articulosBD=statement.executeQuery("SELECT * FROM Articulo");
 			while(articulosBD.next()) {//RECORRO TODOS LOS ARTICULOS DE LA BBDD, SUPONGO QUE HAY TANTOS ARTICULOS EN LA TABLA COMO EN LA TABLA DE STOCK 
 				
@@ -44,7 +45,7 @@ public class Stock {
 						articulosBD.getString("nombre")
 						);
 				
-				ResultSet stockBD = statement.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo='"+articulo.getArtName()+"'");
+				ResultSet  stockBD = statement2.executeQuery("SELECT cantidad FROM Stock WHERE nombre_Articulo='"+articulo.getArtName()+"'");
 				stockBD.next();//OBVIO QUE SOLO HAY UNO
 				
 				HashMap.put(articulo, stockBD.getShort("cantidad"));//A�ADO AL HASHMAP EL ARTICULO Y LA CANTIDAD
@@ -56,12 +57,6 @@ public class Stock {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
-			try {
-				conexion.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		
 	}
@@ -123,7 +118,6 @@ public class Stock {
 		}
 		Connection conexion = null;
 		try {
-			conexion = DriverManager.getConnection(baseDatos,usuario,contrasenia);
 			Statement modificarEnBD = conexion.createStatement();
 			//Actualiza el stock en la bbdd
 			modificarEnBD.executeUpdate("Update Stock SET cantidad="+cantidad+" WHERE nombre_Articulo='"+articulo.getArtName()+"'");
@@ -155,13 +149,10 @@ public class Stock {
 			String query = "SELECT * FROM Stock WHERE nombre_Articulo = '"+a.getArtName()+"'";			
 			Statement sMent = conexion.createStatement();
 			ResultSet rSet = sMent.executeQuery(query);
-			
-			if(rSet.next()&&rSet.getShort("cantidad")<c) {
+			rSet.next();
+			System.out.println(rSet.getShort("cantidad"));
 				Statement modificarEnBD = conexion.createStatement();
 				modificarEnBD.executeUpdate("Update Stock SET cantidad="+(rSet.getShort("cantidad")-c)+" WHERE nombre_Articulo='"+a.getArtName()+"'");
-			}else {
-				throw new StockNoModificadoException();
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -29,10 +29,11 @@ public class Menu extends JPanel {
 		super();
 		this.v = ventana;
 		this.u = usuario;
-
+		System.out.println(this.v.getUsuarioRegistrado());
+		System.out.println(this.v.getUsu().getNombre());
 		setLayout(null);
 		
-		//if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
+		if (usuario.isEsTienda()) { // Comprueba si el Usuario es una Tienda
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verStock = new BotonMenu("Ver Stock");
@@ -118,7 +119,7 @@ public class Menu extends JPanel {
 				}
 			});
 
-		/*} else { // Comprueba si el Usuario NO es una Tienda
+		} else { 
 
 			BotonMenu logout = new BotonMenu("Logout");
 			BotonMenu verMisArticulos = new BotonMenu("Ver mis Articulos");
@@ -193,7 +194,7 @@ public class Menu extends JPanel {
 			});
 			
 
-		}*/
+		}
 
 		setVisible(true);
 

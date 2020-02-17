@@ -120,8 +120,10 @@ public class Comprar extends JPanel {
 				try {
 					
 					float saldoSegundo = saldoPrimero;
+					System.out.println("valor: "+cantidadSpinner.getValue());
+					System.out.println("compro: "+listaComprar.getSelectedValue());
 					
-					user.comprar((Articulo)listaComprar.getSelectedValue(), (Short) cantidadSpinner.getValue());
+					user.comprar(new Articulo((String)listaComprar.getSelectedValue()), Short.parseShort(Integer.toString((int)cantidadSpinner.getValue())));
 
 					if (saldoPrimero >= saldoSegundo) {
 						
